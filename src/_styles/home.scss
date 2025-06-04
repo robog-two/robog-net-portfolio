@@ -1,0 +1,165 @@
+@use '_globals' as globals;
+
+@use 'base';
+
+
+.corner-nav {
+    position: fixed;
+    width: globals.$triangle-size;
+    height: globals.$triangle-size;
+    font-size: globals.$nav-label-size;
+    font-weight: bold;
+    color: globals.$primary-text;
+    text-decoration: none;
+    z-index: 100;
+    transition: color globals.$triangle-transition-speed ease-in;
+    text-align: center;
+    line-height: globals.$triangle-size;
+
+    .triangle-bg {
+        position: absolute;
+        width: globals.$triangle-size;
+        height: globals.$triangle-size;
+        transition: all globals.$triangle-transition-speed ease-in-out;
+        pointer-events: none;
+    }
+
+    .nav-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        white-space: nowrap;
+        line-height: 1;
+        padding-top: calc(-#{globals.$nav-label-size} / 2);
+    }
+
+    // Shared rotation and positioning with padding adjustment
+    &.top-left {
+        .nav-text {
+            transform: translate(calc(-50% - #{globals.$nav-label-padding}), calc(-50% - #{globals.$nav-label-padding})) rotate(-45deg);
+        }
+    }
+
+    &.top-right {
+        .nav-text {
+            transform: translate(calc(-50% + #{globals.$nav-label-padding}), calc(-50% - #{globals.$nav-label-padding})) rotate(45deg);
+        }
+    }
+
+    &.bottom-right {
+        .nav-text {
+            transform: translate(calc(-50% + #{globals.$nav-label-padding}), calc(-50% + #{globals.$nav-label-padding})) rotate(-45deg);
+        }
+    }
+
+    &.bottom-left {
+        .nav-text {
+            transform: translate(calc(-50% - #{globals.$nav-label-padding}), calc(-50% + #{globals.$nav-label-padding})) rotate(45deg);
+        }
+    }
+
+    &:hover .triangle-bg {
+        width: globals.$triangle-hover-size;
+        height: globals.$triangle-hover-size;
+        opacity: 1;
+    }
+
+    // Individual corner positioning and colors
+    &.top-left {
+        top: 0;
+        left: 0;
+
+        .triangle-bg {
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, globals.$color-pink 50%, transparent 50%);
+        }
+    }
+
+    &.top-right {
+        top: 0;
+        right: 0;
+
+        .triangle-bg {
+            top: 0;
+            right: 0;
+            background: linear-gradient(225deg, globals.$color-yellow 50%, transparent 50%);
+        }
+    }
+
+    &.bottom-right {
+        bottom: 0;
+        right: 0;
+
+        .triangle-bg {
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(315deg, globals.$color-green 50%, transparent 50%);
+        }
+    }
+
+    &.bottom-left {
+        bottom: 0;
+        left: 0;
+
+        .triangle-bg {
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(45deg, globals.$color-cyan 50%, transparent 50%);
+        }
+    }
+
+    &:hover {
+        color: globals.$primary-text;
+    }
+}
+
+.color-blocks {
+    display: flex;
+    column-gap: 5px;
+    margin-bottom: 20px;
+
+    .block {
+        width: 30px;
+        height: 26px;
+    }
+
+    .pink {
+        background-color: globals.$color-pink;
+    }
+
+    .cyan {
+        background-color: globals.$color-cyan;
+    }
+
+    .green {
+        background-color: globals.$color-green;
+    }
+}
+
+.bizCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    transition: filter 0.2s ease;
+
+    h1 {
+        font-size: 2.8rem;
+        font-weight: normal;
+        margin: -25px 0 0 0;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        font-weight: normal;
+        margin: 5px 0;
+    }
+
+    &.nav-hovered {
+        filter: blur(3px);
+        transition: filter 0.2s ease 0.25s;
+    }
+}

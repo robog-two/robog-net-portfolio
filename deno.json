@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "dev": "deno --allow-read --allow-env --allow-ffi --allow-net --allow-write npm:@11ty/eleventy --serve --config=.eleventy.js",
+    "build": "deno --allow-read --allow-env --allow-write --allow-ffi npm:@11ty/eleventy --config=.eleventy.js"
+  }
+}

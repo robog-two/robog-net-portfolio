@@ -1,0 +1,28 @@
+// Font-face declarations
+@font-face {
+    font-family: 'TeX Gyre Heros';
+    src: url("/_fonts/herosbolditalic.woff") format("woff");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TeX Gyre Heros';
+    src: url("/_fonts/herosbold.woff") format("woff");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TeX Gyre Heros';
+    src: url("/_fonts/herositalic.woff") format("woff");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'TeX Gyre Heros';
+    src: url("/_fonts/heros.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}

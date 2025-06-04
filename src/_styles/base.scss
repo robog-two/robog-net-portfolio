@@ -1,0 +1,11 @@
+@use "_globals" as globals;
+@use "_fonts";
+
+body {
+    font-family: globals.$font-stack;
+    color: globals.$primary-text;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+}

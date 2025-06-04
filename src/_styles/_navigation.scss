@@ -1,0 +1,143 @@
+@use '_globals' as globals;
+
+.page-navigation {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    z-index: 101;
+    
+    .home-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: globals.$primary-text;
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        transition: all globals.$transition-speed ease;
+        
+        .arrow {
+            font-size: 1.2rem;
+            transition: transform globals.$transition-speed ease;
+        }
+        
+        .home-text {
+            transition: color globals.$transition-speed ease;
+        }
+        
+        &:hover {
+            transform: translateX(-#{globals.$hover-translate});
+            
+            .arrow {
+                transform: translateX(-2px);
+            }
+        }
+    }
+}
+
+.header-container {
+    height: globals.$header-full-height;
+    position: relative;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: globals.$header-full-height;
+    text-align: center;
+    z-index: 50;
+    position: relative;
+    
+    
+    h1 {
+        font-size: globals.$title-full-size;
+        font-weight: bold;
+        color: globals.$primary-text;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+    }
+    
+    // JavaScript-triggered shrunk state
+    &.shrunk {
+        min-height: globals.$header-shrunk-height;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        transition: none;
+        
+        
+        h1 {
+            font-size: globals.$title-shrunk-size;
+        }
+    }
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    
+    // Markdown content styling
+    h2 {
+        font-family: globals.$font-stack;
+        font-size: 2rem;
+        font-weight: bold;
+        color: globals.$primary-text;
+        margin: 2rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+    }
+    
+    h3 {
+        font-family: globals.$font-stack;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: globals.$primary-text;
+        margin: 1.5rem 0 1rem 0;
+    }
+    
+    p {
+        font-family: globals.$text-font-stack;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: globals.$primary-text;
+        margin-bottom: 1rem;
+    }
+    
+    strong {
+        font-weight: bold;
+        color: globals.$primary-text;
+    }
+    
+    em {
+        font-style: italic;
+        color: rgba(13, 7, 72, 0.8);
+    }
+    
+    a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    
+    ul, ol {
+        font-family: globals.$text-font-stack;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: globals.$primary-text;
+        margin: 1rem 0;
+        padding-left: 2rem;
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+    }
+}

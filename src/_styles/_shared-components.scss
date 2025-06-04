@@ -1,0 +1,37 @@
+@use '_globals' as globals;
+
+// Shared card styles used across pages
+%card-base {
+    padding: 1.5rem;
+    transition: all globals.$transition-speed ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid;
+    
+    &:hover {
+        transform: translateY(-#{globals.$hover-translate});
+        box-shadow: 0 globals.$shadow-spread globals.$shadow-blur rgba(0, 0, 0, 0.2);
+    }
+}
+
+// Shared grid layouts
+%grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+// Navigation wrapper for sticky positioning without displacement
+.nav-wrapper {
+    position: sticky;
+    top: 0;
+    height: 0;
+    width: 100%;
+    z-index: 100;
+    
+    .page-navigation {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+    }
+}

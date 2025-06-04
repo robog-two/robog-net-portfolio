@@ -1,0 +1,43 @@
+@use '_globals' as globals;
+@use 'base';
+@use 'navigation';
+@use 'shared-components';
+
+.page-header {
+    background: globals.$color-pink;
+}
+
+// About page specific styling
+.content {
+    h2 {
+        border-bottom: 3px solid globals.$color-pink;
+    }
+    
+    h3 {
+        background: globals.$color-pink;
+        padding: 0.5rem 1rem;
+        display: inline-block;
+    }
+    
+    // Handle markdown bold text as institution names
+    strong {
+        color: globals.$color-pink;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+    
+    em {
+        font-style: italic;
+        color: rgba(13, 7, 72, 0.7);
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    ul li {
+        background: globals.$color-pink;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        list-style: none;
+        text-align: center;
+    }
+}

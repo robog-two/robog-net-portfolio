@@ -1,0 +1,49 @@
+// Global variables (e.g. brand colors, font stacks/sizes, etc.) for use across all stylesheets
+@use 'sass:color';
+
+$font-stack: "TeX Gyre Heros", "Helvetica", "Arial", "URW Nimbus Sans L", sans-serif;
+$text-font-stack: "Lato", "Helvetica", "Arial", sans-serif;
+
+// Brand colors
+$primary-text: #0d0748;
+$color-pink: #ff6fab;
+$color-cyan: #85f7ff;
+$color-green: #aaf751;
+$color-yellow: #ffc533;
+$color-black: #0d0748;
+
+// Pastel versions of brand colors
+$lightness-adjust: 15%;
+$saturation-adjust: 5%;
+
+$pastel-pink: color.adjust($color-pink, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
+$pastel-cyan: color.adjust($color-cyan, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
+$pastel-green: color.adjust($color-green, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
+$pastel-yellow: color.adjust($color-yellow, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
+
+// Animation and interaction variables
+$transition-speed: 0.1s;
+$hover-translate: 4px;
+$shadow-blur: 0px;
+$shadow-spread: 8px;
+$header-full-height: 40vh;
+$header-shrunk-height: 60px;
+$title-full-size: 3rem;
+$title-shrunk-size: 1.5rem;
+
+// Homepage navigation variables
+$triangle-size: 170px;
+$triangle-hover-size: calc(100vh + 100vw);
+$triangle-hover-opacity: 0.7;
+$triangle-transition-speed: 0.5s;
+$nav-label-size: 25px;
+$nav-label-padding: 20px;
+
+// Design tokens
+$border-width: 2px;
+$border-radius: 8px;
+$opacity-subtle: 0.7;
+$opacity-muted: 0.8;
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 2rem;

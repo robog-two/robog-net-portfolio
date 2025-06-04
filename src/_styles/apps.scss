@@ -1,0 +1,62 @@
+@use '_globals' as globals;
+@use 'base';
+@use 'navigation';
+@use 'shared-components';
+
+.page-header {
+    background: globals.$color-green;
+}
+
+// Apps grid styles
+.content {
+    .apps-grid {
+        @extend %grid-layout;
+    }
+    
+    .app-item {
+        @extend %card-base;
+        border-color: globals.$color-green;
+        
+        h3 {
+            background: none;
+            margin: 0 0 1rem 0;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        // Style the tech/platform/year info
+        strong {
+            color: globals.$color-green;
+            font-weight: bold;
+            display: inline;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        // Style links in markdown
+        a {
+            font-weight: bold;
+            color: globals.$color-green;
+            margin-right: 1rem;
+            
+            &:hover {
+                color: globals.$primary-text;
+            }
+            
+            &:first-of-type {
+                background: globals.$color-green;
+                color: globals.$primary-text;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                text-decoration: none;
+                
+                &:hover {
+                    background: globals.$primary-text;
+                    color: globals.$color-green;
+                }
+            }
+        }
+    }
+}

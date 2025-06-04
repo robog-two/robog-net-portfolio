@@ -1,0 +1,187 @@
+@use '_globals' as globals;
+@use 'base';
+@use 'navigation';
+@use 'shared-components';
+
+.page-header {
+    background: globals.$color-yellow;
+}
+
+// Blog listing specific styles
+.content {
+    .blog-post-card {
+        @extend %card-base;
+        border-color: globals.$color-yellow;
+        margin-bottom: 2rem;
+        
+        .post-header {
+            margin-bottom: 1rem;
+            
+            h2 {
+                font-size: 1.8rem;
+                margin: 0 0 0.5rem 0;
+                border: none;
+                
+                a {
+                    color: globals.$primary-text;
+                    
+                    &:hover {
+                        color: globals.$color-yellow;
+                    }
+                }
+            }
+            
+            time {
+                font-size: 0.9rem;
+                color: rgba(13, 7, 72, 0.7);
+                font-style: italic;
+            }
+        }
+        
+        .post-excerpt {
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            font-weight: bold;
+            color: globals.$color-yellow;
+            
+            &:hover {
+                color: globals.$primary-text;
+            }
+        }
+    }
+}
+
+// Blog post template styles  
+.post-content {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: globals.$text-font-stack;
+    line-height: 1.7;
+    color: globals.$primary-text;
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: globals.$font-stack;
+        font-weight: bold;
+        color: globals.$primary-text;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    h2 {
+        border-bottom: 2px solid globals.$color-yellow;
+        padding-bottom: 0.5rem;
+    }
+    
+    p {
+        margin-bottom: 1rem;
+        font-family: globals.$text-font-stack;
+    }
+    
+    a {
+        color: globals.$color-yellow;
+        transition: color 0.3s ease;
+        
+        &:hover {
+            color: globals.$primary-text;
+        }
+    }
+    
+    ul, ol {
+        font-family: globals.$text-font-stack;
+    }
+    
+    img {
+        display: block;
+        margin: 2rem auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        
+        // On larger screens, allow images to break out and use 80% of viewport width
+        @media (min-width: 768px) {
+            max-width: 80vw;
+            width: 80vw;
+            // Move the image left to center it relative to viewport
+            margin-left: calc((100% - 80vw) / 2);
+            margin-right: calc((100% - 80vw) / 2);
+        }
+        
+        &:hover {
+            transform: scale(1.02);
+        }
+    }
+}
+
+// Image modal styles
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    
+    &.show {
+        opacity: 1;
+    }
+    
+    .modal-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+    
+    .modal-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-close {
+        position: absolute;
+        top: -1rem;
+        right: -1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+        
+        &:hover {
+            background: white;
+        }
+    }
+}

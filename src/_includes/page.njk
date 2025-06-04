@@ -1,0 +1,23 @@
+---
+layout: base.njk
+---
+
+<main class="page-content">
+    <div class="header-container">
+        <section class="page-header">
+            <header class="page-navigation">
+                <a href="/" class="home-link" aria-label="Back to home">
+                    <span class="arrow">←</span>
+                    <span class="home-text">Home</span>
+                </a>
+            </header>
+            <h1>{{ title }}</h1>
+        </section>
+    </div>
+    
+    <section class="content">
+        {{ content | safe }}
+    </section>
+</main>
+
+<script src="/_scripts/header-shrink.js"></script>
