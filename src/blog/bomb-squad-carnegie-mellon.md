@@ -14,7 +14,7 @@ excerpt: "... I *really* wanted to have a perfect defusal, so I hatched a plan: 
   - [ ] Journey into podman/flawless defusal
     - [ ] Path 1: MITM
     - [ ] Path 2: Cut all contact, gdb jumping
-    - [ ] Path 3: Nop nop nop nop!
+    - [ ] Path 3: Nops with docker network
   - [ ] Journey into brute forcing with Deno
   - [ ] Decoding the bomb with GDB
   - [ ] Further potential for exploration
