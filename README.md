@@ -1,29 +1,26 @@
 # Portfolio Website
 
-A modern, responsive portfolio website built with Eleventy (11ty) and Sass, showcasing a clean design system with themed pages and interactive navigation.
+A modern, responsive portfolio website built with Eleventy (11ty) and Sass,
+hosted on the edge by Cloudflare at [robog.net](https://robog.net/).
 
 ## Tech Stack
 
 ### Core Technologies
-- **[Eleventy (11ty)](https://www.11ty.dev/)** - Static site generator for building fast, modern websites
-- **[Sass (SCSS)](https://sass-lang.com/)** - CSS preprocessor for maintainable stylesheets with variables, mixins, and modular architecture
-- **[Deno](https://deno.land/)** - JavaScript/TypeScript runtime used by Eleventy for build processes
-- **[Nunjucks](https://mozilla.github.io/nunjucks/)** - Templating engine for dynamic HTML generation
 
-### Build Tools
-- **Eleventy Dev Server** - Local development server with hot reloading
-- **Sass Compiler** - Compiles SCSS to optimized CSS
-- **Font Loading** - Custom web font integration with performance optimization
+- **[Eleventy (11ty)](https://www.11ty.dev/)** - Static site generator for
+  building fast, modern websites
+- **[Sass (SCSS)](https://sass-lang.com/)** - CSS preprocessor for maintainable
+  stylesheets with variables, mixins, and modular architecture
+- **[Deno](https://deno.land/)** - JavaScript/TypeScript runtime used by
+  Eleventy for build processes
+- **[Nunjucks](https://mozilla.github.io/nunjucks/)** - Templating engine for
+  dynamic HTML generation
 
 ## Project Structure
 
 ```
 src/
 ├── _fonts/                    # Custom web fonts (TeX Gyre Heros family)
-│   ├── heros.woff
-│   ├── herosbold.woff
-│   ├── herositalic.woff
-│   └── herosbolditalic.woff
 │
 ├── _includes/                 # Nunjucks templates and layouts
 │   ├── base.njk              # Base HTML template with head/body structure
@@ -50,9 +47,7 @@ src/
 │
 ├── blog/                      # Blog posts and assets
 │   ├── attachments/           # Blog post images and media
-│   ├── blog-1.md             # Individual blog posts (Markdown)
-│   ├── blog-2.md
-│   └── blog-3.md
+│   └── (...).md             # Individual blog posts (Markdown)
 │
 ├── index.html                 # Homepage with corner navigation
 ├── about.md                   # About page content
@@ -64,32 +59,37 @@ src/
 ## Design System
 
 ### Color Palette & Theming
+
 The site uses a consistent 4-color brand palette with page-specific themes:
 
 - **Pink** (`#ff6fab`) - About & CV page theme
-- **Yellow** (`#ffc533`) - Blog page theme  
+- **Yellow** (`#ffc533`) - Blog page theme
 - **Green** (`#aaf751`) - Apps portfolio theme
 - **Cyan** (`#85f7ff`) - Gallery page theme
 - **Primary Text** (`#0d0748`) - Main text color
 
 ### Typography
+
 - **Headers**: TeX Gyre Heros (custom web font)
 - **Body Text**: Lato (Google Fonts fallback)
 - **Responsive Scale**: Fluid typography using rem units
 
 ### Spacing System
+
 Consistent spacing scale using design tokens:
+
 ```scss
-$spacing-xs: 0.25rem;  // 4px
-$spacing-sm: 0.5rem;   // 8px  
-$spacing-md: 1rem;     // 16px
-$spacing-lg: 1.5rem;   // 24px
-$spacing-xl: 2rem;     // 32px
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
 ```
 
 ## Architecture Patterns
 
 ### Sass Organization
+
 - **Modular Architecture**: Separate files for different concerns
 - **Design Tokens**: Centralized variables in `_globals.scss`
 - **Mixins & Placeholders**: Reusable patterns in `_shared-components.scss`
@@ -97,6 +97,7 @@ $spacing-xl: 2rem;     // 32px
 - **BEM-like Naming**: Consistent CSS class naming conventions
 
 ### Template Hierarchy
+
 ```
 base.njk (HTML foundation)
 ├── home.njk (homepage layout)
@@ -105,6 +106,7 @@ base.njk (HTML foundation)
 ```
 
 ### Content Management
+
 - **Markdown**: All content written in Markdown for easy editing
 - **Front Matter**: YAML metadata for titles, layouts, and styling
 - **Collections**: Eleventy automatically generates blog post collections
@@ -113,23 +115,27 @@ base.njk (HTML foundation)
 ## Key Features
 
 ### Interactive Homepage
+
 - **Corner Navigation**: Triangular navigation elements in each corner
 - **Hover Effects**: Animated triangles that expand on hover
 - **Blur Animation**: Background content blurs when navigation is hovered
 - **Business Card**: Centered layout with color blocks and typography
 
 ### Responsive Grid System
+
 - **CSS Grid**: Flexible, responsive layouts for portfolio items
 - **Auto-fit**: Automatically adjusts columns based on screen size
 - **Consistent Cards**: Reusable card components across pages
 
 ### Blog System
+
 - **Image Zoom**: Click images to view in full-screen modal
 - **Responsive Images**: Breakout images on larger screens
 - **Automatic Listing**: Generated blog index with excerpts and dates
 - **Markdown Processing**: Full Markdown support with syntax highlighting
 
 ### Performance Optimizations
+
 - **Font Display Swap**: Optimized web font loading
 - **CSS Optimization**: Modular Sass compilation
 - **Minimal JavaScript**: Lightweight interactions with vanilla JS
@@ -138,36 +144,33 @@ base.njk (HTML foundation)
 ## Development
 
 ### Local Development
-```bash
-# Install dependencies (if using npm)
-npm install
 
-# Start development server
-npm run dev
-# or
-deno task serve
+```bash
+deno task dev
 ```
 
-### Build Process
+### Build for Production
+
 ```bash
-# Build for production
-npm run build
-# or  
 deno task build
 ```
 
 ### File Watching
+
 Eleventy automatically watches for changes to:
+
 - Markdown content files
 - Nunjucks templates
 - Sass stylesheets
 - JavaScript files
 
 ## Browser Support
+
 - Modern browsers with CSS Grid support
 - Progressive enhancement for older browsers
 - Responsive design for mobile, tablet, and desktop
 - Accessible markup with proper ARIA labels
 
 ## License
-[Add your preferred license here]
+
+MIT
