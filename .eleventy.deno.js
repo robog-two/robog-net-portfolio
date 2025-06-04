@@ -1,5 +1,6 @@
 import eleventySass from "npm:@11tyrocks/eleventy-plugin-sass-lightningcss";
 import { eleventyImageTransformPlugin } from "npm:@11ty/eleventy-img";
+import markdownItCheckbox from "npm:markdown-it-task-checkbox"
 
 export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
@@ -14,6 +15,8 @@ export default (eleventyConfig) => {
     },
     svgShortCircuit: true,
   });
+
+  eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(markdownItCheckbox));
 
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy({ "src/_favicon": "/" });

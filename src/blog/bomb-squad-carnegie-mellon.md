@@ -6,8 +6,15 @@ tags: post
 excerpt: "... I *really* wanted to have a perfect defusal, so I hatched a plan: I would put the bomb in a sealed docker container where no radio signals could escape ..."
 ---
 
-**This document is an excerpt. The full version will be released after further
-revision.**
+## Document To-dos
+
+ - [ ] Find source code and upload to GitHub
+ - [ ] Post Content
+    - [ ] Intro, what is the Binary Bomb
+    - [ ] Journey into docker
+    - [ ] Journey into brute forcing with deno
+    - [ ] Decoding the bomb with GDB
+    - [ ] Further potential for exploration
 
 ## Level 3 Jump Table
 
