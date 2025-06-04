@@ -6,12 +6,13 @@ export default (eleventyConfig) => {
 
   // Add image optimization plugin
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    formats: ["webp", "jpeg"],
+    formats: ["webp", "avif", "jpeg", "svg"],
     widths: ["auto"],
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
     },
+    svgShortCircuit: true,
   });
 
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
