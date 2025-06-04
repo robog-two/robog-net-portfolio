@@ -8,7 +8,8 @@ excerpt: Example excerpt for the third blog post. These excerpts help visitors d
 
 # Blog 3
 
-Example blog post content would go here. This is written in Markdown and processed by 11ty.
+Example blog post content would go here. This is written in Markdown and
+processed by 11ty.
 
 ## Example Section
 

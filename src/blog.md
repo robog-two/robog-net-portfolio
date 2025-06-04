@@ -1,12 +1,14 @@
 ---
-title: Blog
+title: Sam's Blog.
 layout: page.njk
 style: blog
 ---
 
-Welcome to my blog where I share thoughts on technology, computer science, and my projects.
+Welcome to my blog where I share thoughts on technology, computer science, and
+my projects.
 
 {%- for post in collections.post reversed -%}
+
 <article class="blog-post-card">
     <header class="post-header">
         <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>

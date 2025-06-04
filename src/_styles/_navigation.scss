@@ -33,7 +33,7 @@
     left: globals.$spacing-md;
     transform: translateY(-50%);
     z-index: 101;
-    
+
     .home-link {
         display: flex;
         align-items: center;
@@ -44,19 +44,19 @@
         text-decoration: none;
         padding: 0.75rem globals.$spacing-md;
         transition: all globals.$transition-fast globals.$ease-standard;
-        
+
         .arrow {
             font-size: globals.$font-size-xl;
             transition: transform globals.$transition-fast globals.$ease-standard;
         }
-        
+
         .home-text {
             transition: color globals.$transition-fast globals.$ease-standard;
         }
-        
+
         &:hover {
             @include button-hover-effect;
-            
+
             .arrow {
                 transform: translateX(-2px);
             }
@@ -81,14 +81,14 @@
     text-align: center;
     position: relative;
     z-index: globals.$z-header;
-    
+
     h1 {
         @include heading-base-styles;
         font-size: globals.$title-full-size;
         position: relative;
         z-index: 1;
     }
-    
+
     // JavaScript-triggered shrunk state for sticky header
     &.shrunk {
         min-height: globals.$header-shrunk-height;
@@ -97,7 +97,7 @@
         left: 0;
         right: 0;
         transition: none;
-        
+
         h1 {
             font-size: globals.$title-shrunk-size;
         }
@@ -112,7 +112,7 @@
     max-width: globals.$content-max-width;
     margin: 0 auto;
     padding: globals.$content-padding;
-    
+
     // Typography hierarchy for markdown content
     h2 {
         @include heading-base-styles;
@@ -120,45 +120,44 @@
         margin: globals.$spacing-xl 0 globals.$spacing-md 0;
         padding-bottom: globals.$spacing-sm;
     }
-    
+
     h3 {
         @include heading-base-styles;
         font-size: globals.$font-size-2xl;
         margin: globals.$spacing-lg 0 globals.$spacing-md 0;
     }
-    
+
     p {
         @include text-base-styles;
         margin-bottom: globals.$spacing-md;
     }
-    
+
     // Inline text styling
     strong {
         font-weight: bold;
         color: globals.$primary-text;
     }
-    
+
     em {
         font-style: italic;
         color: rgba(13, 7, 72, globals.$opacity-muted);
     }
-    
+
     a {
         color: inherit;
-        text-decoration: none;
         transition: color globals.$transition-slow globals.$ease-standard;
-        
+
         &:hover {
             text-decoration: underline;
         }
     }
-    
+
     // List styling
     ul, ol {
         @include text-base-styles;
         margin: globals.$spacing-md 0;
         padding-left: globals.$spacing-xl;
-        
+
         li {
             margin-bottom: globals.$spacing-sm;
         }

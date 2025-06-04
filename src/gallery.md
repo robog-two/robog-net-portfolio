@@ -1,5 +1,5 @@
 ---
-title: Gallery
+title: Sam's Art.
 layout: page.njk
 style: gallery
 ---
@@ -10,9 +10,10 @@ style: gallery
 
 ### Example Art Title 1
 
-*Digital Art, 2024*
+_Digital Art, 2024_
 
-Example description of the first art piece. This would typically include the medium, inspiration, and artistic techniques used.
+Example description of the first art piece. This would typically include the
+medium, inspiration, and artistic techniques used.
 
 [View Details →](#art1)
 
@@ -22,9 +23,10 @@ Example description of the first art piece. This would typically include the med
 
 ### Example Art Title 2
 
-*Painting, 2023*
+_Painting, 2023_
 
-Example description of the second art piece. Details about the creative process, themes, and artistic choices would be included here.
+Example description of the second art piece. Details about the creative process,
+themes, and artistic choices would be included here.
 
 [View Details →](#art2)
 
@@ -34,9 +36,10 @@ Example description of the second art piece. Details about the creative process,
 
 ### Example Art Title 3
 
-*Photography, 2023*
+_Photography, 2023_
 
-Example description of the third art piece. Information about the artistic vision, technique, and meaning behind the work.
+Example description of the third art piece. Information about the artistic
+vision, technique, and meaning behind the work.
 
 [View Details →](#art3)
 
@@ -46,9 +49,10 @@ Example description of the third art piece. Information about the artistic visio
 
 ### Example Art Title 4
 
-*Mixed Media, 2024*
+_Mixed Media, 2024_
 
-Example description of the fourth art piece. Discussion of the materials, inspiration, and artistic development process.
+Example description of the fourth art piece. Discussion of the materials,
+inspiration, and artistic development process.
 
 [View Details →](#art4)
 
@@ -58,9 +62,10 @@ Example description of the fourth art piece. Discussion of the materials, inspir
 
 ### Example Art Title 5
 
-*Sculpture, 2023*
+_Sculpture, 2023_
 
-Example description of the fifth art piece. Exploration of the themes, techniques, and personal significance of the artwork.
+Example description of the fifth art piece. Exploration of the themes,
+techniques, and personal significance of the artwork.
 
 [View Details →](#art5)
 
@@ -70,9 +75,10 @@ Example description of the fifth art piece. Exploration of the themes, technique
 
 ### Example Art Title 6
 
-*Digital Art, 2024*
+_Digital Art, 2024_
 
-Example description of the sixth art piece. Details about the creative journey, artistic challenges, and final outcome.
+Example description of the sixth art piece. Details about the creative journey,
+artistic challenges, and final outcome.
 
 [View Details →](#art6)
 

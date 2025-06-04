@@ -1,5 +1,6 @@
 ---
 layout: base.njk
+style: about
 ---
 
 <main class="page-content">
@@ -15,9 +16,10 @@ layout: base.njk
         </section>
     </div>
 
-    <section class="content">
+    <article class="post-content">
         {{ content | safe }}
-    </section>
+    </article>
 </main>
 
 <script src="/_scripts/header-shrink.js"></script>
+<script src="/_scripts/image-zoom.js"></script>

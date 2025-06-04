@@ -20,7 +20,7 @@ More example content demonstrating markdown formatting capabilities.
 Below is an example chart that demonstrates the image styling and zoom
 functionality:
 
-![Sample Chart](/blog/attachments/diagram1.png)
+![Sample Chart](/blog/media/diagram1.png)
 
 This image should be centered and take up the full width of the blog column.
 Click on it to zoom!
