@@ -88,3 +88,206 @@
         color: $hover-color;
     }
 }
+
+// =============================================================================
+// PAGE COMPONENT MIXINS
+// =============================================================================
+
+// Page header with customizable background color
+@mixin page-header($bg-color) {
+    background: $bg-color;
+}
+
+// Blog post card with theme color
+@mixin blog-post-card($theme-color) {
+    @extend %card-base;
+    border-color: $theme-color;
+    margin-bottom: globals.$spacing-xl;
+
+    .post-header {
+        margin-bottom: globals.$spacing-md;
+
+        h2 {
+            font-size: globals.$font-size-3xl;
+            margin: 0 0 globals.$spacing-sm 0;
+            border: none;
+
+            a {
+                color: globals.$primary-text;
+                transition: color globals.$transition-fast globals.$ease-standard;
+
+                &:hover {
+                    color: $theme-color;
+                }
+            }
+        }
+
+        time {
+            font-size: 0.9rem;
+            color: rgba(13, 7, 72, globals.$opacity-subtle);
+            font-style: italic;
+        }
+    }
+
+    .post-excerpt {
+        margin-bottom: globals.$spacing-lg;
+    }
+
+    .read-more {
+        @include link-color-transition($theme-color);
+    }
+}
+
+// Post content styling with theme color
+@mixin post-content($theme-color) {
+    @extend %content-narrow;
+    font-family: globals.$text-font-stack;
+    line-height: globals.$line-height-relaxed;
+    color: globals.$primary-text;
+
+    // Typography hierarchy
+    h1, h2, h3, h4, h5, h6 {
+        font-family: globals.$font-stack;
+        font-weight: bold;
+        color: globals.$primary-text;
+        margin-top: globals.$spacing-xl;
+        margin-bottom: globals.$spacing-md;
+    }
+
+    h2 {
+        border-bottom: 2px solid $theme-color;
+        padding-bottom: globals.$spacing-sm;
+    }
+
+    p {
+        margin-bottom: globals.$spacing-md;
+        font-family: globals.$text-font-stack;
+    }
+
+    a {
+        @include link-color-transition($theme-color);
+        transition: color globals.$transition-slow globals.$ease-standard;
+    }
+
+    ul, ol {
+        font-family: globals.$text-font-stack;
+        margin: globals.$spacing-md 0;
+        padding-left: globals.$spacing-xl;
+    }
+
+    // Enhanced image styling for posts
+    img {
+        display: block;
+        margin: globals.$spacing-xl auto;
+        max-width: 100%;
+        height: auto;
+
+        box-shadow: globals.$shadow-hover;
+        cursor: pointer;
+        transition: transform globals.$transition-normal globals.$ease-standard;
+
+        // Responsive breakout on larger screens
+        @media (min-width: 768px) {
+            max-width: 80vw;
+            width: 80vw;
+            margin-left: calc((100% - 80vw) / 2);
+            margin-right: calc((100% - 80vw) / 2);
+        }
+
+        &:hover {
+            transform: scale(globals.$hover-scale);
+        }
+    }
+
+    figcaption {
+        text-align: center;
+    }
+
+    // Task list styling (for blog posts)
+    ul.task-list {
+        ul.task-list {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        li {
+            list-style: none;
+
+            input {
+                margin-left: -30px;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// IMAGE MODAL COMPONENT
+// =============================================================================
+
+%image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: globals.$z-modal;
+    opacity: 0;
+    transition: opacity globals.$transition-slow globals.$ease-standard;
+
+    &.show {
+        opacity: 1;
+    }
+
+    .modal-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, globals.$opacity-backdrop);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: globals.$spacing-xl;
+    }
+
+    .modal-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+
+        box-shadow: globals.$shadow-modal;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: calc(-1 * #{globals.$spacing-md});
+        right: calc(-1 * #{globals.$spacing-md});
+        background: rgba(255, 255, 255, globals.$opacity-backdrop);
+        border: none;
+        width: 3rem;
+        height: 3rem;
+
+        font-size: globals.$font-size-2xl;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background globals.$transition-normal globals.$ease-standard;
+
+        &:hover {
+            background: white;
+        }
+    }
+}
