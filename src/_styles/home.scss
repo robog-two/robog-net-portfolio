@@ -165,7 +165,7 @@
 
     .block {
         width: 40px;
-        height: 22px;
+        height: 40px;
 
         // Brand color variants using a map-based approach
         &.pink { background-color: globals.$color-pink; }
@@ -199,7 +199,7 @@
     h1 {
         font-size: 2.8rem;
         font-weight: normal;
-        margin: -30px 0 0 0;
+        margin: -40px 0 0 0;
     }
 
     h2 {
