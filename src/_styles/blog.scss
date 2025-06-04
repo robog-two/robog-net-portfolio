@@ -121,6 +121,10 @@
             transform: scale(globals.$hover-scale);
         }
     }
+
+    figcaption {
+        text-align: center;
+    }
 }
 
 // =============================================================================
