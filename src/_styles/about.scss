@@ -19,15 +19,15 @@
     h2 {
         border-bottom: 3px solid globals.$color-pink;
     }
-    
+
     // Subsection headings with pink background
     h3 {
         background: globals.$color-pink;
         padding: globals.$spacing-sm globals.$spacing-md;
         display: inline-block;
-        border-radius: globals.$border-radius;
+
     }
-    
+
     // Institution/company names (rendered from markdown bold)
     strong {
         color: globals.$color-pink;
@@ -35,7 +35,7 @@
         margin-bottom: 0.25rem;
         font-weight: bold;
     }
-    
+
     // Dates/positions (rendered from markdown italics)
     em {
         font-style: italic;
@@ -43,7 +43,7 @@
         display: block;
         margin-bottom: globals.$spacing-sm;
     }
-    
+
     // Skills/achievements list styling
     ul {
         li {
@@ -51,12 +51,12 @@
             color: globals.$primary-text;
             padding: globals.$spacing-sm globals.$spacing-md;
             margin-bottom: globals.$spacing-sm;
-            border-radius: globals.$border-radius;
+
             list-style: none;
             text-align: center;
             font-weight: bold;
             transition: transform globals.$transition-fast globals.$ease-standard;
-            
+
             &:hover {
                 transform: translateY(-2px);
             }

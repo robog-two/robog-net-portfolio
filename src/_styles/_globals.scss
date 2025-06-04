@@ -42,7 +42,6 @@ $color-cyan: #85f7ff;
 $color-green: #aaf751;
 $color-yellow: #ffc533;
 
-
 // Opacity levels
 $opacity-subtle: 0.7;
 $opacity-muted: 0.8;
@@ -53,8 +52,8 @@ $opacity-backdrop: 0.9;
 // =============================================================================
 
 // Base spacing scale
-$spacing-xs: 0.25rem;
-$spacing-sm: 0.5rem;
+$spacing-xs: 0.5rem;
+$spacing-sm: 0.75rem;
 $spacing-md: 1rem;
 $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
@@ -103,8 +102,6 @@ $title-shrunk-size: $font-size-2xl;
 
 // Border system
 $border-width: 2px;
-$border-radius: 8px;
-$border-radius-full: 50%;
 
 // Z-index scale
 $z-nav: 100;
