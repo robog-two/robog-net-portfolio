@@ -50,7 +50,8 @@
             transition: transform globals.$transition-fast globals.$ease-standard;
         }
 
-        .home-text {
+        .home-text,
+        .back-text {
             transition: color globals.$transition-fast globals.$ease-standard;
         }
 
@@ -87,6 +88,8 @@
         font-size: globals.$title-full-size;
         position: relative;
         z-index: 1;
+        padding-left: 125px;
+        padding-right: 125px;
     }
 
     // JavaScript-triggered shrunk state for sticky header
@@ -161,5 +164,53 @@
         li {
             margin-bottom: globals.$spacing-sm;
         }
+    }
+}
+
+// =============================================================================
+// RESPONSIVE NAVIGATION
+// =============================================================================
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: globals.$font-size-3xl;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .page-header.shrunk h1 {
+        font-size: globals.$font-size-lg !important;
+        padding-left: 50px;
+    }
+
+    .page-navigation {
+        top: 0;
+        left: 0;
+        height: 60px;
+        transform: none;
+        display: flex;
+        align-items: center;
+
+        .home-link {
+            padding: 0.5rem;
+            font-size: 4rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .arrow {
+                font-size: 4rem;
+                line-height: 1;
+            }
+
+            .back-text {
+                display: none;
+            }
+        }
+    }
+
+    .page-header.shrunk .arrow {
+        line-height: 100%;
     }
 }

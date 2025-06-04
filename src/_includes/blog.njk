@@ -8,14 +8,14 @@ style: blog
         <section class="page-header">
             <header class="page-navigation">
                 <a href="/blog" class="home-link" aria-label="Back to view all posts">
-                    <span class="arrow">←</span>
-                    <span class="home-text">All Posts</span>
+                    <span class="arrow">⏴</span>
+                    <span class="back-text">All Posts</span>
                 </a>
             </header>
-            <h1>{{ title }}</h1>
+            <h1>{{ title | safe }}</h1>
         </section>
     </div>
-    
+
     <article class="post-content">
         {{ content | safe }}
     </article>
