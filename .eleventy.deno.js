@@ -1,7 +1,7 @@
-const eleventySass = require("@11tyrocks/eleventy-plugin-sass-lightningcss");
-const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
+import eleventySass from "npm:@11tyrocks/eleventy-plugin-sass-lightningcss";
+import { eleventyImageTransformPlugin } from "npm:@11ty/eleventy-img";
 
-module.exports = (eleventyConfig) => {
+export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
   
   // Add image optimization plugin
