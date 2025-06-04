@@ -1,0 +1,6 @@
+# Build output directory
+public/
+
+# Editor and tool directories
+.vscode/
+.claude/
