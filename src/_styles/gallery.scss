@@ -1,47 +1,45 @@
 @use '_globals' as globals;
 @use 'base';
 @use 'navigation';
-@use 'shared-components';
+@use 'shared-components' as shared;
 
+// =============================================================================
+// GALLERY PAGE STYLES
+// =============================================================================
+// Theme: Cyan - Creative work and portfolio showcase
+
+// Page header with cyan background
 .page-header {
     background: globals.$color-cyan;
 }
 
-// Gallery grid styles
+// Gallery content and grid layout
 .content {
+    // Responsive grid for gallery items
     .gallery-grid {
         @extend %grid-layout;
     }
     
     .gallery-item {
-        @extend %card-base;
+        @extend %card-content;
         border-color: globals.$color-cyan;
         
-        h3 {
-            background: none;
-            margin: 0 0 1rem 0;
-            padding: 0;
-            border-radius: 0;
-        }
-        
+        // Medium/category information
         em {
             color: globals.$color-cyan;
             font-weight: bold;
             display: inline;
-            margin-bottom: 1rem;
+            margin-bottom: globals.$spacing-md;
         }
         
+        // Project description
         p {
-            margin-bottom: 1.5rem;
+            margin-bottom: globals.$spacing-lg;
         }
         
+        // Project links
         a {
-            font-weight: bold;
-            color: globals.$color-cyan;
-            
-            &:hover {
-                color: globals.$primary-text;
-            }
+            @include shared.link-color-transition(globals.$color-cyan);
         }
     }
 }

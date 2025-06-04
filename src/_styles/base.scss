@@ -1,11 +1,44 @@
 @use "_globals" as globals;
 @use "_fonts";
 
+// =============================================================================
+// BASE STYLES & RESET
+// =============================================================================
+// Foundation styles for the entire application
+
+// CSS Reset and base body styling
 body {
+    // Typography
     font-family: globals.$font-stack;
     color: globals.$primary-text;
+    
+    // Layout reset
     margin: 0;
     padding: 0;
     min-height: 100vh;
     position: relative;
+    
+    // Improve text rendering
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+// Box sizing reset for better layout control
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// Remove default margins and focus styles
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// Improve focus visibility for accessibility
+:focus-visible {
+    outline: 2px solid globals.$primary-text;
+    outline-offset: 2px;
 }

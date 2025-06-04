@@ -1,34 +1,61 @@
 @use '_globals' as globals;
 
+// =============================================================================
+// NAVIGATION & HEADER COMPONENTS
+// =============================================================================
+
+// Mixins for common patterns
+@mixin button-hover-effect($translate-x: -#{globals.$hover-translate}) {
+    transform: translateX($translate-x);
+}
+
+@mixin text-base-styles {
+    font-family: globals.$text-font-stack;
+    font-size: globals.$font-size-lg;
+    line-height: globals.$line-height-normal;
+    color: globals.$primary-text;
+}
+
+@mixin heading-base-styles {
+    font-family: globals.$font-stack;
+    font-weight: bold;
+    color: globals.$primary-text;
+    margin: 0;
+}
+
+// =============================================================================
+// PAGE NAVIGATION
+// =============================================================================
+
 .page-navigation {
     position: absolute;
     top: 50%;
-    left: 1rem;
+    left: globals.$spacing-md;
     transform: translateY(-50%);
     z-index: 101;
     
     .home-link {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        font-size: 1.1rem;
+        gap: globals.$spacing-sm;
+        @include text-base-styles;
+        font-size: globals.$font-size-xl;
         font-weight: bold;
-        color: globals.$primary-text;
         text-decoration: none;
-        padding: 0.75rem 1rem;
-        transition: all globals.$transition-speed ease;
+        padding: 0.75rem globals.$spacing-md;
+        transition: all globals.$transition-fast globals.$ease-standard;
         
         .arrow {
-            font-size: 1.2rem;
-            transition: transform globals.$transition-speed ease;
+            font-size: globals.$font-size-xl;
+            transition: transform globals.$transition-fast globals.$ease-standard;
         }
         
         .home-text {
-            transition: color globals.$transition-speed ease;
+            transition: color globals.$transition-fast globals.$ease-standard;
         }
         
         &:hover {
-            transform: translateX(-#{globals.$hover-translate});
+            @include button-hover-effect;
             
             .arrow {
                 transform: translateX(-2px);
@@ -36,6 +63,10 @@
         }
     }
 }
+
+// =============================================================================
+// HEADER SYSTEM
+// =============================================================================
 
 .header-container {
     height: globals.$header-full-height;
@@ -48,20 +79,17 @@
     justify-content: center;
     min-height: globals.$header-full-height;
     text-align: center;
-    z-index: 50;
     position: relative;
-    
+    z-index: globals.$z-header;
     
     h1 {
+        @include heading-base-styles;
         font-size: globals.$title-full-size;
-        font-weight: bold;
-        color: globals.$primary-text;
-        margin: 0;
         position: relative;
         z-index: 1;
     }
     
-    // JavaScript-triggered shrunk state
+    // JavaScript-triggered shrunk state for sticky header
     &.shrunk {
         min-height: globals.$header-shrunk-height;
         position: fixed;
@@ -70,44 +98,41 @@
         right: 0;
         transition: none;
         
-        
         h1 {
             font-size: globals.$title-shrunk-size;
         }
     }
 }
 
+// =============================================================================
+// CONTENT LAYOUT & TYPOGRAPHY
+// =============================================================================
+
 .content {
-    max-width: 800px;
+    max-width: globals.$content-max-width;
     margin: 0 auto;
-    padding: 2rem;
+    padding: globals.$content-padding;
     
-    // Markdown content styling
+    // Typography hierarchy for markdown content
     h2 {
-        font-family: globals.$font-stack;
-        font-size: 2rem;
-        font-weight: bold;
-        color: globals.$primary-text;
-        margin: 2rem 0 1rem 0;
-        padding-bottom: 0.5rem;
+        @include heading-base-styles;
+        font-size: globals.$font-size-4xl;
+        margin: globals.$spacing-xl 0 globals.$spacing-md 0;
+        padding-bottom: globals.$spacing-sm;
     }
     
     h3 {
-        font-family: globals.$font-stack;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: globals.$primary-text;
-        margin: 1.5rem 0 1rem 0;
+        @include heading-base-styles;
+        font-size: globals.$font-size-2xl;
+        margin: globals.$spacing-lg 0 globals.$spacing-md 0;
     }
     
     p {
-        font-family: globals.$text-font-stack;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: globals.$primary-text;
-        margin-bottom: 1rem;
+        @include text-base-styles;
+        margin-bottom: globals.$spacing-md;
     }
     
+    // Inline text styling
     strong {
         font-weight: bold;
         color: globals.$primary-text;
@@ -115,29 +140,27 @@
     
     em {
         font-style: italic;
-        color: rgba(13, 7, 72, 0.8);
+        color: rgba(13, 7, 72, globals.$opacity-muted);
     }
     
     a {
         color: inherit;
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: color globals.$transition-slow globals.$ease-standard;
         
         &:hover {
             text-decoration: underline;
         }
     }
     
+    // List styling
     ul, ol {
-        font-family: globals.$text-font-stack;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: globals.$primary-text;
-        margin: 1rem 0;
-        padding-left: 2rem;
+        @include text-base-styles;
+        margin: globals.$spacing-md 0;
+        padding-left: globals.$spacing-xl;
         
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: globals.$spacing-sm;
         }
     }
 }

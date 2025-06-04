@@ -1,37 +1,90 @@
 @use '_globals' as globals;
 
-// Shared card styles used across pages
+// =============================================================================
+// SHARED COMPONENT LIBRARY
+// =============================================================================
+// Reusable patterns and placeholders used across multiple pages
+
+// =============================================================================
+// CARD SYSTEM
+// =============================================================================
+
+// Base card component with hover effects
 %card-base {
-    padding: 1.5rem;
-    transition: all globals.$transition-speed ease;
+    padding: globals.$spacing-lg;
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid;
+    border: globals.$border-width solid;
+    border-radius: globals.$border-radius;
+    transition: all globals.$transition-fast globals.$ease-standard;
     
     &:hover {
         transform: translateY(-#{globals.$hover-translate});
-        box-shadow: 0 globals.$shadow-spread globals.$shadow-blur rgba(0, 0, 0, 0.2);
+        box-shadow: 0 globals.$shadow-spread globals.$shadow-blur globals.$shadow-color;
     }
 }
 
-// Shared grid layouts
-%grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+// Card variants for different content types
+%card-content {
+    @extend %card-base;
+    
+    h3 {
+        margin: 0 0 globals.$spacing-md 0;
+        padding: 0;
+        background: none;
+        border-radius: 0;
+    }
+    
+    p {
+        margin-bottom: globals.$spacing-lg;
+    }
 }
 
-// Navigation wrapper for sticky positioning without displacement
-.nav-wrapper {
-    position: sticky;
-    top: 0;
-    height: 0;
-    width: 100%;
-    z-index: 100;
+// =============================================================================
+// LAYOUT SYSTEM
+// =============================================================================
+
+// Responsive grid layout for content cards
+%grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(globals.$grid-min-width, 1fr));
+    gap: globals.$grid-gap;
+    margin-top: globals.$spacing-xl;
+}
+
+// Narrow content wrapper for blog posts
+%content-narrow {
+    max-width: globals.$content-narrow-width;
+    margin: 0 auto;
+    padding: globals.$spacing-md;
+}
+
+// =============================================================================
+// BUTTON & LINK PATTERNS
+// =============================================================================
+
+// Primary button style mixin
+@mixin button-primary($bg-color, $text-color: globals.$primary-text) {
+    background: $bg-color;
+    color: $text-color;
+    padding: globals.$spacing-sm globals.$spacing-md;
+    border-radius: globals.$border-radius;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all globals.$transition-fast globals.$ease-standard;
     
-    .page-navigation {
-        position: absolute;
-        top: 20px;
-        left: 20px;
+    &:hover {
+        background: $text-color;
+        color: $bg-color;
+    }
+}
+
+// Link with color transition
+@mixin link-color-transition($color, $hover-color: globals.$primary-text) {
+    color: $color;
+    font-weight: bold;
+    transition: color globals.$transition-fast globals.$ease-standard;
+    
+    &:hover {
+        color: $hover-color;
     }
 }

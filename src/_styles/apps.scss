@@ -1,61 +1,53 @@
 @use '_globals' as globals;
 @use 'base';
 @use 'navigation';
-@use 'shared-components';
+@use 'shared-components' as shared;
 
+// =============================================================================
+// APPS PAGE STYLES
+// =============================================================================
+// Theme: Green - Application portfolio showcase
+
+// Page header with green background
 .page-header {
     background: globals.$color-green;
 }
 
-// Apps grid styles
+// Apps page content and grid layout
 .content {
+    // Responsive grid for app cards
     .apps-grid {
         @extend %grid-layout;
     }
     
     .app-item {
-        @extend %card-base;
+        @extend %card-content;
         border-color: globals.$color-green;
         
-        h3 {
-            background: none;
-            margin: 0 0 1rem 0;
-            padding: 0;
-            border-radius: 0;
-        }
-        
-        // Style the tech/platform/year info
+        // Technology/platform metadata
         strong {
-            color: globals.$color-green;
-            font-weight: bold;
+            @include shared.link-color-transition(globals.$color-green);
             display: inline;
         }
         
+        // App description text
         p {
-            margin-bottom: 1.5rem;
+            margin-bottom: globals.$spacing-lg;
         }
         
-        // Style links in markdown
+        // Action links (demo, code, etc.)
         a {
-            font-weight: bold;
-            color: globals.$color-green;
-            margin-right: 1rem;
+            margin-right: globals.$spacing-md;
             
-            &:hover {
-                color: globals.$primary-text;
+            // Primary action button (usually first link)
+            &:first-of-type {
+                @include shared.button-primary(globals.$color-green);
+                margin-right: globals.$spacing-md;
             }
             
-            &:first-of-type {
-                background: globals.$color-green;
-                color: globals.$primary-text;
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                text-decoration: none;
-                
-                &:hover {
-                    background: globals.$primary-text;
-                    color: globals.$color-green;
-                }
+            // Secondary links
+            &:not(:first-of-type) {
+                @include shared.link-color-transition(globals.$color-green);
             }
         }
     }

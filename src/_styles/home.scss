@@ -1,9 +1,51 @@
 @use '_globals' as globals;
-
 @use 'base';
 
+// =============================================================================
+// MIXINS & UTILITIES
+// =============================================================================
+
+// Mixin for corner positioning to reduce duplication
+@mixin corner-position($position) {
+    @if $position == top-left {
+        top: 0;
+        left: 0;
+    } @else if $position == top-right {
+        top: 0;
+        right: 0;
+    } @else if $position == bottom-right {
+        bottom: 0;
+        right: 0;
+    } @else if $position == bottom-left {
+        bottom: 0;
+        left: 0;
+    }
+}
+
+// Mixin for triangle background positioning (inherits corner position)
+@mixin triangle-bg-position($position) {
+    @include corner-position($position);
+}
+
+// Mixin for nav text transforms with consistent positioning
+@mixin nav-text-transform($x-offset, $y-offset, $rotation) {
+    transform: translate(
+        calc(-50% + #{$x-offset}), 
+        calc(-50% + #{$y-offset})
+    ) rotate($rotation);
+}
+
+// Mixin for triangle gradient backgrounds
+@mixin triangle-gradient($angle, $color) {
+    background: linear-gradient($angle, $color 50%, transparent 50%);
+}
+
+// =============================================================================
+// CORNER NAVIGATION COMPONENT
+// =============================================================================
 
 .corner-nav {
+    // Base styles for corner navigation elements
     position: fixed;
     width: globals.$triangle-size;
     height: globals.$triangle-size;
@@ -11,11 +53,12 @@
     font-weight: bold;
     color: globals.$primary-text;
     text-decoration: none;
-    z-index: 100;
-    transition: color globals.$triangle-transition-speed ease-in;
     text-align: center;
     line-height: globals.$triangle-size;
+    z-index: 100;
+    transition: color globals.$triangle-transition-speed ease-in;
 
+    // Triangle background element (animated on hover)
     .triangle-bg {
         position: absolute;
         width: globals.$triangle-size;
@@ -24,6 +67,7 @@
         pointer-events: none;
     }
 
+    // Navigation label text positioning
     .nav-text {
         position: absolute;
         top: 50%;
@@ -33,119 +77,113 @@
         padding-top: calc(-#{globals.$nav-label-size} / 2);
     }
 
-    // Shared rotation and positioning with padding adjustment
-    &.top-left {
-        .nav-text {
-            transform: translate(calc(-50% - #{globals.$nav-label-padding}), calc(-50% - #{globals.$nav-label-padding})) rotate(-45deg);
-        }
-    }
-
-    &.top-right {
-        .nav-text {
-            transform: translate(calc(-50% + #{globals.$nav-label-padding}), calc(-50% - #{globals.$nav-label-padding})) rotate(45deg);
-        }
-    }
-
-    &.bottom-right {
-        .nav-text {
-            transform: translate(calc(-50% + #{globals.$nav-label-padding}), calc(-50% + #{globals.$nav-label-padding})) rotate(-45deg);
-        }
-    }
-
-    &.bottom-left {
-        .nav-text {
-            transform: translate(calc(-50% - #{globals.$nav-label-padding}), calc(-50% + #{globals.$nav-label-padding})) rotate(45deg);
-        }
-    }
-
-    &:hover .triangle-bg {
-        width: globals.$triangle-hover-size;
-        height: globals.$triangle-hover-size;
-        opacity: 1;
-    }
-
-    // Individual corner positioning and colors
-    &.top-left {
-        top: 0;
-        left: 0;
-
-        .triangle-bg {
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, globals.$color-pink 50%, transparent 50%);
-        }
-    }
-
-    &.top-right {
-        top: 0;
-        right: 0;
-
-        .triangle-bg {
-            top: 0;
-            right: 0;
-            background: linear-gradient(225deg, globals.$color-yellow 50%, transparent 50%);
-        }
-    }
-
-    &.bottom-right {
-        bottom: 0;
-        right: 0;
-
-        .triangle-bg {
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(315deg, globals.$color-green 50%, transparent 50%);
-        }
-    }
-
-    &.bottom-left {
-        bottom: 0;
-        left: 0;
-
-        .triangle-bg {
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(45deg, globals.$color-cyan 50%, transparent 50%);
-        }
-    }
-
+    // Hover effects for triangle expansion
     &:hover {
         color: globals.$primary-text;
+        
+        .triangle-bg {
+            width: globals.$triangle-hover-size;
+            height: globals.$triangle-hover-size;
+            opacity: 1;
+        }
+    }
+
+    // Corner-specific positioning and styling
+    &.top-left {
+        @include corner-position(top-left);
+        
+        .nav-text {
+            @include nav-text-transform(-#{globals.$nav-label-padding}, -#{globals.$nav-label-padding}, -45deg);
+        }
+        
+        .triangle-bg {
+            @include triangle-bg-position(top-left);
+            @include triangle-gradient(135deg, globals.$color-pink);
+        }
+    }
+
+    &.top-right {
+        @include corner-position(top-right);
+        
+        .nav-text {
+            @include nav-text-transform(#{globals.$nav-label-padding}, -#{globals.$nav-label-padding}, 45deg);
+        }
+        
+        .triangle-bg {
+            @include triangle-bg-position(top-right);
+            @include triangle-gradient(225deg, globals.$color-yellow);
+        }
+    }
+
+    &.bottom-right {
+        @include corner-position(bottom-right);
+        
+        .nav-text {
+            @include nav-text-transform(#{globals.$nav-label-padding}, #{globals.$nav-label-padding}, -45deg);
+        }
+        
+        .triangle-bg {
+            @include triangle-bg-position(bottom-right);
+            @include triangle-gradient(315deg, globals.$color-green);
+        }
+    }
+
+    &.bottom-left {
+        @include corner-position(bottom-left);
+        
+        .nav-text {
+            @include nav-text-transform(-#{globals.$nav-label-padding}, #{globals.$nav-label-padding}, 45deg);
+        }
+        
+        .triangle-bg {
+            @include triangle-bg-position(bottom-left);
+            @include triangle-gradient(45deg, globals.$color-cyan);
+        }
     }
 }
 
+// =============================================================================
+// COLOR BLOCKS COMPONENT
+// =============================================================================
+
 .color-blocks {
     display: flex;
-    column-gap: 5px;
-    margin-bottom: 20px;
+    column-gap: globals.$spacing-xs;
+    margin-bottom: globals.$spacing-sm;
 
     .block {
         width: 30px;
         height: 26px;
-    }
-
-    .pink {
-        background-color: globals.$color-pink;
-    }
-
-    .cyan {
-        background-color: globals.$color-cyan;
-    }
-
-    .green {
-        background-color: globals.$color-green;
+        
+        // Brand color variants using a map-based approach
+        &.pink { background-color: globals.$color-pink; }
+        &.cyan { background-color: globals.$color-cyan; }
+        &.green { background-color: globals.$color-green; }
     }
 }
 
+// =============================================================================
+// BUSINESS CARD COMPONENT
+// =============================================================================
+
 .bizCard {
+    // Centered full-viewport layout
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     text-align: center;
+    
+    // Blur effect when navigation is hovered
     transition: filter 0.2s ease;
+    
+    &.nav-hovered {
+        filter: blur(3px);
+        transition: filter 0.2s ease 0.25s;
+    }
 
+    // Typography hierarchy
     h1 {
         font-size: 2.8rem;
         font-weight: normal;
@@ -155,11 +193,6 @@
     h2 {
         font-size: 1.2rem;
         font-weight: normal;
-        margin: 5px 0;
-    }
-
-    &.nav-hovered {
-        filter: blur(3px);
-        transition: filter 0.2s ease 0.25s;
+        margin: globals.$spacing-xs 0;
     }
 }

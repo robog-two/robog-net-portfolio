@@ -1,29 +1,39 @@
 @use '_globals' as globals;
 @use 'base';
 @use 'navigation';
-@use 'shared-components';
+@use 'shared-components' as shared;
 
+// =============================================================================
+// BLOG PAGE STYLES
+// =============================================================================
+// Theme: Yellow - Blog posts and articles
+
+// Page header with yellow background
 .page-header {
     background: globals.$color-yellow;
 }
 
-// Blog listing specific styles
+// =============================================================================
+// BLOG LISTING STYLES
+// =============================================================================
+
 .content {
     .blog-post-card {
         @extend %card-base;
         border-color: globals.$color-yellow;
-        margin-bottom: 2rem;
+        margin-bottom: globals.$spacing-xl;
         
         .post-header {
-            margin-bottom: 1rem;
+            margin-bottom: globals.$spacing-md;
             
             h2 {
-                font-size: 1.8rem;
-                margin: 0 0 0.5rem 0;
+                font-size: globals.$font-size-3xl;
+                margin: 0 0 globals.$spacing-sm 0;
                 border: none;
                 
                 a {
                     color: globals.$primary-text;
+                    transition: color globals.$transition-fast globals.$ease-standard;
                     
                     &:hover {
                         color: globals.$color-yellow;
@@ -33,101 +43,99 @@
             
             time {
                 font-size: 0.9rem;
-                color: rgba(13, 7, 72, 0.7);
+                color: rgba(13, 7, 72, globals.$opacity-subtle);
                 font-style: italic;
             }
         }
         
         .post-excerpt {
-            margin-bottom: 1.5rem;
+            margin-bottom: globals.$spacing-lg;
         }
         
         .read-more {
-            font-weight: bold;
-            color: globals.$color-yellow;
-            
-            &:hover {
-                color: globals.$primary-text;
-            }
+            @include shared.link-color-transition(globals.$color-yellow);
         }
     }
 }
 
-// Blog post template styles  
+// =============================================================================
+// BLOG POST TEMPLATE STYLES
+// =============================================================================
+
 .post-content {
-    max-width: 550px;
-    margin: 0 auto;
-    padding: 1rem;
+    @extend %content-narrow;
     font-family: globals.$text-font-stack;
-    line-height: 1.7;
+    line-height: globals.$line-height-relaxed;
     color: globals.$primary-text;
     
+    // Typography hierarchy
     h1, h2, h3, h4, h5, h6 {
         font-family: globals.$font-stack;
         font-weight: bold;
         color: globals.$primary-text;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
+        margin-top: globals.$spacing-xl;
+        margin-bottom: globals.$spacing-md;
     }
     
     h2 {
         border-bottom: 2px solid globals.$color-yellow;
-        padding-bottom: 0.5rem;
+        padding-bottom: globals.$spacing-sm;
     }
     
     p {
-        margin-bottom: 1rem;
+        margin-bottom: globals.$spacing-md;
         font-family: globals.$text-font-stack;
     }
     
     a {
-        color: globals.$color-yellow;
-        transition: color 0.3s ease;
-        
-        &:hover {
-            color: globals.$primary-text;
-        }
+        @include shared.link-color-transition(globals.$color-yellow);
+        transition: color globals.$transition-slow globals.$ease-standard;
     }
     
     ul, ol {
         font-family: globals.$text-font-stack;
+        margin: globals.$spacing-md 0;
+        padding-left: globals.$spacing-xl;
     }
     
+    // Enhanced image styling for blog posts
     img {
         display: block;
-        margin: 2rem auto;
+        margin: globals.$spacing-xl auto;
         max-width: 100%;
         height: auto;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: globals.$border-radius;
+        box-shadow: globals.$shadow-hover;
         cursor: pointer;
-        transition: transform 0.2s ease;
+        transition: transform globals.$transition-normal globals.$ease-standard;
         
-        // On larger screens, allow images to break out and use 80% of viewport width
+        // Responsive breakout on larger screens
         @media (min-width: 768px) {
             max-width: 80vw;
             width: 80vw;
-            // Move the image left to center it relative to viewport
             margin-left: calc((100% - 80vw) / 2);
             margin-right: calc((100% - 80vw) / 2);
         }
         
         &:hover {
-            transform: scale(1.02);
+            transform: scale(globals.$hover-scale);
         }
     }
 }
 
-// Image modal styles
+// =============================================================================
+// IMAGE MODAL COMPONENT
+// =============================================================================
+
 .image-modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: globals.$z-modal;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity globals.$transition-slow globals.$ease-standard;
     
     &.show {
         opacity: 1;
@@ -139,11 +147,11 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, globals.$opacity-backdrop);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem;
+        padding: globals.$spacing-xl;
     }
     
     .modal-content {
@@ -159,26 +167,26 @@
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-        border-radius: 8px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border-radius: globals.$border-radius;
+        box-shadow: globals.$shadow-modal;
     }
     
     .modal-close {
         position: absolute;
-        top: -1rem;
-        right: -1rem;
-        background: rgba(255, 255, 255, 0.9);
+        top: calc(-1 * #{globals.$spacing-md});
+        right: calc(-1 * #{globals.$spacing-md});
+        background: rgba(255, 255, 255, globals.$opacity-backdrop);
         border: none;
         width: 3rem;
         height: 3rem;
-        border-radius: 50%;
-        font-size: 1.5rem;
+        border-radius: globals.$border-radius-full;
+        font-size: globals.$font-size-2xl;
         font-weight: bold;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: background 0.2s ease;
+        transition: background globals.$transition-normal globals.$ease-standard;
         
         &:hover {
             background: white;

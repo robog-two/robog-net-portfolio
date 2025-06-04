@@ -1,49 +1,133 @@
-// Global variables (e.g. brand colors, font stacks/sizes, etc.) for use across all stylesheets
+// =============================================================================
+// GLOBAL DESIGN SYSTEM
+// =============================================================================
+// Centralized design tokens, colors, typography, and spacing for the portfolio
+
 @use 'sass:color';
 
+// =============================================================================
+// TYPOGRAPHY SYSTEM
+// =============================================================================
+
+// Primary font stacks
 $font-stack: "TeX Gyre Heros", "Helvetica", "Arial", "URW Nimbus Sans L", sans-serif;
 $text-font-stack: "Lato", "Helvetica", "Arial", sans-serif;
 
-// Brand colors
+// Typography scale
+$font-size-base: 1rem;
+$font-size-lg: 1.1rem;
+$font-size-xl: 1.2rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.8rem;
+$font-size-4xl: 2rem;
+$font-size-5xl: 2.8rem;
+$font-size-6xl: 3rem;
+
+// Line heights
+$line-height-tight: 1;
+$line-height-normal: 1.6;
+$line-height-relaxed: 1.7;
+
+// =============================================================================
+// COLOR SYSTEM
+// =============================================================================
+
+// Base colors
 $primary-text: #0d0748;
+$color-black: #0d0748;
+
+// Brand color palette
 $color-pink: #ff6fab;
 $color-cyan: #85f7ff;
 $color-green: #aaf751;
 $color-yellow: #ffc533;
-$color-black: #0d0748;
 
-// Pastel versions of brand colors
-$lightness-adjust: 15%;
-$saturation-adjust: 5%;
 
-$pastel-pink: color.adjust($color-pink, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
-$pastel-cyan: color.adjust($color-cyan, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
-$pastel-green: color.adjust($color-green, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
-$pastel-yellow: color.adjust($color-yellow, $saturation: $saturation-adjust, $lightness: $lightness-adjust);
+// Opacity levels
+$opacity-subtle: 0.7;
+$opacity-muted: 0.8;
+$opacity-backdrop: 0.9;
 
-// Animation and interaction variables
-$transition-speed: 0.1s;
+// =============================================================================
+// SPACING SYSTEM
+// =============================================================================
+
+// Base spacing scale
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Component-specific spacing
+$content-max-width: 800px;
+$content-narrow-width: 550px;
+$content-padding: $spacing-xl;
+
+// =============================================================================
+// ANIMATION & INTERACTION
+// =============================================================================
+
+// Transition speeds
+$transition-fast: 0.1s;
+$transition-normal: 0.2s;
+$transition-slow: 0.3s;
+$transition-triangle: 0.5s;
+
+// Animation easings
+$ease-standard: ease;
+$ease-in: ease-in;
+$ease-out: ease-out;
+$ease-in-out: ease-in-out;
+
+// Interaction feedback
 $hover-translate: 4px;
+$hover-scale: 1.02;
+
+// Shadow system
 $shadow-blur: 0px;
 $shadow-spread: 8px;
+$shadow-color: rgba(0, 0, 0, 0.2);
+$shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+$shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+// =============================================================================
+// LAYOUT TOKENS
+// =============================================================================
+
+// Header system
 $header-full-height: 40vh;
 $header-shrunk-height: 60px;
-$title-full-size: 3rem;
-$title-shrunk-size: 1.5rem;
+$title-full-size: $font-size-6xl;
+$title-shrunk-size: $font-size-2xl;
 
-// Homepage navigation variables
+// Border system
+$border-width: 2px;
+$border-radius: 8px;
+$border-radius-full: 50%;
+
+// Z-index scale
+$z-nav: 100;
+$z-header: 50;
+$z-modal: 1000;
+
+// =============================================================================
+// HOMEPAGE NAVIGATION SYSTEM
+// =============================================================================
+
+// Triangle navigation dimensions
 $triangle-size: 170px;
 $triangle-hover-size: calc(100vh + 100vw);
-$triangle-hover-opacity: 0.7;
-$triangle-transition-speed: 0.5s;
+$triangle-hover-opacity: $opacity-subtle;
+
+// Navigation label styling
 $nav-label-size: 25px;
 $nav-label-padding: 20px;
 
-// Design tokens
-$border-width: 2px;
-$border-radius: 8px;
-$opacity-subtle: 0.7;
-$opacity-muted: 0.8;
-$spacing-xs: 0.5rem;
-$spacing-sm: 1rem;
-$spacing-md: 2rem;
+// Grid system
+$grid-min-width: 350px;
+$grid-gap: $spacing-xl;
+
+// Legacy aliases
+$transition-speed: $transition-fast;
+$triangle-transition-speed: $transition-triangle;

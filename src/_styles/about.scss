@@ -3,41 +3,63 @@
 @use 'navigation';
 @use 'shared-components';
 
+// =============================================================================
+// ABOUT PAGE STYLES
+// =============================================================================
+// Theme: Pink - Personal/About information styling
+
+// Page header with pink background
 .page-header {
     background: globals.$color-pink;
 }
 
-// About page specific styling
+// About page content styling with pink theme
 .content {
+    // Section headings with pink accent
     h2 {
         border-bottom: 3px solid globals.$color-pink;
     }
     
+    // Subsection headings with pink background
     h3 {
         background: globals.$color-pink;
-        padding: 0.5rem 1rem;
+        padding: globals.$spacing-sm globals.$spacing-md;
         display: inline-block;
+        border-radius: globals.$border-radius;
     }
     
-    // Handle markdown bold text as institution names
+    // Institution/company names (rendered from markdown bold)
     strong {
         color: globals.$color-pink;
         display: block;
         margin-bottom: 0.25rem;
+        font-weight: bold;
     }
     
+    // Dates/positions (rendered from markdown italics)
     em {
         font-style: italic;
-        color: rgba(13, 7, 72, 0.7);
+        color: rgba(13, 7, 72, globals.$opacity-subtle);
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: globals.$spacing-sm;
     }
     
-    ul li {
-        background: globals.$color-pink;
-        padding: 0.5rem 1rem;
-        margin-bottom: 0.5rem;
-        list-style: none;
-        text-align: center;
+    // Skills/achievements list styling
+    ul {
+        li {
+            background: globals.$color-pink;
+            color: globals.$primary-text;
+            padding: globals.$spacing-sm globals.$spacing-md;
+            margin-bottom: globals.$spacing-sm;
+            border-radius: globals.$border-radius;
+            list-style: none;
+            text-align: center;
+            font-weight: bold;
+            transition: transform globals.$transition-fast globals.$ease-standard;
+            
+            &:hover {
+                transform: translateY(-2px);
+            }
+        }
     }
 }
