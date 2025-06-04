@@ -1,6 +1,7 @@
 const eleventySass = require("@11tyrocks/eleventy-plugin-sass-lightningcss");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const markdownItCheckbox = require('markdown-it-task-checkbox');
+const markdownItFootnote = require('markdown-it-footnote');
 
 module.exports = (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
@@ -15,7 +16,11 @@ module.exports = (eleventyConfig) => {
     },
     svgShortCircuit: true,
   });
-    eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(markdownItCheckbox));
+    eleventyConfig.amendLibrary("md", (mdLib) => {
+        mdLib
+            .use(markdownItCheckbox)
+            .use(markdownItFootnote)
+    });
 
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy({ "src/_favicon": "/" });
