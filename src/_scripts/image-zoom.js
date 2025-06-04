@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       newCaption.innerHTML = caption.innerHTML; // Innerhtml in case there is text formatting
 
       const newFigure = document.createElement("figure");
+      // Replace <picture></picture> with <figure></figure> to add caption
       const oldInner = img.parentElement.parentElement.innerHTML;
       img.parentElement.parentElement.replaceWith(newFigure);
       newFigure.innerHTML = oldInner;
@@ -18,15 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
       caption.remove();
       newFigure.appendChild(newCaption);
 
-      newFigure.childNodes[0].childNodes[1].addEventListener(
+      const newImg = newFigure.querySelector("img");
+      newImg.addEventListener(
         "click",
         function () {
-          openImageModal(this);
+          openImageModal(newImg);
         },
       );
     } else {
       img.addEventListener("click", function () {
-        openImageModal(this);
+        openImageModal(img);
       });
     }
   });

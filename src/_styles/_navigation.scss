@@ -46,6 +46,12 @@
         transition: all globals.$transition-fast globals.$ease-standard;
 
         .arrow {
+            display: inline-block;
+            height: auto;
+            img {
+                height: 0.7em;
+                width: auto;
+            }
             font-size: globals.$font-size-xl;
             transition: transform globals.$transition-fast globals.$ease-standard;
         }
@@ -200,8 +206,12 @@
             justify-content: center;
 
             .arrow {
-                font-size: 4rem;
-                line-height: 1;
+                img {
+                    height: 2.5rem;
+                    padding-top: 8px;
+                    padding-left: 8px;
+                    width: auto;
+                }
             }
 
             .back-text {
@@ -210,7 +220,12 @@
         }
     }
 
-    .page-header.shrunk .arrow {
-        line-height: 100%;
+    .page-header.shrunk {
+        .arrow {
+            img {
+                height: 2rem;
+                width: auto;
+            }
+        }
     }
 }
