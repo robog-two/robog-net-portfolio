@@ -1,7 +1,7 @@
 name = "robog-net"
 compatibility_date = "2025-06-01"
 
-assets = { directory = "./public", binding = "ASSETS", html_handling = "force-trailing-slash" }
+assets = { directory = "./public" }
 
 [build]
 command = "npm install --save markdown-it-footnote markdown-it-task-checkbox @11tyrocks/eleventy-plugin-sass-lightningcss @11ty/eleventy-img && npx @11ty/eleventy"
