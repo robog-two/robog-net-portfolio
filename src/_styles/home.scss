@@ -1,7 +1,7 @@
 @use '_globals' as globals;
 @use 'base';
 @use 'navigation';
-
+@use 'sass:color';
 // =============================================================================
 // MIXINS & UTILITIES
 // =============================================================================
@@ -37,8 +37,22 @@
 }
 
 // Mixin for triangle gradient backgrounds
-@mixin triangle-gradient($angle, $color) {
-    background: linear-gradient($angle, $color 50%, transparent 50%);
+@mixin triangle-gradient($angle, $color, $class) {
+    $tts: globals.$triangle-transition-speed;
+    transition: --#{$angle}-cprop $tts, width $tts, height $tts;
+    background: linear-gradient($angle, var(--#{$angle}-cprop) 50%, transparent 50%);
+
+    @at-root {
+        .corner-nav#{$class}:hover .triangle-bg {
+            --#{$angle}-cprop: #{$color};
+        }
+
+        @property --#{$angle}-cprop {
+            syntax: '<color>';
+            initial-value: color.scale($color, $lightness: 60%);
+            inherits: false;
+        }
+    }
 }
 
 // =============================================================================
@@ -111,7 +125,7 @@
 
         .triangle-bg {
             @include triangle-bg-position(top-left);
-            @include triangle-gradient(135deg, globals.$color-pink);
+            @include triangle-gradient(135deg, globals.$color-pink, '.top-left');
         }
     }
 
@@ -124,7 +138,7 @@
 
         .triangle-bg {
             @include triangle-bg-position(top-right);
-            @include triangle-gradient(225deg, globals.$color-yellow);
+            @include triangle-gradient(225deg, globals.$color-yellow, '.top-right');
         }
     }
 
@@ -137,7 +151,7 @@
 
         .triangle-bg {
             @include triangle-bg-position(bottom-right);
-            @include triangle-gradient(315deg, globals.$color-green);
+            @include triangle-gradient(315deg, globals.$color-green, '.bottom-right');
         }
     }
 
@@ -150,7 +164,7 @@
 
         .triangle-bg {
             @include triangle-bg-position(bottom-left);
-            @include triangle-gradient(45deg, globals.$color-cyan);
+            @include triangle-gradient(45deg, globals.$color-cyan, '.bottom-left');
         }
     }
 }
@@ -187,14 +201,6 @@
     justify-content: center;
     min-height: 100vh;
     text-align: center;
-
-    // Blur effect when navigation is hovered
-    transition: filter 0.2s ease;
-
-    &.nav-hovered {
-        filter: blur(3px);
-        transition: filter 0.2s ease 0.25s;
-    }
 
     // Typography hierarchy
     h1 {
