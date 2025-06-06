@@ -1,7 +1,7 @@
 import eleventySass from "npm:@11tyrocks/eleventy-plugin-sass-lightningcss";
 import { eleventyImageTransformPlugin } from "npm:@11ty/eleventy-img";
-import markdownItCheckbox from "npm:markdown-it-task-checkbox"
-import markdownItFootnote from "npm:markdown-it-footnote"
+import markdownItCheckbox from "npm:markdown-it-task-checkbox";
+import markdownItFootnote from "npm:markdown-it-footnote";
 
 export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
@@ -19,12 +19,15 @@ export default (eleventyConfig) => {
 
   eleventyConfig.amendLibrary("md", (mdLib) => {
     mdLib
-        .use(markdownItCheckbox)
-        .use(markdownItFootnote)
-});
+      .use(markdownItCheckbox)
+      .use(markdownItFootnote);
+  });
 
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy({ "src/_favicon": "/" });
+
+  // Gallery pieces are completely static and should not be processed
+  eleventyConfig.addPassthroughCopy("src/gallery/piece");
 
   // Copy font files to output
   eleventyConfig.addPassthroughCopy("src/_fonts");

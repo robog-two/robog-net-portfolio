@@ -4,3 +4,4 @@ public/
 # Editor and tool directories
 .vscode/
 .claude/
+.DS_Store
