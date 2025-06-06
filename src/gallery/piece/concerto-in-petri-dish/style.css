@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+canvas {
+  display: block;
+  border-radius: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: 1;
+  max-width: 95vw;
+  height: auto !important;
+}
+
+a {
+    text-align: center;
+    font-size: 8px;
+    color: black;
+    text-decoration: none;
+    padding-top: 5px;
+    padding-bottom: 20px;
+}

@@ -2,7 +2,7 @@
 layout: base.njk
 ---
 
-<main class="page-content">
+<div class="page-content">
     <div class="header-container">
         <section class="page-header">
             <header class="page-navigation">
@@ -15,9 +15,9 @@ layout: base.njk
         </section>
     </div>
 
-    <section class="content">
+    <main class="content">
         {{ content | safe }}
-    </section>
-</main>
+    </main>
+</div>
 
 <script src="/_scripts/header-shrink.js"></script>

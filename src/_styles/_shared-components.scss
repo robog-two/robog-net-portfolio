@@ -138,44 +138,7 @@
     }
 }
 
-// Post content styling with theme color
-@mixin post-content($theme-color) {
-    @extend %content-narrow;
-    font-family: globals.$text-font-stack;
-    line-height: globals.$line-height-relaxed;
-    color: globals.$primary-text;
-
-    // Typography hierarchy
-    h1, h2, h3, h4, h5, h6 {
-        font-family: globals.$font-stack;
-        font-weight: bold;
-        color: globals.$primary-text;
-        margin-top: globals.$spacing-xl;
-        margin-bottom: globals.$spacing-md;
-    }
-
-    h2 {
-        border-bottom: 2px solid $theme-color;
-        padding-bottom: globals.$spacing-sm;
-    }
-
-    p {
-        margin-bottom: globals.$spacing-md;
-        font-family: globals.$text-font-stack;
-    }
-
-    a {
-        @include link-color-transition($theme-color);
-        transition: color globals.$transition-slow globals.$ease-standard;
-    }
-
-    ul, ol {
-        font-family: globals.$text-font-stack;
-        margin: globals.$spacing-md 0;
-        padding-left: globals.$spacing-xl;
-    }
-
-    // Enhanced image styling for posts
+@mixin post-images {
     img {
         display: block;
         margin: globals.$spacing-xl auto;
@@ -197,6 +160,44 @@
         &:hover {
             transform: scale(globals.$hover-scale);
         }
+    }
+}
+
+// Post content styling with theme color
+@mixin post-content($theme-color) {
+    @extend %content-narrow;
+    font-family: globals.$text-font-stack;
+    line-height: globals.$line-height-relaxed;
+    color: globals.$primary-text;
+
+    // Typography hierarchy
+    h1, h2, h3, h4, h5, h6 {
+        font-family: globals.$font-stack;
+        font-weight: bold;
+        color: globals.$primary-text;
+        margin-top: globals.$spacing-xl;
+        margin-bottom: globals.$spacing-md;
+    }
+
+    h1 {
+        border-bottom: 2px solid $theme-color;
+        padding-bottom: globals.$spacing-sm;
+    }
+
+    p {
+        margin-bottom: globals.$spacing-md;
+        font-family: globals.$text-font-stack;
+    }
+
+    a {
+        @include link-color-transition($theme-color);
+        transition: color globals.$transition-slow globals.$ease-standard;
+    }
+
+    ul, ol {
+        font-family: globals.$text-font-stack;
+        margin: globals.$spacing-md 0;
+        padding-left: globals.$spacing-xl;
     }
 
     figcaption {

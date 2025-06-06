@@ -29,6 +29,7 @@
 
 .post-content {
     @include shared.post-content(globals.$color-pink);
+    @include shared.post-images;
 }
 
 // =============================================================================
