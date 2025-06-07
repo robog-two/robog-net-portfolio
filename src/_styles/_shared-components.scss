@@ -12,7 +12,7 @@
 // Base card component with hover effects
 %card-base {
     padding: globals.$spacing-lg;
-    background: rgba(255, 255, 255, 0.1);
+    background: white;
     border: globals.$border-width solid;
 
     transition: all globals.$transition-fast globals.$ease-standard;

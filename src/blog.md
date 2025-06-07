@@ -13,7 +13,7 @@ style: blog
 <time datetime="{{ post.data.date | date: '%Y-%m-%d' }}">{{ post.data.date |
 date: '%B %d, %Y' }}</time>
 </header> {%- if post.data.excerpt -%}
-<p class="post-excerpt">{{ post.data.excerpt }}</p> {%- endif -%}
+<p class="post-excerpt">{{ post.data.description }}</p> {%- endif -%}
 <a href="{{ post.url }}" class="read-more">Read More</a>
 
 </a>
