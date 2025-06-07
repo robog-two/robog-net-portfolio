@@ -32,6 +32,27 @@
     @include shared.post-images;
 }
 
+body,html,main {
+    min-height: 100vh;
+}
+
+main article.post-content {
+    padding-bottom: 146px;
+}
+
+footer {
+    background-color: globals.$color-yellow;
+    font-family: globals.$text-font-stack;
+    text-align: center;
+    padding: 5px;
+    height: 100px;
+    width: 100vw;
+    padding-top: 15px;
+    padding-bottom: 50px;
+    position: absolute;
+    bottom: 0;
+}
+
 // =============================================================================
 // IMAGE MODAL COMPONENT
 // =============================================================================

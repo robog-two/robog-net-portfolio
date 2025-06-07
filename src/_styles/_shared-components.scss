@@ -151,10 +151,10 @@
 
         // Responsive breakout on larger screens
         @media (min-width: 768px) {
-            max-width: 80vw;
-            width: 80vw;
-            margin-left: calc((100% - 80vw) / 2);
-            margin-right: calc((100% - 80vw) / 2);
+            width: 70vw;
+            max-width: 800px;
+            margin-left: calc((100% - min(70vw, 800px)) / 2);
+            //margin-right: calc((100% - min(70vw, 1000px)) / 2);
         }
 
         &:hover {
@@ -179,9 +179,17 @@
         margin-bottom: globals.$spacing-md;
     }
 
+
+
     h1 {
+        font-size: globals.$font-size-2xl;
         border-bottom: 2px solid $theme-color;
-        padding-bottom: globals.$spacing-sm;
+        padding-bottom: 0;
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: globals.$font-size-lg
     }
 
     p {

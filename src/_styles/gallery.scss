@@ -29,24 +29,6 @@ section.series-header {
         font-size: globals.$font-size-base;
     }
 
-    @media screen and (max-width: 760px) {
-        h1 {
-            text-align: center;
-        }
-
-        .horizontal {
-            flex-direction: column-reverse;
-
-            div {
-                display: block;
-            }
-
-            aside figcaption {
-                margin-bottom: 20px;
-            }
-        }
-    }
-
     .horizontal {
         display: flex;
         flex-direction: row;
@@ -77,6 +59,24 @@ section.series-header {
                 opacity: 0.6;
                 font-style: italic;
                 text-align: center;
+            }
+        }
+    }
+
+    @media screen and (max-width: 760px) {
+        h1 {
+            text-align: center;
+        }
+
+        .horizontal {
+            flex-direction: column-reverse;
+
+            div {
+                display: block;
+            }
+
+            aside figcaption {
+                margin-bottom: 20px;
             }
         }
     }

@@ -3,34 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const blogImages = document.querySelectorAll(".post-content img");
 
   blogImages.forEach((img) => {
-    // This is kind of messy but I'm not writing a whole eleventy plugin that does this. Not right now, anyways
-    const caption =
-      img.parentElement.parentElement.nextSibling.nextElementSibling;
-    if (caption.tagName == "FIGCAPTION") {
-      const newCaption = document.createElement("figcaption");
-      newCaption.innerHTML = caption.innerHTML; // Innerhtml in case there is text formatting
-
-      const newFigure = document.createElement("figure");
-      // Replace <picture></picture> with <figure></figure> to add caption
-      const oldInner = img.parentElement.parentElement.innerHTML;
-      img.parentElement.parentElement.replaceWith(newFigure);
-      newFigure.innerHTML = oldInner;
-
-      caption.remove();
-      newFigure.appendChild(newCaption);
-
-      const newImg = newFigure.querySelector("img");
-      newImg.addEventListener(
-        "click",
-        function () {
-          openImageModal(newImg);
-        },
-      );
-    } else {
-      img.addEventListener("click", function () {
-        openImageModal(img);
-      });
-    }
+    img.addEventListener("click", function () {
+      openImageModal(img);
+    });
   });
 
   function openImageModal(img) {
@@ -63,6 +38,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // if (modal.requestFullscreen) {
+    //   modal.requestFullscreen();
+    // } else if (document.webkitRequestFullscreen) { // Safari
+    //   modal.webkitRequestFullscreen();
+    // } else if (document.msRequestFullscreen) { // IE11
+    //   modal.msRequestFullscreen();
+    // }
+
+    // // Listen for exiting fullscreen and close the modal when that happens
+    // document.addEventListener("fullscreenchange", function () {
+    //   closeImageModal();
+    // });
+
     // Close on Escape key
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
@@ -71,6 +59,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function closeModal() {
+      if (document.fullscreenElement) {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { // Safari
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { // IE11
+          document.msExitFullscreen();
+        }
+      }
       document.body.removeChild(modal);
       document.body.style.overflow = "";
     }
