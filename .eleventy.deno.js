@@ -8,8 +8,8 @@ export default (eleventyConfig) => {
 
   // Add image optimization plugin
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    formats: ["webp", "avif", "jpeg", "svg"],
-    widths: ["auto"],
+    formats: ["webp", "avif", "svg"],
+    widths: ["240", "480", "760", "1280", null],
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
@@ -23,7 +23,7 @@ export default (eleventyConfig) => {
       .use(markdownItFootnote);
   });
 
-  eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+  //eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy({ "src/_favicon": "/" });
 
   // Gallery pieces are completely static and should not be processed

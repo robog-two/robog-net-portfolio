@@ -9,7 +9,7 @@ module.exports = (eleventyConfig) => {
   // Add image optimization plugin
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     formats: ["webp", "avif", "jpeg", "svg"],
-    widths: ["auto"],
+    widths: ["240", "480", "760", "1280", null],
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
