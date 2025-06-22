@@ -10,7 +10,7 @@
 }
 
 @mixin text-base-styles {
-    font-family: globals.$text-font-stack;
+    font-family: globals.$font-stack;
     font-size: globals.$font-size-lg;
     line-height: globals.$line-height-normal;
     color: globals.$primary-text;
