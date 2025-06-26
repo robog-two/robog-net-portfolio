@@ -167,9 +167,9 @@ Eleventy automatically watches for changes to:
 ## Browser Support
 
 - Modern browsers with CSS Grid support
-- Progressive enhancement for older browsers
+- Progressive enhancement for older browsers (plain old HTML)
 - Responsive design for mobile, tablet, and desktop
-- Accessible markup with proper ARIA labels
+- Accessible markup with proper ARIA labels & semantic HTML
 
 ## License
 
