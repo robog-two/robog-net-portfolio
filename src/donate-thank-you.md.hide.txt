@@ -1,0 +1,14 @@
+---
+title: Thank you.
+layout: about.njk
+description: Thank you for donating.
+---
+
+### Your donation has been confirmed.
+
+Thank you for your support. It truly means the world to me.
+
+<p>
+Best wishes,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sam
+</p>

@@ -21,7 +21,3 @@ E-mail **(preferred)**: [sknight2@ithaca.edu](mailto:sknight2@ithaca.edu)
 GitHub: [robog-two](https://github.com/robog-two)
 
 Mastodon: [sam_knight@mastadon.social](https://mastodon.social/home)
-
-# Support
-
-Ko-fi: [givesamacoffee](https://ko-fi.com/givesamacoffee)
