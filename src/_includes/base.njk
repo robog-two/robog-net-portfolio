@@ -30,6 +30,8 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-    {{ content | safe }}
+    {% block inner %}
+        {{ content | safe }}
+    {% endblock %}
 </body>
 </html>

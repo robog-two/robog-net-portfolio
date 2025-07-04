@@ -17,7 +17,7 @@
 
 // Responsive grid for gallery items
 
-main {
+.content {
     @include shared.post-content(globals.$color-cyan);
     // Override from mixin
     max-width: 1200px !important;

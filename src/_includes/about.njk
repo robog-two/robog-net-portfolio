@@ -1,25 +1,11 @@
 ---
-layout: base.njk
 style: about
 ---
 
-<main class="page-content">
-    <div class="header-container">
-        <section class="page-header">
-            <header class="page-navigation">
-                <a href="/" class="home-link" aria-label="Back to home">
-                    <div class="arrow"><img src="/_favicon/arrow.svg" alt="Back Arrow"></div>
-                    <span class="back-text">Home</span>
-                </a>
-            </header>
-            <h1>{{ title | safe }}</h1>
-        </section>
-    </div>
+{% extends "page.njk" %}
 
+{% block content %}
     <article class="post-content">
         {{ content | safe }}
     </article>
-</main>
-
-<script src="/_scripts/header-shrink.js"></script>
-<script src="/_scripts/image-zoom.js"></script>
+{% endblock %}
