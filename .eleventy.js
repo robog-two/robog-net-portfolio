@@ -1,14 +1,16 @@
-const eleventySass = require("@11tyrocks/eleventy-plugin-sass-lightningcss");
-const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
-const markdownItCheckbox = require("markdown-it-task-checkbox");
-const markdownItFootnote = require("markdown-it-footnote");
+import eleventySass from "@11tyrocks/eleventy-plugin-sass-lightningcss";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import markdownItCheckbox from "markdown-it-task-checkbox";
+import markdownItFootnote from "markdown-it-footnote";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
-module.exports = (eleventyConfig) => {
+export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   // Add image optimization plugin
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    formats: ["webp", "avif", "jpeg", "svg"],
+    formats: ["webp", "jpeg", "svg"],
     widths: ["240", "480", "760", "1280", null],
     defaultAttributes: {
       loading: "lazy",

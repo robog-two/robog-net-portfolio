@@ -1,29 +1,25 @@
 ---
-layout: base.njk
 style: blog
+primaryColor: "#ffc533"
+navOverrideLink: /blog
+navOverrideText: All Posts
 ---
 
-<main class="page-content">
-    <div class="header-container">
-        <section class="page-header">
-            <header class="page-navigation">
-                <a href="/blog" class="home-link" aria-label="Back to view all posts">
-                    <div class="arrow"><img src="/_favicon/arrow.svg" alt="Back Arrow"></div>
-                    <span class="back-text">All Posts</span>
-                </a>
-            </header>
-            <h1>{{ title | safe }}</h1>
-        </section>
-    </div>
+{% extends "page.njk" %}
 
+{% block content %}
     <article class="post-content">
         {{ content | safe }}
     </article>
+{% endblock %}
 
+{% block afterContent %}
+    {% if hideFooter is not defined %}
     <footer>
-        <p>You're done reading. You can explore other topics <a href="/blog">here</a>.</p>
+        <p>Comments? <a href="/about">Contact me directly</a>.</p>
+        <p><a href="/blog">Explore other topics</a>.</p>
     </footer>
-</main>
+    {% endif %}
 
-<script src="/_scripts/header-shrink.js" defer></script>
-<script src="/_scripts/image-zoom.js" defer></script>
+    <script src="/_scripts/image-zoom.js" defer></script>
+{% endblock %}

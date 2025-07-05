@@ -152,15 +152,6 @@
         color: rgba(13, 7, 72, globals.$opacity-muted);
     }
 
-    a {
-        color: inherit;
-        transition: color globals.$transition-slow globals.$ease-standard;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
     // List styling
     ul, ol {
         @include text-base-styles;

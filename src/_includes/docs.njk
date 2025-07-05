@@ -1,0 +1,20 @@
+---
+style: blog
+primaryColor: "#aaf751"
+navOverrideText: All Docs
+navOverrideLink: /docs
+hideFooter: true
+---
+
+{% extends "blog.njk" %}
+
+{# Technically, this does not need to be its own template. #}
+{# I'm separating it for now in the event that I want to #}
+{# make the docs have a different format instead of just using #}
+{# the blog format. #}
+
+{% block content %}
+    <article class="post-content">
+        {{ content | safe }}
+    </article>
+{% endblock %}

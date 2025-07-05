@@ -10,15 +10,15 @@
 
 // Page header with cyan background
 .page-header {
-    background: globals.$color-cyan;
+    background: globals.$color-primary;
 }
 
 // Gallery content and grid layout
 
 // Responsive grid for gallery items
 
-main {
-    @include shared.post-content(globals.$color-cyan);
+.content {
+    @include shared.post-content(globals.$color-primary);
     // Override from mixin
     max-width: 1200px !important;
 }
@@ -93,7 +93,7 @@ section img {
 
 section.gallery-item {
     @extend %card-content;
-    border-color: globals.$color-cyan;
+    border-color: globals.$color-primary;
 
     h2 {
         text-align: center;
@@ -101,7 +101,7 @@ section.gallery-item {
 
     // Medium/category information
     em {
-        color: globals.$color-cyan;
+        color: globals.$color-primary;
         font-weight: bold;
         display: inline;
         margin-bottom: globals.$spacing-md;
@@ -114,6 +114,6 @@ section.gallery-item {
 
     // Project links
     a {
-        @include shared.link-color-transition(globals.$color-cyan);
+        @include shared.link-color-transition(globals.$color-primary);
     }
 }

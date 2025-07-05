@@ -48,9 +48,9 @@ walked out of the front door yet.
 There are so many brilliant, thoroughly researched, well cited posts on the
 internet, and starting today, I have decided that they will not be in this blog.
 Well, I will try my best not to research or cite or think too hard (no promises
->:] ). I'm making cool stuff. I want people to see it, and I know that there's
-good content in there, too. Since I had to struggle through a problem, that
-means someone else won't need to.
+&gt;:] ). I'm making cool stuff. I want people to see it, and I know that
+there's good content in there, too. Since I had to struggle through a problem,
+that means someone else won't need to.
 
 So I'm gonna try. Very soon, you should see some more blog posts here. They
 might not be the best, but they will certainly be interesting and new. And most

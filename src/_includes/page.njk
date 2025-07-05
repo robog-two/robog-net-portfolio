@@ -1,23 +1,41 @@
----
-layout: base.njk
----
+{% extends "base.njk" %}
 
+{% block inner %}
 <div class="page-content">
-    <div class="header-container">
-        <section class="page-header">
-            <header class="page-navigation">
-                <a href="/" class="home-link" aria-label="Back to home">
-                    <div class="arrow"><img src="/_favicon/arrow.svg" alt="Back Arrow"></div>
-                    <span class="back-text">Home</span>
-                </a>
-            </header>
+    <header class="header-container">
+        <div class="page-header">
+            {% if hideNav is not defined %}
+                <nav class="page-navigation">
+                    <a href="
+                        {{ navOverrideLink }}
+
+                        {% if navOverrideLink is not defined %}
+                            /
+                        {% endif %}
+                    " class="home-link">
+                        <div class="arrow"><img src="/_favicon/arrow.svg" alt="Back Arrow"></div>
+                        <span class="back-text">
+                            {{ navOverrideText }}
+
+                            {% if navOverrideText is not defined %}
+                                Home
+                            {% endif %}
+                        </span>
+                    </a>
+                </nav>
+            {% endif %}
             <h1>{{ title }}</h1>
-        </section>
-    </div>
+        </div>
+    </header>
 
-    <main class="content">
-        {{ content | safe }}
+    <main class="content" >
+        {% block content %}
+            {{ content | safe }}
+        {% endblock %}
     </main>
-</div>
 
-<script src="/_scripts/header-shrink.js" defer></script>
+    {% block afterContent %}
+    {% endblock %}
+    <script src="/_scripts/header-shrink.js" defer></script>
+</div>
+{% endblock %}

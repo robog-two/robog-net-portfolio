@@ -1,6 +1,7 @@
 ---
 title: Sam's Art.
 layout: page.njk
+primaryColor: "#85f7ff"
 style: gallery
 description: My personal art gallery. Currently working on the "What Grows" series, featuring "Concerto in Petri Dish" and "Our World, Planes Overhead".
 ---

@@ -10,7 +10,7 @@
 
 // Page header with yellow background
 .page-header {
-    @include shared.page-header(globals.$color-yellow);
+    @include shared.page-header(globals.$color-primary);
 }
 
 // =============================================================================
@@ -19,7 +19,7 @@
 
 .content {
     .blog-post-card {
-        @include shared.blog-post-card(globals.$color-yellow);
+        @include shared.blog-post-card(globals.$color-primary);
     }
 }
 
@@ -28,7 +28,7 @@
 // =============================================================================
 
 .post-content {
-    @include shared.post-content(globals.$color-yellow);
+    @include shared.post-content(globals.$color-primary);
     @include shared.post-images;
 }
 
@@ -41,7 +41,7 @@ main article.post-content {
 }
 
 footer {
-    background-color: globals.$color-yellow;
+    background-color: globals.$color-primary;
     font-family: globals.$text-font-stack;
     text-align: center;
     padding: 5px;
@@ -51,6 +51,10 @@ footer {
     padding-bottom: 50px;
     position: absolute;
     bottom: 0;
+
+    a {
+        @include shared.link-color-transition(globals.$color-primary);
+    }
 }
 
 // =============================================================================

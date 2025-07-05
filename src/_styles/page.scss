@@ -10,7 +10,7 @@
 
 // Page header with default background
 .page-header {
-    background: globals.$color-cyan;
+    background: globals.$color-primary;
 }
 
 // Content styling
@@ -58,7 +58,6 @@
 
     a {
         color: inherit;
-        transition: color globals.$transition-slow globals.$ease-standard;
 
         &:hover {
             text-decoration: underline;
