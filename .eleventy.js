@@ -2,7 +2,7 @@ const eleventySass = require("@11tyrocks/eleventy-plugin-sass-lightningcss");
 const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const markdownItCheckbox = require("markdown-it-task-checkbox");
 const markdownItFootnote = require("markdown-it-footnote");
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const { syntaxHighlight } = require("@11ty/eleventy-plugin-syntaxhighlight");
 
 export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
