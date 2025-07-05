@@ -6,15 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title | safe }}</title>
     <meta name="description" content="{{ description }}{% if description is not defined %}Sam Knight's digital portfolio. Art, blog, apps, and more.{% endif %}">
-    <link href="/_styles/fonts.css"  onload="this.onload=null;this.rel='stylesheet'">
     <style>
         * {
+            /* Used to define primary color in nunjucks templates */
             --color-primary: {{ primaryColor }}{% if primaryColor is not defined %}#aaf751{% endif %};
         }
     </style>
+
+    <!-- lazy load bulky styles -->
     <noscript>
         <link href="/_styles/fonts.css" rel="stylesheet">
+        <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />
     </noscript>
+    <link href="/_styles/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" onload="this.onload=null;this.rel='stylesheet'"/>
+    <!-- end lazy load -->
+
     <link rel="stylesheet" href="/_styles/{{ style }}{% if style is not defined %}base{% endif %}.css"></link>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">

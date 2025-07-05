@@ -2,9 +2,11 @@ import eleventySass from "npm:@11tyrocks/eleventy-plugin-sass-lightningcss";
 import { eleventyImageTransformPlugin } from "npm:@11ty/eleventy-img";
 import markdownItCheckbox from "npm:markdown-it-task-checkbox";
 import markdownItFootnote from "npm:markdown-it-footnote";
+import syntaxHighlight from "npm:@11ty/eleventy-plugin-syntaxhighlight";
 
 export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
+  eleventyConfig.addPlugin(syntaxHighlight);
 
   // Add image optimization plugin
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
