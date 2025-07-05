@@ -18,8 +18,8 @@
         <link href="/_styles/fonts.css" rel="stylesheet">
         <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" rel="stylesheet" />
     </noscript>
-    <link href="/_styles/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" onload="this.onload=null;this.rel='stylesheet'"/>
+    <link href="/_styles/fonts.css" class="lazycss">
+    <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" class="lazycss"/>
     <!-- end lazy load -->
 
     <link rel="stylesheet" href="/_styles/{{ style }}{% if style is not defined %}base{% endif %}.css"></link>
@@ -45,5 +45,9 @@
     {% block inner %}
         {{ content | safe }}
     {% endblock %}
+    <script defer>
+        // Absurd that I have to do this. W3C pls fix.
+        document.querySelectorAll(".lazycss").forEach((css) => {css.rel = "stylesheet"});
+    </script>
 </body>
 </html>
