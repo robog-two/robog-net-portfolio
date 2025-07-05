@@ -1,6 +1,7 @@
 ---
 title: Sam's Blog.
 layout: page.njk
+primaryColor: "#ffc533"
 style: blog
 ---
 

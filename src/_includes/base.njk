@@ -7,6 +7,11 @@
     <title>{{ title | safe }}</title>
     <meta name="description" content="{{ description }}{% if description is not defined %}Sam Knight's digital portfolio. Art, blog, apps, and more.{% endif %}">
     <link href="/_styles/fonts.css"  onload="this.onload=null;this.rel='stylesheet'">
+    <style>
+        * {
+            --color-primary: {{ primaryColor }}{% if primaryColor is not defined %}#aaf751{% endif %};
+        }
+    </style>
     <noscript>
         <link href="/_styles/fonts.css" rel="stylesheet">
     </noscript>

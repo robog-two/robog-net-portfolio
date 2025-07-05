@@ -80,12 +80,13 @@
 
 // Link with color transition
 @mixin link-color-transition($color, $hover-color: globals.$primary-text) {
-    color: $color;
+    color: $hover-color;
+    background-color: transparent;
     font-weight: bold;
-    transition: color globals.$transition-fast globals.$ease-standard;
 
     &:hover {
-        color: $hover-color;
+        background-color: globals.$primary-text;
+        color: $color;
     }
 }
 
@@ -114,7 +115,6 @@
 
             a {
                 color: globals.$primary-text;
-                transition: color globals.$transition-fast globals.$ease-standard;
 
                 &:hover {
                     color: $theme-color;
@@ -199,7 +199,6 @@
 
     a {
         @include link-color-transition($theme-color);
-        transition: color globals.$transition-slow globals.$ease-standard;
     }
 
     ul, ol {

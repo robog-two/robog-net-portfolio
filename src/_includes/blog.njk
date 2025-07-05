@@ -1,5 +1,6 @@
 ---
 style: blog
+primaryColor: "#ffc533"
 navOverrideLink: /blog
 navOverrideText: All Posts
 ---
@@ -13,10 +14,12 @@ navOverrideText: All Posts
 {% endblock %}
 
 {% block afterContent %}
+    {% if hideFooter is not defined %}
     <footer>
         <p>Comments? <a href="/about">Contact me directly</a>.</p>
         <p>Explore other topics <a href="/blog">here</a>.</p>
     </footer>
+    {% endif %}
 
     <script src="/_scripts/image-zoom.js" defer></script>
 {% endblock %}
