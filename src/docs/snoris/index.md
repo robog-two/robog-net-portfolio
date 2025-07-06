@@ -12,11 +12,11 @@ description: A well-designed fan controller for Linux systems.
 
 A fan controller should:
 
-- Make fans faster when temperature gets hotter
-- Make fans slower when temperature gets colder
+- Make fans faster when temperature gets hotter.
+- Make fans slower when temperature gets colder.
 - Determine what PWM values affect the fan's actual speed in RPMs, i.e., what is
-  low-medium-high speed for your fan
-- Shutdown the computer if temperature reaches unsafe values
+  low-medium-high speed for your fan.
+- Shutdown the computer if temperature reaches unsafe values.
 
 Fan curves can be really complicated, but most computer fans actually only have
 a few true speeds they will reach. So, in reality, fan "curves" behave more like
@@ -57,29 +57,29 @@ control them accurately and configure them automatically.
    - Set the fan to a "medium" speed like 128 (in a typical 0-255 PWM range)
    - Wait for the user to confirm auditorily that the fan has stopped changing
      speed (or, 5 minutes is probably more than fine for most fans in a headless
-     environment)
-   - Measure the fan RPMs for 10s
+     environment).
+   - Measure the fan RPMs for 10 seconds.
    - Calculate [2SEM](https://en.wikipedia.org/wiki/Standard_error) to determine
-     a good range for the fan's "stable" RPM measurements
+     a good range for the fan's "stable" RPM measurements.
    - Congratulations, we now don't need any more user input!
-2. Find out how long it takes the fan to "spin up" exactly
-   - Now that we know when the fan is stable, set the fan's PWM controller to 0
-   - Wait for the fan to remain within a 2SEM range for 1s
-   - Start a timer, and set the fan's PWM controller to 255
-   - Wait for the fan to remain within a 2SEM range for 1s
-   - Stop the timer and subtract 1s: This is how long it takes the fan to spin
-     up
-   - This process should be repeated in reverse, because it might take longer to
-     slow down than to spin up, and the maximum value should be used
-3. Find every discrete fan speed
-   - Set the fan PWM controller to 0 and wait for the spin up time
-   - Increase the value sent to the PWM controller by some amount
-   - Wait for the spin up time again
-   - Check if the current RPMs have moved outside of the 2SEM window
+2. Find out how long it takes the fan to spin up.
+   - Now that we know when the fan is stable, set the fan's PWM controller to 0.
+   - Wait for the fan to remain within a 2SEM range for 1 second.
+   - Start a timer and set the fan's PWM controller to 255.
+   - Wait for the fan to remain within a 2SEM range for 1 second.
+   - Stop the timer and subtract 1: This is how long it takes the fan to spin
+     up.
+   - This process should be repeated in reverse because it might take longer to
+     slow down than to spin up, and the maximum value should be used.
+3. Find every discrete fan speed.
+   - Set the fan PWM controller to 0 and wait for the spin-up time.
+   - Increase the value sent to the PWM controller by some amount.
+   - Wait for the spin-up time again.
+   - Check if the current RPMs have moved outside of the 2SEM window.
      - If yes, this is a new speed! Remember this PWM value.
      - If no, the fans don't support a speed at this resolution.
    - Check every x values (configurable but I found that 50 is generally fine)
-     until 255
+     until 255.
 
 # Introducing SNORIS
 
@@ -93,7 +93,7 @@ The main SNORIS controller script runs in a separate service as the emergency
 stop script, meaning that a problem with your fans or sensor configuration that
 causes an error or crash will not prevent your computer from shutting down to
 save its components. Most computers probably have safeguards in place at the
-hardware/firmware level, but this is an extra layer of protection just in case
+hardware/firmware level, but this is an extra layer of protection just in case.
 
 **P.S.** if SNORIS does crash this way, please submit any information printed in
 `systemctl status snoris` or in the complete journalctl logs to
