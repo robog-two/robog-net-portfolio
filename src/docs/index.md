@@ -1,7 +1,7 @@
 ---
 title: Sam's Documentation.
 layout: about.njk
-primaryColor: "#aaf751"
+primaryColor: '#aaf751'
 description: Various documentation for my public APIs, libraries, and projects.
 hideNav: true
 ---

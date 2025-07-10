@@ -1,20 +1,15 @@
 # Portfolio Website
 
-A modern, responsive portfolio website built with Eleventy (11ty) and Sass,
-hosted on the edge by Cloudflare at [robog.net](https://robog.net/).
+A modern, responsive portfolio website built with Eleventy (11ty) and Sass, hosted on the edge by Cloudflare at [robog.net](https://robog.net/).
 
 ## Tech Stack
 
 ### Core Technologies
 
-- **[Eleventy (11ty)](https://www.11ty.dev/)** - Static site generator for
-  building fast, modern websites
-- **[Sass (SCSS)](https://sass-lang.com/)** - CSS preprocessor for maintainable
-  stylesheets with variables, mixins, and modular architecture
-- **[Deno](https://deno.land/)** - JavaScript/TypeScript runtime used by
-  Eleventy for build processes
-- **[Nunjucks](https://mozilla.github.io/nunjucks/)** - Templating engine for
-  dynamic HTML generation
+- **[Eleventy (11ty)](https://www.11ty.dev/)** - Static site generator for building fast, modern websites
+- **[Sass (SCSS)](https://sass-lang.com/)** - CSS preprocessor for maintainable stylesheets with variables, mixins, and modular architecture
+- **[Deno](https://deno.land/)** - JavaScript/TypeScript runtime used by Eleventy for build processes
+- **[Nunjucks](https://mozilla.github.io/nunjucks/)** - Templating engine for dynamic HTML generation
 
 ## Project Structure
 

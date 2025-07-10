@@ -7,11 +7,7 @@ tags:
 description: Public API for using various small language models.
 ---
 
-The Small Language Model API allows you to integrate Ollama-based language
-models into your project for free. I created it because I wanted to be able to
-write webapps that use these models without requiring users to have lots of
-available processing power. Please use it kindly as I am hosting this service on
-my own hardware.
+The Small Language Model API allows you to integrate Ollama-based language models into your project for free. I created it because I wanted to be able to write webapps that use these models without requiring users to have lots of available processing power. Please use it kindly as I am hosting this service on my own hardware.
 
 # Synchronous Completion
 
