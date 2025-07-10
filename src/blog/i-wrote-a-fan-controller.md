@@ -49,18 +49,18 @@ individual fan hardware and configuration. A simple 2-step process can be used
 to determine how PWMs map to different fan speeds, and how we can use this to
 control them accurately and configure them without user input.
 
-1. Find how stable the fan's RPMs are
-   - Set the fan to the highest speed
-   - Wait 1 minute for the fans to achieve this speed
+1. Find how stable the fan's RPMs are:
+   - Set the fan to the highest speed.
+   - Wait 1 minute for the fans to achieve this speed.
    - Measure the fan RPMs for 10 seconds.
-   - Calculate the range of RPM values based on the measured data
-2. Find every discrete fan speed.
+   - Calculate the range of RPM values based on the measured data.
+2. Find every discrete fan speed:
    - Set the fan PWM controller to 0 and wait for the RPM values to stay within
      the range we found.
    - Increase the value sent to the PWM controller by some amount.
-   - Wait for the RPM to stabilize within the normal range
+   - Wait for the RPM to stabilize within the normal range.
    - Check if the difference between this speed and the previous speed is more
-     than the normal range
+     than the normal range:
      - If yes, this is a new speed! Remember this PWM value.
      - If no, the fans don't support a speed at this resolution.
    - Check every x values (configurable, but I found that 50 is generally fine)
