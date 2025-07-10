@@ -36,7 +36,7 @@ speeds. So, in reality, fan "curves" behave more like discrete steps:
 </p>
 
 This means that fans are actually better controlled with discrete states than
-with a complex curve, as most fans will only achieve a handful of specific
+with a complex curve, since most fans will only achieve a handful of specific
 speeds, and this reduces the complexity of the program controlling them to a
 simple state machine. This means that the fan controller can be more reliable
 (very important if it's running on a pricey server) and more understandable
@@ -45,27 +45,25 @@ simple state machine. This means that the fan controller can be more reliable
 Additionally, because many modern fan controllers report RPMs, we can use the
 hardware to calibrate the fan automatically. This is good because no two fans
 are alike, and it's extremely difficult to create a custom fan curve for every
-individual fan hardware and configuration. A simple 3-step process can be used
+individual fan hardware and configuration. A simple 2-step process can be used
 to determine how PWMs map to different fan speeds, and how we can use this to
 control them accurately and configure them without user input.
 
 1. Find how stable the fan's RPMs are
-   - Set the fan to a "medium" speed like 128 (in a typical 0-255 PWM range)
-   - Wait for the user to confirm auditorily that the fan has stopped changing
-     speed (or, 5 minutes is probably more than fine for most fans in a headless
-     environment).
+   - Set the fan to the highest speed
+   - Wait 1 minute for the fans to achieve this speed
    - Measure the fan RPMs for 10 seconds.
-   - Calculate [2SEM](https://en.wikipedia.org/wiki/Standard_error) to determine
-     a good range for the fan's "stable" RPM measurements.
+   - Calculate the range of RPM values based on the measured data
 2. Find every discrete fan speed.
    - Set the fan PWM controller to 0 and wait for the RPM values to stay within
      the range we found.
    - Increase the value sent to the PWM controller by some amount.
-   - Wait for the spin-up time again.
-   - Check if the current RPMs have moved outside of the 2SEM window.
+   - Wait for the RPM to stabilize within the normal range
+   - Check if the difference between this speed and the previous speed is more
+     than the normal range
      - If yes, this is a new speed! Remember this PWM value.
      - If no, the fans don't support a speed at this resolution.
-   - Check every x values (configurable but I found that 50 is generally fine)
+   - Check every x values (configurable, but I found that 50 is generally fine)
      until 255.
 
 # Why a new fan controller?
@@ -73,13 +71,13 @@ control them accurately and configure them without user input.
 The current state-of-the-art fan controller on Linux systems is the kernel. 99%
 of users do not need to mess with their fan settings, because the kernel modules
 for their specific motherboard or device generally come with built-in settings
-and configurations that are faster, better, and easier to setup. This is great
+and configurations that are faster, better, and easier to set up. This is great
 for boards that have them, and if you are one of these people, a fan controller
 like Snoris will not help you, and will probably make your fans louder and your
 computer hotter.
 
 However, for devices that don't have kernel modules which control their fans,
-like the two Dell Optiplex 5050s that power parts of this website, your only
+like the two Dell OptiPlex 5050s that power parts of this website, your only
 other option is `fancontrol`. I think `fancontrol` is a package that has grown
 over the years to address too many different use cases since the features are
 plentiful but the configuration is confusing and very manual.
