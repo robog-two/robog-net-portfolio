@@ -2,7 +2,7 @@
 title: Snoris
 layout: docs.njk
 tags:
-  - post
+  - docroot
 description: A simple and elegant fan controller for Linux systems.
 ---
 
