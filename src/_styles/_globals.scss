@@ -11,9 +11,9 @@
 
 // Primary font stacks
 /* Font fallbacks: Preferred (included w/site), MacOS, Windows, More linux, More linux, type */
-$font-stack: "TeX Gyre Heros", "Helvetica", "Arial", "URW Nimbus Sans L", "Liberation Sans", sans-serif;
+$font-stack: "TeX Gyre Heros", Helvetica, Arial, "URW Nimbus Sans L", "Liberation Sans", sans-serif;
 /* Font fallbacks: Preferred (MacOS), Windows, Older Windows, Linux, More linux, Maybe ChromeOS, type */
-$text-font-stack: "Palatino", "Palatino Linotype", "Book Antiqua", "TeX Gyre Pagella", "URW Palladio", "EB Garamond", serif;
+$text-font-stack: Avenir, "Trebuchet MS", Trebuchet, "Open Sans", "Noto Sans", "Oxygen Sans", sans-serif;
 
 // Typography scale
 $font-size-base: 1rem;
