@@ -25,6 +25,8 @@ export default (eleventyConfig) => {
       .use(markdownItFootnote);
   });
 
+  eleventyConfig.addPassthroughCopy("src/cv");
+
   //eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy({ "src/_favicon": "/" });
 
