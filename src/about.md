@@ -14,10 +14,12 @@ _Sam Knight_ (any/all) is a programmer, multimedia digital artist, and queer fem
 
 <figcaption>Visiting the Cornell botanical gardens.</figcaption>
 
+# Résumé
+
+My [résumé](/cv/resume-sam-knight-sep-15-2025.pdf) is available in PDF format. It was last updated Sep. 15, 2025.
+
 # Contact information
 
 E-mail **(preferred)**: [sknight2@ithaca.edu](mailto:sknight2@ithaca.edu)
 
 GitHub: [robog-two](https://github.com/robog-two)
-
-Mastodon: [sam_knight@mastadon.social](https://mastodon.social/home)
