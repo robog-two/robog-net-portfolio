@@ -20,6 +20,8 @@ My [résumé](/cv/resume-sam-knight-sep-15-2025.pdf) is available in PDF format.
 
 # Contact information
 
-E-mail **(preferred)**: [sknight2@ithaca.edu](mailto:sknight2@ithaca.edu)
+[Pass me a handwritten note.](/gallery/piece/passing-notes) (prints to a thermal printer on my desk)
+
+E-mail: [sknight2@ithaca.edu](mailto:sknight2@ithaca.edu)
 
 GitHub: [robog-two](https://github.com/robog-two)
