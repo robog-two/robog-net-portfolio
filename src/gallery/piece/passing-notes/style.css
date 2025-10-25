@@ -1,0 +1,39 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  overflow: hidden;
+}
+
+p {
+  text-align: center;
+  margin-top: calc(50vh - 145px);
+  font-family: "Segoe Script", "Snell Roundhand", cursive;
+  height: 35px;
+  line-height: 35px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+}
+
+button {
+  display: block;
+  background-color: inherit;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 5px;
+  text-align: center;
+  margin: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 35px;
+  font-family: "Helvetica Neue", "Helvetica", "Calibri", sans-serif;
+}
