@@ -1,7 +1,7 @@
 let isDrawing = false;
 
 function setup() {
-  createCanvas(200, 200);
+  createCanvas(250, 250);
   background(255);
   let btn = createButton("Print to my Desk");
 
@@ -35,7 +35,9 @@ function sendCanvas() {
   })
     .then((res) => {
       if (res.ok) {
-        alert("Your note has been received and will be printed on my desk shortly.");
+        alert(
+          "Your note has been received and will be printed on my desk shortly.",
+        );
         background(255);
       } else {
         throw new Error("Server error!");
