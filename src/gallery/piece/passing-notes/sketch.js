@@ -18,7 +18,7 @@ function draw() {
 
 function sendCanvas() {
   // Get the canvas as a Base64-encoded PNG image
-  const imgData = canvas.toDataURL("image/png");
+  const imgData = canvas.toDataURL("image/jpeg", 0.3);
 
   // Prepare JSON payload.
   const data = {
