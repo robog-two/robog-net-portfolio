@@ -16,7 +16,7 @@ _Sam Knight_ (any/all) is a programmer, multimedia digital artist, and queer fem
 
 # Résumé
 
-My [résumé](/cv/sam-knight-resume-oct-27-2025.pdf) is available in PDF format. It was last updated Oct. 27, 2025.
+My [résumé](/cv/sam-knight-resume-nov-6-2025.pdf) is available in PDF format. It was last updated Nov. 6, 2025.
 
 # Contact information
 
