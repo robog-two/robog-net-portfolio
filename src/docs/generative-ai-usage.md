@@ -1,5 +1,5 @@
 ---
-title: Generative AI Ethical Framework
+title: "Generative&nbsp;AI Ethical&nbsp;Framework"
 layout: docs.njk
 tags:
   - docroot
