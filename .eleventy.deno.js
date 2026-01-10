@@ -1,8 +1,8 @@
-import eleventySass from "npm:@11tyrocks/eleventy-plugin-sass-lightningcss";
-import { eleventyImageTransformPlugin } from "npm:@11ty/eleventy-img";
-import markdownItCheckbox from "npm:markdown-it-task-checkbox";
-import markdownItFootnote from "npm:markdown-it-footnote";
-import syntaxHighlight from "npm:@11ty/eleventy-plugin-syntaxhighlight";
+import eleventySass from "@11tyrocks/eleventy-plugin-sass-lightningcss";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import markdownItCheckbox from "markdown-it-task-checkbox";
+import markdownItFootnote from "markdown-it-footnote";
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 
 export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);

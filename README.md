@@ -1,5 +1,7 @@
 # Portfolio Website
 
+*[Generative AI Disclosure](https://robog.net/docs/generative-ai-usage): The initial prototype for this website was created with the assistance of Claude Code, using a Large Language Model. The original design, written content, and build system were created originally by me. Commits authored by Claude Code are marked as such in the commit description. No images or art on this website were created by a generative AI model. If you suspect a portion of code may be written by AI and undisclosed, please contact me personally at robog.net/about*
+
 A modern, responsive portfolio website built with Eleventy (11ty) and Sass, hosted on the edge by Cloudflare at [robog.net](https://robog.net/).
 
 ## Tech Stack
