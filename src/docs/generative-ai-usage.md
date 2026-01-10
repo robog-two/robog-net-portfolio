@@ -3,7 +3,6 @@ title: "Generative&nbsp;AI Ethical&nbsp;Framework"
 layout: docs.njk
 tags:
   - docroot
-date: "git Last Modified"
 ---
 
 **This document is an outline of my personal best practices and beliefs when incorporating Generative AI into my work.**
