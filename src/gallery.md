@@ -12,6 +12,22 @@ description: My personal art gallery. Currently working on the "What Grows" seri
 
 <section class="gallery-item">
 
+## Herb Journey
+
+![A leaf of parsley flapping its wings like a butterfly goes through a city towards the sunset](/blog/media/herb-journey-thumb.png)
+
+_Medium:_ Boid simulation (updated from Dan Shiffman's code), p5.js, WebGL
+
+_Created:_ August 2025 - July 2025
+
+A strange and alien world which elicits the same comfort and familiarity of an herb garden or a quiet sunset.
+
+[View Piece →](/gallery/piece/herb-journey)
+
+</section>
+
+<section class="gallery-item">
+
 ## Concerto in Petri Dish
 
 ![Small multicolored dots undulate in angular patterns](/blog/media/gallery-petri-dish.png)
