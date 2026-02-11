@@ -59,7 +59,7 @@ Sam
 
 <p style="text-align: center; margin-top: 50px; margin-bottom: 120px; width: 100%;">//////////// 🫀 ////////////</p>
 
-<p style="text-align: center; margin-bottom: 350px; width: 100%;">Originally written on January 9th, 2026 after long deliberation and discussions with friends and those close to me.<br/>Thank you, Rob. You have a brilliant and wonderful mind.<br/><br/>This document was not created by Generative AI.<br/>Claude Sonnet 4.5 and Gemma 3 were consulted for feedback on the prose and structure of inital drafts, but all text was produced originally and finally by my own human fingers.<br/>I would know, I can feel my carpal tunnels.</p>
+<p style="text-align: center; margin-bottom: 350px; width: 100%;">Originally written on January 9th, 2026 after long deliberation and discussions with friends and those close to me.<br/><br/>This document was not created by Generative AI.<br/>Claude Sonnet 4.5 and Gemma 3 were consulted for feedback on the prose and structure of inital drafts, but all text was produced originally and finally by my own human fingers.<br/>I would know, I can feel my carpal tunnels.</p>
 
 
 *Footnotes:*
