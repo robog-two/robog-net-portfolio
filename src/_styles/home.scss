@@ -173,20 +173,16 @@
 // COLOR BLOCKS COMPONENT
 // =============================================================================
 
-.color-blocks {
-    display: flex;
-    column-gap: globals.$spacing-xs;
+#color-blocks-sketch {
+    position: relative;
     margin-bottom: globals.$spacing-sm;
+    overflow: visible;
 
-    .block {
-        width: 40px;
-        height: 40px;
-
-        // Brand color variants using a map-based approach
-        &.pink { background-color: globals.$color-pink; }
-        &.cyan { background-color: globals.$color-cyan; }
-        &.green { background-color: globals.$color-green; }
+    canvas {
+        display: block;
     }
+
+    z-index: -1;
 }
 
 // =============================================================================
