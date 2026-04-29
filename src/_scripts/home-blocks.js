@@ -1,3 +1,5 @@
+// This easter egg was implemented with the assistance of Claude 4.5 Haiku
+
 new p5(function (p) {
   const BLOCK = 40;
   const PADDING = 80;
