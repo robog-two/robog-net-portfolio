@@ -1,10 +1,12 @@
 ---
 date: 2026-05-01
-time: 8:02PM
+time: 8:29PM
 tags: post
 snippet: yes
+layout: blog.njk
+description: yes
 ---
-Working on new stuff here on the site! For example, this thing. I hope that having a place to write a little shorter (but still quite long) form content will let me put more stuff on the blog in my free time. I'll probably use this to discuss projects and other things going on in my world.
+Working on new stuff here on the site! For example, this snippets thing. I hope that having a place to write a little shorter (but still quite long) form content will let me put more stuff on the blog in my free time. I'll probably use this to discuss projects and other things going on in my world.
 For example:
 - Got accepted into the [summer scholars program](https://www.ithaca.edu/academics/school-humanities-and-sciences/summer-scholars-program) to work on [Localify](https://localify.org/)
 - Slowly migrating [Deno Deploy Classic](https://docs.deno.com/deploy/classic/) projects. Wish they did this automatically!
