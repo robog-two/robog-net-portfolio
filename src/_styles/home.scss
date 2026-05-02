@@ -1,6 +1,6 @@
-@use '_globals' as globals;
-@use 'base';
-@use 'navigation';
+@use './_globals' as globals;
+@use './base';
+@use './navigation';
 @use 'sass:color';
 // =============================================================================
 // MIXINS & UTILITIES

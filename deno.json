@@ -1,12 +1,14 @@
 {
   "tasks": {
-    "dev": "deno --allow-read --allow-env --allow-ffi --allow-net --allow-write npm:@11ty/eleventy --serve --config=.eleventy.deno.js",
-    "build": "deno --allow-read --allow-env --allow-write --allow-ffi npm:@11ty/eleventy --config=.eleventy.deno.js"
+    "dev": "export BROWSERSLIST_IGNORE_OLD_DATA=1; export BROWSERSLIST_ROOT_PATH=.; deno --allow-read=. --allow-env=BROWSERSLIST_ROOT_PATH,BROWSERSLIST_IGNORE_OLD_DATA --ignore-env --allow-ffi --allow-net --allow-write=. npm:@11ty/eleventy --serve --config=.eleventy.deno.ts",
+    "build": "deno --allow-read --allow-env --allow-write --allow-ffi npm:@11ty/eleventy --config=.eleventy.deno.ts"
   },
   "imports": {
     "@11ty/eleventy-img": "npm:@11ty/eleventy-img@^6.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "npm:@11ty/eleventy-plugin-syntaxhighlight@^5.0.2",
     "@11tyrocks/eleventy-plugin-sass-lightningcss": "npm:@11tyrocks/eleventy-plugin-sass-lightningcss@^1.3.0",
+    "@b-fuze/deno-dom": "jsr:@b-fuze/deno-dom@^0.1.56",
+    "markdown-it": "npm:markdown-it@^14.1.1",
     "markdown-it-footnote": "npm:markdown-it-footnote@^4.0.0",
     "markdown-it-task-checkbox": "npm:markdown-it-task-checkbox@^1.0.6"
   }
