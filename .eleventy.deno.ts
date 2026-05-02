@@ -3,6 +3,8 @@ import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import markdownItCheckbox from "markdown-it-task-checkbox";
 import markdownItFootnote from "markdown-it-footnote";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import markdownIt from "markdown-it";
+import { DOMParser } from "@b-fuze/deno-dom";
 
 export default (eleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
@@ -17,6 +19,18 @@ export default (eleventyConfig) => {
       decoding: "async",
     },
     svgShortCircuit: true,
+  });
+
+  // Filters which are used like {{ data.thing | filter }}
+  eleventyConfig.addFilter("md", function (content = "") {
+    return markdownIt({ html: true }).render(content);
+  });
+  eleventyConfig.addFilter("excerpt", function (content = "") {
+    return htmlToText(markdownIt({ html: true }).render(content)).slice(0, 200)
+      .replace(/\.+$/, "").replace(/\s\w+$/, "") + "…";
+  });
+  eleventyConfig.addFilter("keys", function (content = {}) {
+    return JSON.stringify(Object.keys(content));
   });
 
   eleventyConfig.amendLibrary("md", (mdLib) => {
@@ -49,3 +63,31 @@ export default (eleventyConfig) => {
     },
   };
 };
+
+// Source - https://stackoverflow.com/a/50822488
+// Posted by chrmcpn, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-05-01, License - CC BY-SA 4.0
+
+function htmlToText(html: string) {
+  //remove code brakes and tabs
+  html = html.replace(/\n/g, "");
+  html = html.replace(/\t/g, "");
+
+  //keep html brakes and tabs
+  html = html.replace(/<\/td>/g, " ");
+  html = html.replace(/<\/table>/g, " ");
+  html = html.replace(/<\/tr>/g, " ");
+  html = html.replace(/<\/p>/g, " ");
+  html = html.replace(/<\/div>/g, " ");
+  html = html.replace(/<\/h>/g, " ");
+  html = html.replace(/<br>/g, " ");
+  html = html.replace(/<br( )*\/>/g, " ");
+  html = html.replace(/>/g, "> ");
+
+  //parse html into text
+  const dom = (new DOMParser()).parseFromString(
+    "<!doctype html><html><body>" + html +  "</body></html>",
+    "text/html",
+  );
+  return dom.body.textContent;
+}

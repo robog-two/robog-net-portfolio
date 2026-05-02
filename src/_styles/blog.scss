@@ -1,7 +1,7 @@
-@use '_globals' as globals;
-@use 'base';
-@use 'navigation';
-@use 'shared-components' as shared;
+@use './_globals' as globals;
+@use './base';
+@use './navigation';
+@use './shared-components' as shared;
 
 // =============================================================================
 // BLOG PAGE STYLES
@@ -20,6 +20,45 @@
 .content {
     .blog-post-card {
         @include shared.blog-post-card(globals.$color-primary);
+    }
+
+    .snippet-card {
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+        border-left: 2px solid;
+        border-color: var(--color-primary);
+        margin-bottom: 2rem;
+
+        header {
+            display: flex;
+            margin-bottom: 0.5rem;
+            flex-direction: row;
+            justify-content: space-between;
+            color: #8f8f8f;
+            font-size: 0.8em;
+        }
+
+        a::before {
+            content: "";
+            display: inline-block;
+            height: 12px;
+            width: 12px;
+            margin-right: 5px;
+            margin-left: 5px;
+            white-space: nowrap;
+            background-image: url("/linkicon.svg");
+            background-size: 100%;
+        }
+
+        a {
+            @include shared.link-color-transition(globals.$color-primary);
+            padding-right: 5px;
+            display: inline-block;
+        }
+
+        a:hover::before {
+            filter: invert(1);
+        }
     }
 }
 
