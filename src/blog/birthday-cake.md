@@ -3,7 +3,7 @@ title: Baffling Blueberry Birthday Cake
 layout: blog.njk
 date: 2025-12-22
 tags: post
-description: A birthday cake recipe.
+description: yes
 ---
 
 I have tried and failed three times to bake a cake from scratch. This year, with the help of a little birthday magic, a stand mixer, and a kitchen scale, I finally pulled off making a birthday cake from scratch.

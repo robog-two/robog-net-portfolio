@@ -3,7 +3,7 @@ title: First Ever Blog Post
 layout: blog.njk
 date: 2025-07-03
 tags: post
-description: A short piece about finding my voice.
+description: yes
 ---
 
 # Finding my Voice

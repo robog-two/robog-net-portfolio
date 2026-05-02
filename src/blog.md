@@ -1,5 +1,5 @@
 ---
-title: Sam's Blog.
+title: Sam's Thoughts.
 layout: page.njk
 primaryColor: '#ffc533'
 style: blog

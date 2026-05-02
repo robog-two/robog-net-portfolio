@@ -4,7 +4,7 @@ layout: blog.njk
 date: 2026-01-09
 tags:
   - post
-description: How I use these two in tandem to create easy to manage Linux servers.
+description: yes
 ---
 
 Recently in my work for [Localify.org](https://localify.org/) I needed to connect an AWS-managed Prometheus database to a Spring Boot application. I learned about OpenTelemetry, specifically, AWS's own fork of it called ADOT. It turns out that we already had some pre-paid EC2 instances on our account, so I decided I would run the container using a setup I've used in the past on my own personal homelab infrastructure. I figured that it would be pretty useful to publish somewhere on the web, because I have a pretty great workflow that requires some specific little tweaks.

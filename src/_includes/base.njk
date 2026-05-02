@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title | safe }}</title>
-    <meta name="description" content="{{ description }}{% if description is not defined %}Sam Knight's digital portfolio. Art, blog, apps, and more.{% endif %}">
+    <meta name="description" content="{% if description is not defined %}Sam Knight's digital portfolio. Art, blog, apps, and more.{% else %}{{ page.rawInput | excerpt }}{% endif %}">
     <style>
         * {
             /* Used to define primary color in nunjucks templates */

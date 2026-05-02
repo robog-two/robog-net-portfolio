@@ -4,7 +4,7 @@ layout: blog.njk
 date: 2025-07-10
 tags:
   - post
-description: Snoris is a simple and elegant fan controller for Linux systems.
+description: yes
 ---
 
 # What is a fan controller?
