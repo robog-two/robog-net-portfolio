@@ -61,8 +61,8 @@ The site uses a consistent 4-color brand palette with page-specific themes:
 
 - **Pink** (`#ff6fab`) - About & CV page theme
 - **Yellow** (`#ffc533`) - Blog page theme
-- **Green** (`#aaf751`) - Apps portfolio theme
-- **Cyan** (`#85f7ff`) - Gallery page theme
+- **Green** (`#a0e80a`) - Apps portfolio theme
+- **Cyan** (`#00c2ea`) - Gallery page theme
 - **Primary Text** (`#0d0748`) - Main text color
 
 ### Typography

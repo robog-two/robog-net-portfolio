@@ -3,7 +3,7 @@
 new p5(function (p) {
   const BLOCK = 40;
   const PADDING = 80;
-  const COLORS = ["#ff6fab", "#85f7ff", "#aaf751"];
+  const COLORS = ["#ff6fab", "#00c2ea", "#a0e80a"];
   let gap;
   let colorBlocks = [];
 
@@ -21,11 +21,16 @@ new p5(function (p) {
     }),
     slerp: (a, b, t) => {
       let dot = a.w * b.w + a.x * b.x + a.y * b.y + a.z * b.z;
-      if (dot < 0) { b = { w: -b.w, x: -b.x, y: -b.y, z: -b.z }; dot = -dot; }
+      if (dot < 0) {
+        b = { w: -b.w, x: -b.x, y: -b.y, z: -b.z };
+        dot = -dot;
+      }
       if (dot > 0.9995) {
         return Q.normalize({
-          w: a.w + t * (b.w - a.w), x: a.x + t * (b.x - a.x),
-          y: a.y + t * (b.y - a.y), z: a.z + t * (b.z - a.z)
+          w: a.w + t * (b.w - a.w),
+          x: a.x + t * (b.x - a.x),
+          y: a.y + t * (b.y - a.y),
+          z: a.z + t * (b.z - a.z),
         });
       }
       const theta0 = Math.acos(dot);
@@ -33,8 +38,10 @@ new p5(function (p) {
       const s0 = Math.cos(theta) - dot * Math.sin(theta) / Math.sin(theta0);
       const s1 = Math.sin(theta) / Math.sin(theta0);
       return {
-        w: s0 * a.w + s1 * b.w, x: s0 * a.x + s1 * b.x,
-        y: s0 * a.y + s1 * b.y, z: s0 * a.z + s1 * b.z,
+        w: s0 * a.w + s1 * b.w,
+        x: s0 * a.x + s1 * b.x,
+        y: s0 * a.y + s1 * b.y,
+        z: s0 * a.z + s1 * b.z,
       };
     },
     normalize: (q) => {
@@ -44,31 +51,56 @@ new p5(function (p) {
     toMatrix: (q) => {
       const { w, x, y, z } = q;
       return [
-        1 - 2*(y*y + z*z),     2*(x*y + z*w),     2*(x*z - y*w), 0,
-            2*(x*y - z*w), 1 - 2*(x*x + z*z),     2*(y*z + x*w), 0,
-            2*(x*z + y*w),     2*(y*z - x*w), 1 - 2*(x*x + y*y), 0,
-                        0,                 0,                  0, 1
+        1 - 2 * (y * y + z * z),
+        2 * (x * y + z * w),
+        2 * (x * z - y * w),
+        0,
+        2 * (x * y - z * w),
+        1 - 2 * (x * x + z * z),
+        2 * (y * z + x * w),
+        0,
+        2 * (x * z + y * w),
+        2 * (y * z - x * w),
+        1 - 2 * (x * x + y * y),
+        0,
+        0,
+        0,
+        0,
+        1,
       ];
     },
     apply: (q) => {
       const m = Q.toMatrix(q);
       p.applyMatrix(
-        m[0],  m[1],  m[2],  m[3],
-        m[4],  m[5],  m[6],  m[7],
-        m[8],  m[9],  m[10], m[11],
-        m[12], m[13], m[14], m[15]
+        m[0],
+        m[1],
+        m[2],
+        m[3],
+        m[4],
+        m[5],
+        m[6],
+        m[7],
+        m[8],
+        m[9],
+        m[10],
+        m[11],
+        m[12],
+        m[13],
+        m[14],
+        m[15],
       );
-    }
+    },
   };
 
   const ease = {
-    inOutCubic: t => t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
+    inOutCubic: (t) =>
+      t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1,
   };
 
   const Q_neutral = Q.identity();
   const Q_tipped = Q.multiply(
     Q.fromAxisAngle(0, 0, 1, Math.PI / 4),
-    Q.fromAxisAngle(1, 0, 0, Math.atan(1 / Math.sqrt(2)))
+    Q.fromAxisAngle(1, 0, 0, Math.atan(1 / Math.sqrt(2))),
   );
 
   class ColorBlock {
@@ -90,8 +122,10 @@ new p5(function (p) {
 
     update() {
       const now = p.millis();
-      this.animations = this.animations.filter(a => now < a.end);
-      this.activeAnimations = this.animations.filter(a => now >= a.start && now < a.end);
+      this.animations = this.animations.filter((a) => now < a.end);
+      this.activeAnimations = this.animations.filter((a) =>
+        now >= a.start && now < a.end
+      );
     }
 
     // TWIRL
@@ -189,7 +223,9 @@ new p5(function (p) {
   }
 
   p.setup = function () {
-    const remPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const remPx = parseFloat(
+      getComputedStyle(document.documentElement).fontSize,
+    );
     gap = Math.round(0.5 * remPx);
 
     const sketchW = BLOCK * 3 + gap * 2;
@@ -199,7 +235,11 @@ new p5(function (p) {
     container.style.width = sketchW + "px";
     container.style.height = sketchH + "px";
 
-    const canvas = p.createCanvas(sketchW + PADDING * 2, sketchH + PADDING * 2, p.WEBGL);
+    const canvas = p.createCanvas(
+      sketchW + PADDING * 2,
+      sketchH + PADDING * 2,
+      p.WEBGL,
+    );
     canvas.parent("color-blocks-sketch");
     canvas.style("position", "absolute");
     canvas.style("top", -PADDING + "px");
@@ -218,9 +258,9 @@ new p5(function (p) {
 
   function pickAnimation(block) {
     const r = Math.random();
-    if (r < 0.9)  return { fn: block.aboutFace,    duration: 1500 };
-    if (r < 0.98)  return { fn: block.jumpAndFlip,  duration: 1500 };
-    return           { fn: block.twirl,         duration: 3000 };
+    if (r < 0.9) return { fn: block.aboutFace, duration: 1500 };
+    if (r < 0.98) return { fn: block.jumpAndFlip, duration: 1500 };
+    return { fn: block.twirl, duration: 3000 };
   }
 
   p.draw = function () {
@@ -230,13 +270,16 @@ new p5(function (p) {
     p.directionalLight(255, 255, 255, 0, 0, -1);
 
     const now = p.millis();
-    if (now > 15000 && Math.floor(now / 5000) > Math.floor((now - p.deltaTime) / 5000)) {
+    if (
+      now > 15000 &&
+      Math.floor(now / 5000) > Math.floor((now - p.deltaTime) / 5000)
+    ) {
       colorBlocks.forEach((block, i) => {
         const { fn, duration } = pickAnimation(block);
         block.animate(fn, now + i * 200, duration);
       });
     }
 
-    colorBlocks.forEach(block => block.display());
+    colorBlocks.forEach((block) => block.display());
   };
 });
