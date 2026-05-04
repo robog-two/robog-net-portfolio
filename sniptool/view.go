@@ -3,135 +3,140 @@ package main
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	"github.com/charmbracelet/lipgloss"
 )
 
 func (m model) View() string {
+	if !m.ready {
+		return ""
+	}
+
 	if m.err != nil {
 		return fmt.Sprintf("Error: %v\n\nPress Ctrl+C to quit.\n", m.err)
 	}
 
-	if m.appState == stateMainMenu {
-		return m.renderMainMenu()
-	}
-	if m.appState == statePickThread {
-		return m.renderPickThread()
-	}
-	if m.appState == stateNewThread {
-		return m.renderNewThread()
-	}
-
-	// stateNewSnippet or stateAppendEntry: preview/editor
-	if m.mode == modePreview {
-		header := headerStyle.Render("── Preview ──")
-		help := helpStyle.Render("tab/esc: back to editor • ctrl+c: quit")
-		return fmt.Sprintf("%s\n\n%s\n%s\n", header, previewBoxStyle.Render(m.preview), help)
+	var content string
+	switch m.appState {
+	case stateHome:
+		content = m.renderHome()
+	case stateEditor:
+		content = m.renderEditor()
+	case statePreview:
+		content = m.renderPreview()
 	}
 
-	// Edit mode for snippet or append entry
-	now := time.Now()
-	preview := m.textarea.Value()
-	if strings.TrimSpace(preview) == "" {
-		preview = "(empty)"
-	}
-
-	var info string
-	if m.appState == stateNewSnippet {
-		fileName := fmt.Sprintf("%s-%s.md", now.Format("2006-01-02"), slugify(preview))
-		info = fmt.Sprintf("File: %s   Time: %s",
-			outputDir+"/"+fileName,
-			now.Format("Mon Jan 2 3:04 PM"),
-		)
-	} else if m.appState == stateAppendEntry {
-		fileName := fmt.Sprintf("%s-%s.md", now.Format("2006-01-02"), slugify(preview))
-		info = fmt.Sprintf("File: %s/%s   Time: %s",
-			outputDir+"/"+m.selectedSlug,
-			fileName,
-			now.Format("Mon Jan 2 3:04 PM"),
-		)
-	}
-
-	var buttons []string
-	for id := buttonID(0); id < numButtons; id++ {
-		label := buttonLabels[id]
-		if m.focus == focusButtons && id == m.activeButton {
-			buttons = append(buttons, buttonFocusedStyle.Render(label))
-		} else {
-			buttons = append(buttons, buttonStyle.Render(label))
-		}
-	}
-	buttonRow := lipgloss.JoinHorizontal(lipgloss.Top, buttons...)
-
-	var help string
-	if m.focus == focusEditor {
-		help = "tab: focus buttons • ctrl+c: quit"
-	} else {
-		help = "←/→: pick button • enter: activate • tab: back to editor • ctrl+c: quit"
-	}
-
-	status := ""
-	if m.statusMsg != "" {
-		status = "\n" + helpStyle.Render(m.statusMsg)
-	}
-
-	title := "New post"
-	if m.appState == stateAppendEntry {
-		title = "Add to thread"
-	}
-
-	return fmt.Sprintf(
-		"%s\n%s\n\n%s\n\n%s%s\n%s\n",
-		headerStyle.Render(title),
-		helpStyle.Render(info),
-		m.textarea.View(),
-		buttonRow,
-		status,
-		helpStyle.Render(help),
-	)
+	return lipgloss.NewStyle().Width(m.width).Render(content)
 }
 
-func (m model) renderMainMenu() string {
+// --- home screen ---------------------------------------------------------
+
+func (m model) renderHome() string {
+	header := homeHeaderStyle.Render("Sniptool")
+
 	var items []string
-	for id := menuNewSnippet; id < numMenuItems; id++ {
-		label := menuLabels[id]
-		if int(id) == m.menuCursor {
-			items = append(items, menuItemFocusedStyle.Render("> "+label))
+	for i, item := range m.homeItems {
+		label := item.label
+		if i == m.homeCursor {
+			if item.kind == homeAction {
+				items = append(items, actionItemFocusedStyle.Render(label))
+			} else {
+				items = append(items, threadItemFocusedStyle.Render(label))
+			}
 		} else {
-			items = append(items, menuItemStyle.Render("  "+label))
+			if item.kind == homeAction {
+				items = append(items, actionItemStyle.Render(label))
+			} else {
+				items = append(items, threadItemStyle.Render(label))
+			}
 		}
 	}
 
-	help := helpStyle.Render("↑/↓: navigate • enter: select • ctrl+c: quit")
-	return fmt.Sprintf(
-		"%s\n\n%s\n\n%s\n",
-		headerStyle.Render("Sniptool"),
-		strings.Join(items, "\n"),
+	var banner string
+	if m.savedMsg != "" {
+		banner = savedBannerStyle.Render("✓ " + m.savedMsg)
+	}
+
+	help := homeHelpStyle.Render("↑/↓: navigate • enter: select • ctrl+c: quit")
+
+	return lipgloss.JoinVertical(lipgloss.Left,
+		header,
+		"",
+		lipgloss.JoinVertical(lipgloss.Left, items...),
+		"",
+		banner,
+		"",
 		help,
 	)
 }
 
-func (m model) renderPickThread() string {
-	header := headerStyle.Render("Pick a thread to append to:")
-	help := helpStyle.Render("↑/↓/j/k: navigate • enter: select • esc: back")
-	return fmt.Sprintf("%s\n%s\n%s\n", header, m.threadList.View(), help)
-}
+// --- editor screen -------------------------------------------------------
 
-func (m model) renderNewThread() string {
-	titleLabel := "Title"
-	bodyLabel := "Body"
+func (m model) renderEditor() string {
+	// Build breadcrumb header
+	var breadcrumb string
+	switch m.editKind {
+	case editSnippet:
+		breadcrumb = "Sniptool › New Snippet Post"
+	case editThreadPost:
+		breadcrumb = "Sniptool › New Thread Post"
+	case editThreadReply:
+		// Find thread title
+		threadTitle := "Unknown"
+		for _, t := range m.threads {
+			if t.slug == m.editSlug {
+				threadTitle = t.title
+				break
+			}
+		}
+		breadcrumb = fmt.Sprintf("Sniptool › Reply to: %s", threadTitle)
+	}
+	header := editorHeaderStyle.Render(breadcrumb)
 
-	switch m.focus {
-	case focusTitleInput:
-		titleLabel = headerStyle.Render(titleLabel + " (focused)")
-	case focusThreadBody:
-		bodyLabel = headerStyle.Render(bodyLabel + " (focused)")
+	// Build file path preview
+	var filePath string
+	preview := strings.TrimSpace(m.textarea.Value())
+	if preview == "" {
+		preview = "(empty)"
 	}
 
+	switch m.editKind {
+	case editSnippet:
+		filePath = fmt.Sprintf("File: %s/YYYY-MM-DD-%s.md", outputDir, slugify(preview))
+	case editThreadPost:
+		if m.editTitle == "" {
+			filePath = fmt.Sprintf("File: %s/(untitled).md", blogDir)
+		} else {
+			filePath = fmt.Sprintf("File: %s/%s.md", blogDir, slugify(m.editTitle))
+		}
+	case editThreadReply:
+		filePath = fmt.Sprintf("File: %s/%s/YYYY-MM-DD-%s.md", outputDir, m.editSlug, slugify(preview))
+	}
+	info := infoStyle.Render(filePath)
+
+	// Title field (only for thread posts)
+	var titleField string
+	if m.editKind == editThreadPost {
+		titleLabel := "Title"
+		if m.focus == focusTitle {
+			titleLabel = titleLabelStyle.Render(titleLabel + " (editing)")
+		}
+		titleField = lipgloss.JoinVertical(lipgloss.Left, titleLabel, m.titleInput.View(), "")
+	}
+
+	// Body field
+	bodyLabel := "Content"
+	if m.focus == focusEditor {
+		bodyLabel = bodyLabelStyle.Render(bodyLabel + " (editing)")
+	}
+	body := lipgloss.JoinVertical(lipgloss.Left, bodyLabel, editorBoxStyle.Render(m.textarea.View()), "")
+
+	// Buttons
 	var buttons []string
-	for id := buttonID(0); id < numButtons; id++ {
-		label := buttonLabels[id]
+	btnLabels := []string{"Preview", "Save", "Back"}
+	for i := 0; i < 3; i++ {
+		id := buttonID(i)
+		label := btnLabels[i]
 		if m.focus == focusButtons && id == m.activeButton {
 			buttons = append(buttons, buttonFocusedStyle.Render(label))
 		} else {
@@ -140,22 +145,55 @@ func (m model) renderNewThread() string {
 	}
 	buttonRow := lipgloss.JoinHorizontal(lipgloss.Top, buttons...)
 
+	// Help text
 	var help string
 	if m.focus == focusButtons {
-		help = "←/→: pick button • enter: save • tab: back to fields • esc: cancel"
+		help = "←/→: pick button • enter/space: select • esc: back"
+	} else if m.editKind == editThreadPost && m.focus == focusTitle {
+		help = "tab: next field • ctrl+c: quit"
 	} else {
-		help = "tab: next field • esc: cancel"
+		help = "tab: next field • ctrl+c: quit"
 	}
+	helpText := editorHelpStyle.Render(help)
 
-	return fmt.Sprintf(
-		"%s\n%s\n%s\n\n%s\n%s\n\n%s\n\n%s\n%s\n",
-		headerStyle.Render("New Thread Post"),
-		titleLabel,
-		m.titleInput.View(),
-		bodyLabel,
-		m.threadBody.View(),
+	return lipgloss.JoinVertical(lipgloss.Left,
+		header,
+		info,
+		titleField,
+		body,
 		buttonRow,
-		helpStyle.Render(help),
-		helpStyle.Render("ctrl+c: quit"),
+		"",
+		helpText,
+	)
+}
+
+// --- preview screen ------------------------------------------------------
+
+func (m model) renderPreview() string {
+	header := previewHeaderStyle.Render("── Preview ──")
+
+	// Buttons: Back and Save
+	var buttons []string
+	btnLabels := []string{"← Back to Editor", "Save & Return Home"}
+	for i := 0; i < 2; i++ {
+		id := buttonID(i)
+		if m.focus == focusButtons && id == m.activeButton {
+			buttons = append(buttons, previewButtonFocusedStyle.Render(btnLabels[i]))
+		} else {
+			buttons = append(buttons, previewButtonStyle.Render(btnLabels[i]))
+		}
+	}
+	buttonRow := lipgloss.JoinHorizontal(lipgloss.Top, buttons...)
+
+	help := previewHelpStyle.Render("↑/↓: scroll • ←/→: pick button • enter/space: select • esc: back to editor")
+
+	return lipgloss.JoinVertical(lipgloss.Left,
+		header,
+		"",
+		m.viewport.View(),
+		"",
+		buttonRow,
+		"",
+		help,
 	)
 }

@@ -18,7 +18,8 @@ navOverrideText: All Posts
       <div class="thread-spine-rule"></div>
     </div>
     <div class="thread-spine">
-      {# Entries matching this thread will appear here #}
+      {%- for post in collections.post reversed -%}
+      {%- endfor -%}
     </div>
   </section>
 {% endblock %}

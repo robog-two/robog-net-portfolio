@@ -5,32 +5,20 @@ package main
 type appState int
 
 const (
-	stateMainMenu appState = iota
-	stateNewSnippet
-	stateNewThread
-	statePickThread
-	stateAppendEntry
+	stateHome appState = iota
+	stateEditor
+	statePreview
 )
 
 type focusRegion int
 
 const (
-	focusEditor focusRegion = iota
+	focusTitle focusRegion = iota
+	focusEditor
 	focusButtons
-	focusMenu
-	focusList
-	focusTitleInput
-	focusThreadBody
 )
 
-type mode int
-
-const (
-	modeEdit mode = iota
-	modePreview
-)
-
-// --- ui controls ---------------------------------------------------------
+// --- buttons (editor and preview screens) --------------------------------
 
 type buttonID int
 
@@ -41,25 +29,29 @@ const (
 	numButtons
 )
 
-var buttonLabels = map[buttonID]string{
-	btnPreview: "Preview",
-	btnSave:    "Save",
-	btnQuit:    "Quit",
-}
+// --- editor context -----------------------------------------------------
 
-type menuItem int
+type editKind int
 
 const (
-	menuNewSnippet menuItem = iota
-	menuNewThread
-	menuAppendThread
-	numMenuItems
+	editSnippet editKind = iota
+	editThreadPost
+	editThreadReply
 )
 
-var menuLabels = map[menuItem]string{
-	menuNewSnippet:   "New Snippet",
-	menuNewThread:    "New Thread",
-	menuAppendThread: "Append to Thread",
+// --- home screen items --------------------------------------------------
+
+type homeItemKind int
+
+const (
+	homeAction homeItemKind = iota
+	homeThread
+)
+
+type homeItem struct {
+	kind  homeItemKind
+	label string
+	slug  string // empty for actions
 }
 
 // --- data models ---------------------------------------------------------

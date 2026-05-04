@@ -1,21 +1,19 @@
 package main
 
 import (
-	"github.com/charmbracelet/bubbles/list"
-	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/charmbracelet/bubbles/textarea"
+	"github.com/charmbracelet/bubbles/textinput"
+	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
+	"github.com/charmbracelet/lipgloss"
 )
 
 // UI dimensions
 const (
-	defaultTextareaWidth  = 80
-	defaultTextareaHeight = 15
-	defaultThreadHeight   = 12
-	minTextareaWidth      = 20
-	minTextareaHeight     = 5
-	uiPadding             = 4
-	uiMargin              = 8
+	minEditorWidth  = 20
+	minEditorHeight = 5
+	uiPadding       = 4
+	uiMargin        = 8
 )
 
 // --- application state ---------------------------------------------------
@@ -23,70 +21,110 @@ const (
 type model struct {
 	// Control state
 	appState appState
-	mode     mode
 	focus    focusRegion
+	ready    bool
 
-	// Main menu
-	menuCursor int
+	// Home screen
+	homeItems  []homeItem
+	homeCursor int
+	threads    []threadPostMeta
+	savedMsg   string // last save message (cleared after render)
 
-	// Editor (snippet & thread entry)
-	textarea     textarea.Model
-	activeButton buttonID
+	// Editor
+	editKind   editKind
+	editSlug   string // parent slug for replies
+	editTitle  string // title content for thread posts
+	titleInput textinput.Model
+	textarea   textarea.Model
+
+	// Preview
 	preview      string
-
-	// Thread creation
-	titleInput   textinput.Model
-	threadBody   textarea.Model
-	titleFocused bool
-
-	// Thread selection
-	threadList  list.Model
-	threadPosts []threadPostMeta
+	viewport     viewport.Model
+	activeButton buttonID
 
 	// Status
-	selectedSlug string
-	width        int
-	height       int
-	statusMsg    string
-	err          error
-	saved        bool
-	savedPath    string
+	width    int
+	height   int
+	err      error
+	lastPath string // path of last saved file
 }
 
 func newModel() model {
 	ta := textarea.New()
-	ta.Placeholder = "Write your post here. Markdown + HTML supported."
+	ta.Placeholder = "Write your content here. Markdown + HTML supported."
 	ta.Prompt = "│ "
 	ta.ShowLineNumbers = false
-	ta.SetWidth(defaultTextareaWidth)
-	ta.SetHeight(defaultTextareaHeight)
 
 	ti := textinput.New()
 	ti.Placeholder = "Post title..."
 	ti.CharLimit = 100
-	ti.Width = defaultTextareaWidth
 
-	threadBody := textarea.New()
-	threadBody.Placeholder = "Write thread post content here."
-	threadBody.Prompt = "│ "
-	threadBody.ShowLineNumbers = false
-	threadBody.SetWidth(defaultTextareaWidth)
-	threadBody.SetHeight(defaultThreadHeight)
-
-	threadList := list.New([]list.Item{}, list.NewDefaultDelegate(), defaultTextareaWidth, defaultTextareaHeight)
-	threadList.Title = "Select a thread to append to:"
-
-	return model{
-		appState:    stateMainMenu,
-		mode:        modeEdit,
-		focus:       focusMenu,
-		textarea:    ta,
-		titleInput:  ti,
-		threadBody:  threadBody,
-		threadList:  threadList,
-		activeButton: btnPreview,
-		menuCursor:  0,
+	m := model{
+		appState:     stateHome,
+		focus:        focusTitle,
+		textarea:     ta,
+		titleInput:   ti,
+		homeCursor:   0,
+		activeButton: btnSave,
+		viewport:     viewport.New(0, 0),
 	}
+
+	m.loadHomeItems()
+	return m
+}
+
+func (m *model) resizeComponents() {
+	if !m.ready {
+		return
+	}
+
+	// measure chrome heights (placeholder renders)
+	headerH := lipgloss.Height(editorHeaderStyle.Render("x"))
+	infoH := lipgloss.Height(infoStyle.Render("x"))
+	labelH := 1
+	btnH := lipgloss.Height(buttonStyle.Render("x"))
+	helpH := lipgloss.Height(editorHelpStyle.Render("x"))
+	chrome := headerH + infoH + labelH + btnH + helpH + 2 // 2 spacing
+
+	if m.editKind == editThreadPost {
+		chrome += 3 // title label + title input + gap
+	}
+
+	boxPad := 4 // border (1 each side) + padding (1 each side)
+	w := m.width - boxPad
+	h := m.height - chrome - 2 // 2 for box border
+	if w < 20 {
+		w = 20
+	}
+	if h < 5 {
+		h = 5
+	}
+
+	m.textarea.SetWidth(w)
+	m.textarea.SetHeight(h)
+	m.titleInput.Width = m.width - 2
+
+	m.viewport.Width = m.width - 4
+	m.viewport.Height = m.height - 8 // header + buttons + help
+}
+
+func (m *model) loadHomeItems() {
+	m.homeItems = []homeItem{
+		{kind: homeAction, label: "[+] New Snippet Post"},
+		{kind: homeAction, label: "[+] New Thread Post"},
+	}
+
+	threads, _ := scanThreadPosts()
+	m.threads = threads
+	for _, t := range threads {
+		m.homeItems = append(m.homeItems, homeItem{
+			kind:  homeThread,
+			label: t.title,
+			slug:  t.slug,
+		})
+	}
+
+	m.homeCursor = 0
 }
 
 func (m model) Init() tea.Cmd {

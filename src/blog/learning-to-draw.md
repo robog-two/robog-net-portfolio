@@ -5,7 +5,6 @@ date: 2026-02-10
 tags:
   - post
 description: yes
-thread: true
 ---
 
 One time back in high school I said a really nasty thing about one of my co-authors for the podcast I was producing for the school newspaper. It felt justified at the time, maybe because I really wanted to impress people with this podcast, maybe because I was doing really well in my writing class, or maybe because it's just what I actually believed at the time. I said that "some people have a creative spark, and others don't, and this person's writing doesn't have that spark."

@@ -3,7 +3,6 @@ package main
 import (
 	"strings"
 
-	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -13,21 +12,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.WindowSizeMsg:
 		m.width = msg.Width
 		m.height = msg.Height
-		taWidth := msg.Width - uiPadding
-		if taWidth < minTextareaWidth {
-			taWidth = minTextareaWidth
-		}
-		taHeight := msg.Height - uiMargin
-		if taHeight < minTextareaHeight {
-			taHeight = minTextareaHeight
-		}
-		m.textarea.SetWidth(taWidth)
-		m.textarea.SetHeight(taHeight)
-		m.threadBody.SetWidth(taWidth)
-		m.threadBody.SetHeight(taHeight - 3)
-		m.titleInput.Width = taWidth
-		m.threadList.SetWidth(taWidth)
-		m.threadList.SetHeight(taHeight)
+		m.ready = true
+		m.resizeComponents()
 		return m, nil
 
 	case tea.KeyMsg:
@@ -36,272 +22,244 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		}
 
-		// Main menu
-		if m.appState == stateMainMenu {
-			switch msg.String() {
-			case "up", "k":
-				if m.menuCursor > 0 {
-					m.menuCursor--
-				}
-			case "down", "j":
-				if m.menuCursor < int(numMenuItems)-1 {
-					m.menuCursor++
-				}
-			case "enter", " ":
-				switch menuItem(m.menuCursor) {
-				case menuNewSnippet:
-					m.appState = stateNewSnippet
-					m.focus = focusEditor
-					m.textarea.Focus()
-					m.statusMsg = ""
-				case menuNewThread:
-					m.appState = stateNewThread
-					m.focus = focusTitleInput
-					m.titleFocused = true
-					m.titleInput.Focus()
-					m.statusMsg = ""
-				case menuAppendThread:
-					threads, _ := scanThreadPosts()
-					m.threadPosts = threads
-					items := make([]list.Item, len(threads))
-					for i, t := range threads {
-						items[i] = t
-					}
-					m.threadList.SetItems(items)
-					m.appState = statePickThread
-					m.focus = focusList
-					m.statusMsg = ""
-				}
-			}
-			return m, nil
-		}
-
-		// Pick thread list
-		if m.appState == statePickThread {
-			if msg.String() == "enter" {
-				if sel, ok := m.threadList.SelectedItem().(threadPostMeta); ok {
-					m.selectedSlug = sel.slug
-					m.appState = stateAppendEntry
-					m.focus = focusEditor
-					m.textarea.Reset()
-					m.textarea.Focus()
-					m.statusMsg = ""
-				}
-			} else if msg.String() == "esc" {
-				m.appState = stateMainMenu
-				m.menuCursor = 0
-				m.statusMsg = ""
-				return m, nil
-			}
-			var cmd tea.Cmd
-			m.threadList, cmd = m.threadList.Update(msg)
-			return m, cmd
-		}
-
-		// New thread: title input, body, or buttons
-		if m.appState == stateNewThread {
-			if msg.String() == "tab" {
-				switch m.focus {
-				case focusTitleInput:
-					m.titleInput.Blur()
-					m.focus = focusThreadBody
-					m.threadBody.Focus()
-					m.titleFocused = false
-				case focusThreadBody:
-					m.threadBody.Blur()
-					m.focus = focusButtons
-					m.titleFocused = false
-				case focusButtons:
-					m.focus = focusTitleInput
-					m.titleInput.Focus()
-					m.titleFocused = true
-				}
-				return m, nil
-			}
-			if msg.String() == "esc" {
-				m.appState = stateMainMenu
-				m.menuCursor = 0
-				m.titleInput.Reset()
-				m.threadBody.Reset()
-				m.focus = focusTitleInput
-				m.titleFocused = true
-				m.statusMsg = ""
-				return m, nil
-			}
-
-			if m.focus == focusTitleInput {
-				var cmd tea.Cmd
-				m.titleInput, cmd = m.titleInput.Update(msg)
-				return m, cmd
-			}
-
-			if m.focus == focusThreadBody {
-				var cmd tea.Cmd
-				m.threadBody, cmd = m.threadBody.Update(msg)
-				return m, cmd
-			}
-
-			if m.focus == focusButtons {
-				switch msg.String() {
-				case "left", "h":
-					if m.activeButton > 0 {
-						m.activeButton--
-					}
-				case "right", "l":
-					if m.activeButton < numButtons-1 {
-						m.activeButton++
-					}
-				case "enter", " ":
-					return m.activateThreadButton()
-				}
-				return m, nil
-			}
-		}
-
-		// New snippet or append entry: editor with buttons
-		if m.appState == stateNewSnippet || m.appState == stateAppendEntry {
-			if msg.String() == "tab" {
-				if m.focus == focusEditor {
-					m.focus = focusButtons
-					m.textarea.Blur()
-				} else {
-					m.focus = focusEditor
-					m.textarea.Focus()
-				}
-				return m, nil
-			}
-			if msg.String() == "esc" && m.appState == stateAppendEntry {
-				m.appState = statePickThread
-				m.focus = focusList
-				m.selectedSlug = ""
-				m.statusMsg = ""
-				return m, nil
-			}
-
-			if m.focus == focusEditor {
-				var cmd tea.Cmd
-				m.textarea, cmd = m.textarea.Update(msg)
-				return m, cmd
-			}
-
-			if m.focus == focusButtons {
-				switch msg.String() {
-				case "left", "h":
-					if m.activeButton > 0 {
-						m.activeButton--
-					}
-				case "right", "l":
-					if m.activeButton < numButtons-1 {
-						m.activeButton++
-					}
-				case "enter", " ":
-					return m.activateButton()
-				}
-				return m, nil
-			}
+		// State-specific handling
+		switch m.appState {
+		case stateHome:
+			return m.updateHome(msg)
+		case stateEditor:
+			return m.updateEditor(msg)
+		case statePreview:
+			return m.updatePreview(msg)
 		}
 	}
 
 	return m, nil
 }
 
-func (m model) activateThreadButton() (tea.Model, tea.Cmd) {
-	switch m.activeButton {
-	case btnPreview:
-		// Preview not yet supported for thread posts
-		m.statusMsg = "Preview not supported for thread posts"
-		return m, nil
+// --- home screen updates -------------------------------------------------
 
-	case btnSave:
-		title := strings.TrimSpace(m.titleInput.Value())
-		body := strings.TrimSpace(m.threadBody.Value())
-
-		if title == "" {
-			m.statusMsg = "Title cannot be empty."
-			return m, nil
+func (m model) updateHome(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
+	switch msg.String() {
+	case "up", "k":
+		if m.homeCursor > 0 {
+			m.homeCursor--
 		}
-		if body == "" {
-			m.statusMsg = "Body cannot be empty."
-			return m, nil
+	case "down", "j":
+		if m.homeCursor < len(m.homeItems)-1 {
+			m.homeCursor++
+		}
+	case "enter", " ":
+		item := m.homeItems[m.homeCursor]
+		if item.kind == homeAction {
+			// First action is snippet, second is thread post
+			if m.homeCursor == 0 {
+				m.editKind = editSnippet
+			} else {
+				m.editKind = editThreadPost
+			}
+		} else {
+			m.editKind = editThreadReply
+			m.editSlug = item.slug
 		}
 
-		path, err := saveThreadPost(title, body)
-		if err != nil {
-			m.err = err
-			return m, nil
+		// Enter editor
+		m.appState = stateEditor
+		m.focus = focusEditor
+		if m.editKind == editThreadPost {
+			m.focus = focusTitle
+			m.titleInput.Focus()
+		} else {
+			m.textarea.Focus()
 		}
-		m.saved = true
-		m.savedPath = path
-		return m, tea.Quit
-
-	case btnQuit:
-		m.appState = stateMainMenu
-		m.menuCursor = 0
+		m.textarea.Reset()
 		m.titleInput.Reset()
-		m.threadBody.Reset()
-		m.focus = focusTitleInput
-		m.titleFocused = true
-		m.statusMsg = ""
-		return m, nil
+		m.editTitle = ""
+		m.savedMsg = ""
+		m.resizeComponents()
 	}
+
 	return m, nil
 }
 
-func (m model) activateButton() (tea.Model, tea.Cmd) {
+// --- editor screen updates -----------------------------------------------
+
+func (m model) updateEditor(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
+	switch msg.String() {
+	case "tab":
+		switch m.focus {
+		case focusTitle:
+			m.titleInput.Blur()
+			m.focus = focusEditor
+			m.textarea.Focus()
+		case focusEditor:
+			m.textarea.Blur()
+			m.focus = focusButtons
+		case focusButtons:
+			m.focus = focusTitle
+			m.titleInput.Focus()
+		}
+		return m, nil
+
+	case "esc":
+		// Go back to home
+		m.appState = stateHome
+		m.loadHomeItems()
+		m.focus = focusTitle
+		return m, nil
+
+	case "left", "h":
+		if m.focus == focusButtons && m.activeButton > 0 {
+			m.activeButton--
+		}
+		return m, nil
+
+	case "right", "l":
+		if m.focus == focusButtons && m.activeButton < numButtons-1 {
+			m.activeButton++
+		}
+		return m, nil
+
+	case "enter", " ":
+		if m.focus == focusButtons {
+			return m.activateEditorButton()
+		}
+	}
+
+	// Forward keystrokes to focused widget
+	if m.focus == focusTitle {
+		var cmd tea.Cmd
+		m.titleInput, cmd = m.titleInput.Update(msg)
+		m.editTitle = m.titleInput.Value()
+		return m, cmd
+	}
+
+	if m.focus == focusEditor {
+		var cmd tea.Cmd
+		m.textarea, cmd = m.textarea.Update(msg)
+		return m, cmd
+	}
+
+	return m, nil
+}
+
+func (m model) activateEditorButton() (tea.Model, tea.Cmd) {
 	switch m.activeButton {
 	case btnPreview:
-		post := m.textarea.Value()
-		if strings.TrimSpace(post) == "" {
-			m.statusMsg = "Nothing to preview yet."
-			return m, nil
+		body := strings.TrimSpace(m.textarea.Value())
+		if body == "" {
+			return m, nil // silently do nothing
 		}
-		rendered, err := renderMarkdown(post)
+		rendered, err := renderMarkdown(body)
 		if err != nil {
 			m.err = err
 			return m, nil
 		}
 		m.preview = rendered
-		m.mode = modePreview
-		m.statusMsg = ""
+		m.viewport.SetContent(rendered)
+		m.viewport.GotoTop()
+		m.appState = statePreview
+		m.focus = focusButtons
+		m.activeButton = btnSave // default to Save button in preview
 		return m, nil
 
 	case btnSave:
-		post := m.textarea.Value()
-		if strings.TrimSpace(post) == "" {
-			m.statusMsg = "Can't save an empty post."
-			return m, nil
-		}
-
-		if m.appState == stateNewSnippet {
-			path, err := saveSnippet(post)
-			if err != nil {
-				m.err = err
-				return m, nil
-			}
-			m.saved = true
-			m.savedPath = path
-			return m, tea.Quit
-
-		} else if m.appState == stateAppendEntry {
-			path, err := appendThreadEntry(m.selectedSlug, post)
-			if err != nil {
-				m.err = err
-				return m, nil
-			}
-			m.saved = true
-			m.savedPath = path
-			return m, tea.Quit
-		}
+		return m.saveContent()
 
 	case btnQuit:
-		if m.appState == stateNewSnippet || m.appState == stateAppendEntry {
-			m.appState = stateMainMenu
-			m.menuCursor = 0
-			m.textarea.Reset()
-			m.selectedSlug = ""
-			m.statusMsg = ""
+		m.appState = stateHome
+		m.loadHomeItems()
+		m.focus = focusTitle
+		return m, nil
+	}
+
+	return m, nil
+}
+
+func (m model) saveContent() (tea.Model, tea.Cmd) {
+	var path string
+	var err error
+
+	switch m.editKind {
+	case editSnippet:
+		body := strings.TrimSpace(m.textarea.Value())
+		if body == "" {
+			return m, nil
+		}
+		path, err = saveSnippet(body)
+
+	case editThreadPost:
+		title := strings.TrimSpace(m.editTitle)
+		body := strings.TrimSpace(m.textarea.Value())
+		if title == "" || body == "" {
+			return m, nil
+		}
+		path, err = saveThreadPost(title, body)
+
+	case editThreadReply:
+		body := strings.TrimSpace(m.textarea.Value())
+		if body == "" {
+			return m, nil
+		}
+		path, err = appendThreadEntry(m.editSlug, body)
+	}
+
+	if err != nil {
+		m.err = err
+		return m, nil
+	}
+
+	// Success: show banner and return to home
+	m.lastPath = path
+	m.savedMsg = "Post saved"
+	m.appState = stateHome
+	m.loadHomeItems()
+	m.focus = focusTitle
+	return m, nil
+}
+
+// --- preview screen updates ----------------------------------------------
+
+func (m model) updatePreview(msg tea.Msg) (tea.Model, tea.Cmd) {
+	switch msg := msg.(type) {
+	case tea.KeyMsg:
+		switch msg.String() {
+		case "esc":
+			// Back to editor
+			m.appState = stateEditor
+			m.focus = focusEditor
+			if m.editKind == editThreadPost {
+				m.focus = focusTitle
+			}
+			return m, nil
+
+		case "left", "h":
+			if m.activeButton > 0 {
+				m.activeButton--
+			}
+			return m, nil
+
+		case "right", "l":
+			if m.activeButton < 1 {
+				m.activeButton++
+			}
+			return m, nil
+
+		case "enter", " ":
+			switch m.activeButton {
+			case 0: // Back button
+				m.appState = stateEditor
+				m.focus = focusEditor
+				if m.editKind == editThreadPost {
+					m.focus = focusTitle
+				}
+			case 1: // Save button
+				return m.saveContent()
+			}
 			return m, nil
 		}
 	}
-	return m, nil
+
+	var cmd tea.Cmd
+	m.viewport, cmd = m.viewport.Update(msg)
+	return m, cmd
 }
