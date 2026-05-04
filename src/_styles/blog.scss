@@ -103,3 +103,132 @@ footer {
 .image-modal {
     @extend %image-modal;
 }
+
+// =============================================================================
+// LIVEBLOG BADGE (listing page)
+// =============================================================================
+
+.liveblog-badge {
+    display: inline-block;
+    background: globals.$color-yellow;
+    color: globals.$color-black;
+    font-family: globals.$font-stack;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 6px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+// =============================================================================
+// THREAD SPINE LAYOUT (post page)
+// =============================================================================
+
+.thread-spine-section {
+    @extend %content-narrow;
+    margin-top: globals.$spacing-xl;
+    font-family: globals.$text-font-stack;
+}
+
+.thread-spine-header {
+    display: flex;
+    align-items: center;
+    gap: globals.$spacing-md;
+    margin-bottom: globals.$spacing-xl;
+}
+
+.thread-spine-label {
+    font-family: globals.$font-stack;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(13, 7, 72, 0.5);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.thread-spine-rule {
+    flex: 1;
+    height: 2px;
+    background: globals.$color-black;
+}
+
+.thread-spine {
+    padding-left: 1.75rem;
+    border-left: 3px solid globals.$color-yellow;
+    display: flex;
+    flex-direction: column;
+    gap: globals.$spacing-xl;
+}
+
+.thread-entry {
+    position: relative;
+}
+
+.thread-tick {
+    position: absolute;
+    left: calc(-1.75rem - 7px);
+    top: 0.2rem;
+    width: 14px;
+    height: 14px;
+    background: globals.$color-yellow;
+    border: 2px solid globals.$color-black;
+}
+
+.thread-entry-time {
+    display: block;
+    font-family: globals.$font-stack;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(13, 7, 72, 0.5);
+    text-decoration: none;
+    margin-bottom: 0.4rem;
+
+    &:hover {
+        color: globals.$color-black;
+    }
+}
+
+.thread-entry-content {
+    font-size: 1rem;
+    line-height: globals.$line-height-relaxed;
+
+    p {
+        margin-bottom: 0.5rem;
+        font-family: globals.$text-font-stack;
+    }
+
+    a {
+        @include shared.link-color-transition(globals.$color-yellow);
+    }
+}
+
+// =============================================================================
+// THREAD ENTRY STANDALONE PAGE (thread-entry.njk)
+// =============================================================================
+
+.thread-entry-back {
+    font-family: globals.$font-stack;
+    font-size: 0.85rem;
+    margin-bottom: globals.$spacing-md;
+
+    a {
+        @include shared.link-color-transition(globals.$color-yellow);
+    }
+}
+
+.thread-entry-standalone-time {
+    display: block;
+    font-family: globals.$font-stack;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(13, 7, 72, 0.5);
+    margin-bottom: globals.$spacing-lg;
+}

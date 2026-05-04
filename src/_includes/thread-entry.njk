@@ -1,0 +1,18 @@
+---
+style: blog
+primaryColor: "#ffc533"
+hideNav: false
+---
+{% extends "page.njk" %}
+
+{% block content %}
+  <article class="post-content thread-entry-page">
+    <p class="thread-entry-back">
+      <a href="/blog/{{ thread }}/">← Back to thread</a>
+    </p>
+    <time class="thread-entry-standalone-time">
+      {{ date | date: '%B %d, %Y' }} · {{ time }}
+    </time>
+    {{ content | safe }}
+  </article>
+{% endblock %}

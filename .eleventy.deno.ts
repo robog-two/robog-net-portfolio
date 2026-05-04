@@ -32,6 +32,12 @@ export default (eleventyConfig) => {
   eleventyConfig.addFilter("keys", function (content = {}) {
     return JSON.stringify(Object.keys(content));
   });
+  eleventyConfig.addCollection("threadEntries", function(collection: any) {
+    // Returns all pages with a 'thread' field set (thread entry pages)
+    return collection
+      .getAll()
+      .filter((item: any) => item.data.thread);
+  });
 
   eleventyConfig.amendLibrary("md", (mdLib) => {
     mdLib

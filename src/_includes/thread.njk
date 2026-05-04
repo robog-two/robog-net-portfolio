@@ -1,0 +1,32 @@
+---
+style: blog
+primaryColor: "#ffc533"
+navOverrideLink: /blog
+navOverrideText: All Posts
+---
+{% extends "page.njk" %}
+
+{% block content %}
+  <article class="post-content">
+    {{ content | safe }}
+  </article>
+
+  {# Thread entries will be rendered dynamically when created #}
+  <section class="thread-spine-section" id="thread-spine">
+    <div class="thread-spine-header">
+      <span class="thread-spine-label">Updates</span>
+      <div class="thread-spine-rule"></div>
+    </div>
+    <div class="thread-spine">
+      {# Entries matching this thread will appear here #}
+    </div>
+  </section>
+{% endblock %}
+
+{% block afterContent %}
+  <footer>
+    <p>Comments? <a href="/about">Contact me directly</a>.</p>
+    <p><a href="/blog">Explore other topics</a>.</p>
+  </footer>
+  <script src="/_scripts/image-zoom.js" defer></script>
+{% endblock %}
