@@ -10,9 +10,8 @@ style: blog
 {%- if post.data.snippet == "yes" -%}
 <article class="snippet-card">
 <header class="post-header">
-<span>Sam's Snippets ✂️</span>
-<time datetime="{{ post.data.date | date: '%Y-%m-%d' }}">{{ post.data.date |
-date: '%m/%d/%y' }}  {{ post.data.time }}</time>
+<time datetime="{{ post.data.date | date: '%Y-%m-%d' }}">Snippet Post • {{ post.data.date |
+date: '%B %d, %Y' }}  {{ post.data.time }}</time>
 </header>
 {{ post.data.page.rawInput | md }}
 </article>
