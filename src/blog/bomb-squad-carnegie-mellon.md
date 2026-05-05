@@ -1,6 +1,6 @@
 ---
 title: Bomb&nbsp;Squad&colon; How&nbsp;I&nbsp;defused Carnegie&nbsp;Mellon's Binary&nbsp;Bomb
-layout: blog.njk
+layout: blog.liquid
 date: 2025-06-04
 #tags: post TODO: Uncomment when draft is finished!
 description: '... I *really* wanted to have a perfect defusal, so I hatched a plan: I would put the bomb in a sealed docker container where no radio signals could escape ...'

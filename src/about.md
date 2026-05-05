@@ -1,8 +1,8 @@
 ---
 title: About Sam.
-layout: blog.njk
+layout: blog.liquid
 primaryColor: '#ff6fab'
-hideFooter: true
+footer: ''
 navOverrideLink: /
 navOverrideText: Home
 description: Sam Knight (any/all) is a programmer, multimedia digital artist, and queer feminist advocate studying Computer Science at Ithaca College. Their exacting aesthetic sensibilities guide their journey to make precise, impactful, and expansive work everywhere they go.

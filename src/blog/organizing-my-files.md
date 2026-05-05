@@ -1,6 +1,6 @@
 ---
 title: Organizing&nbspMy&nbspFiles (The&nbspHard&nbspWay)
-layout: blog.njk
+layout: blog.liquid
 date: 2025-06-04
 tags: # post TODO: uncomment upon publishing
 description: My hard drive needs a spring cleaning. Instead of actually doing the work, I decided to write a cutting-edge agentic multi-modal local-llm file organizing app in Python. (Because this is obviously easier than organizing them myself!)

@@ -1,6 +1,6 @@
 ---
 title: First Ever Blog Post
-layout: blog.njk
+layout: blog.liquid
 date: 2025-07-03
 tags: post
 description: yes

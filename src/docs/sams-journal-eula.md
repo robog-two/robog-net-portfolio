@@ -1,6 +1,6 @@
 ---
 title: Sam's Journal EULA
-layout: docs.njk
+layout: docs.liquid
 tags:
   - docroot
 ---

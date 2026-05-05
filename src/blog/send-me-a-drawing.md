@@ -1,6 +1,6 @@
 ---
 title: "Weekend Project: Send me a drawing."
-layout: blog.njk
+layout: blog.liquid
 date: 2025-10-27
 #tags:
 #  - post

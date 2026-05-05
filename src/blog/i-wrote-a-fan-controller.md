@@ -1,6 +1,6 @@
 ---
 title: I wrote a fan controller!
-layout: blog.njk
+layout: blog.liquid
 date: 2025-07-10
 tags:
   - post

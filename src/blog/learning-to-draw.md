@@ -1,6 +1,6 @@
 ---
 title: Learning to Draw
-layout: blog.njk
+layout: blog.liquid
 date: 2026-02-10
 tags:
   - post

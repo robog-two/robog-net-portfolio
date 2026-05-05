@@ -1,0 +1,35 @@
+---
+layout: base.liquid
+---
+<div class="page-content">
+  <header class="header-container">
+    <div class="page-header">
+      {% unless hideNav %}
+        <nav class="page-navigation">
+          <a
+            href="                        {% if navOverrideLink %}{{ navOverrideLink }}{% else %}/{% endif %}"
+            class="home-link"
+          >
+            <div class="arrow"><img src="/_favicon/arrow.svg" alt="Back Arrow"></div>
+            <span class="back-text">
+              {% if navOverrideText %}{{ navOverrideText }}{% else %}Home{% endif %}
+            </span>
+          </a>
+        </nav>
+      {% endunless %}
+      <h1>{{ title }}</h1>
+    </div>
+  </header>
+
+  <main class="content">
+    {{ content }}
+  </main>
+
+  {% if footer %}
+    {{ footer }}
+  {% endif %}
+
+  {% if page.url contains '/blog' or page.url contains '/about' or page.url contains '/docs' %}
+  {% endif %}
+  <script src="/_scripts/header-shrink.js" defer></script>
+</div>

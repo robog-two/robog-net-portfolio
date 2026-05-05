@@ -1,6 +1,6 @@
 ---
 title: Podman + Systemd = Awesome!
-layout: blog.njk
+layout: blog.liquid
 date: 2026-01-09
 tags:
   - post

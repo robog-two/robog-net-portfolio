@@ -1,6 +1,6 @@
 ---
 title: Sam's Thoughts.
-layout: page.njk
+layout: page.liquid
 primaryColor: "#ffc533"
 style: blog
 ---

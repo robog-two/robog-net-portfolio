@@ -1,6 +1,6 @@
 ---
 title: Small Language Model API
-layout: docs.njk
+layout: docs.liquid
 tags:
   - docroot
   - docs-slm

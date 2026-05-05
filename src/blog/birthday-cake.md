@@ -1,6 +1,6 @@
 ---
 title: Baffling Blueberry Birthday Cake
-layout: blog.njk
+layout: blog.liquid
 date: 2025-12-22
 tags: post
 description: yes

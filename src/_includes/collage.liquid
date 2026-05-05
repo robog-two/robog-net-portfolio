@@ -1,0 +1,28 @@
+---
+layout: blog.liquid
+style: blog
+primaryColor: "#ffc533"
+navOverrideLink: /blog
+navOverrideText: All Posts
+---
+{{ content }}
+
+<!-- TODO: Move this stuff into a template file separate from this -->
+<div class="collage-separator">
+    <span>SNIPPETS</span>
+    <div class="separator-line-container">
+        <div class="separator-line"></div>
+    </div>
+</div>
+
+{%- for snippet in collections['post-digital-minimalism'] -%}
+  <div class="snippet-card">
+    <header class="post-header">
+      <time datetime="{{ snippet.data.date | date: '%Y-%m-%d' }}">
+        {{- snippet.data.date | date: '%B %d, %Y' }}
+        {{ snippet.data.time -}}
+      </time>
+    </header>
+    {{ snippet.data.page.rawInput | md }}
+  </div>
+{%- endfor -%}

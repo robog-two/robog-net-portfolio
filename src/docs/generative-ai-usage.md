@@ -1,6 +1,6 @@
 ---
 title: "Generative&nbsp;AI Ethical&nbsp;Framework"
-layout: docs.njk
+layout: docs.liquid
 tags:
   - docroot
 ---

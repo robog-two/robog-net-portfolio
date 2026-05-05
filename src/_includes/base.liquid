@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Hello curious individual! My website is made with 11ty and Sass and you can find the source at https://sh.robog.net/src -->
+    <!-- Hello curious individual! My website is made with 11ty, Liquid, and Sass and you can find the source at https://sh.robog.net/src -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title | safe }}</title>
-    <meta name="description" content="{% if description is not defined %}Sam Knight's digital portfolio. Art, blog, apps, and more.{% else %}{{ page.rawInput | excerpt }}{% endif %}">
+    <title>{{ title }}</title>
+    <meta name="description" content="{% if description %}{{ page.rawInput | excerpt }}{% else %}Sam Knight's digital portfolio. Art, blog, apps, and more.{% endif %}">
     <style>
         * {
-            /* Used to define primary color in nunjucks templates */
-            --color-primary: {{ primaryColor }}{% if primaryColor is not defined %}#a0e80a{% endif %};
+            /* Used to define primary color in liquid templates */
+            --color-primary: {% if primaryColor %}{{ primaryColor }}{% else %}#a0e80a{% endif %};
         }
     </style>
 
@@ -22,7 +22,7 @@
     <link href="https://unpkg.com/prismjs@1.20.0/themes/prism-okaidia.css" class="lazycss"/>
     <!-- end lazy load -->
 
-    <link rel="stylesheet" href="/_styles/{{ style }}{% if style is not defined %}base{% endif %}.css"></link>
+    <link rel="stylesheet" href="/_styles/{% if style %}{{ style }}{% else %}base{% endif %}.css"></link>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -44,9 +44,7 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-    {% block inner %}
-        {{ content | safe }}
-    {% endblock %}
+    {{ content }}
     <script defer>
         // Absurd that I have to do this. W3C pls fix.
         document.querySelectorAll(".lazycss").forEach((css) => {css.rel = "stylesheet"});

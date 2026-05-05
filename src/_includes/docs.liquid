@@ -1,0 +1,17 @@
+---
+layout: blog.liquid
+style: blog
+primaryColor: "#a0e80a"
+navOverrideText: All Docs
+navOverrideLink: /docs
+footer: ''
+---
+{% comment %}
+  Technically, this does not need to be its own template.
+  I'm separating it for now in the event that I want to
+  make the docs have a different format instead of just using
+  the blog format.
+{% endcomment %}
+<article class="post-content">
+  {{ content }}
+</article>

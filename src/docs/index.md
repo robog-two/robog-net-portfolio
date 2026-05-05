@@ -1,6 +1,6 @@
 ---
 title: Sam's Documentation.
-layout: about.njk
+layout: about.liquid
 primaryColor: '#a0e80a'
 description: Various documentation for my public APIs, libraries, and projects.
 hideNav: true

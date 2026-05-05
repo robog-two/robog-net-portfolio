@@ -1,6 +1,6 @@
 ---
 title: Sam's Work.
-layout: page.njk
+layout: page.liquid
 style: apps
 ---
 

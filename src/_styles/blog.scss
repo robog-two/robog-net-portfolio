@@ -18,24 +18,52 @@
 // =============================================================================
 
 .content {
+    article .post-excerpt {
+        font-family: globals.$text-font-stack;
+    }
+
     .blog-post-card {
         @include shared.blog-post-card(globals.$color-primary);
     }
 
+    // Div snippet cards live within a post,
+    // wherease article.snippet-card is on the
+    // blog listing page.
+    div.snippet-card:last-child {
+        padding-bottom: 0;
+        margin-bottom: 2rem;
+    }
+
+    div.snippet-card {
+        .post-header::before {
+            content: "";
+            display: block;
+            margin-left: -33px;
+            margin-bottom: -18px;
+            width: 16px;
+            height: 16px;
+            background-color: globals.$page-background-color;
+            border: 2px solid var(--color-primary);
+        }
+        padding-bottom: 2rem;
+    }
+
+    article.snippet-card {
+        margin-bottom: 2rem;
+    }
+
     .snippet-card {
+        font-family: globals.$text-font-stack;
         padding-left: 1.5rem;
         padding-right: 1rem;
         border-left: 2px solid;
         border-color: var(--color-primary);
-        margin-bottom: 2rem;
 
-        header {
-            display: flex;
+        .post-header {
             margin-bottom: 0.5rem;
-            flex-direction: row;
-            justify-content: space-between;
             color: #8f8f8f;
             font-size: 0.8em;
+            font-family: globals.$font-stack;
         }
 
         a::before {
@@ -58,6 +86,44 @@
 
         a:hover::before {
             filter: invert(1);
+        }
+
+        * {
+            font-family: inherit;
+        }
+    }
+
+    // For snippet thread pages
+//     <div class="collage-separator">
+//     <span>SNIPPETS</span>
+//     <div class="separator-line-container">
+//         <div class="separator-line"></div>
+//     </div>
+// </div>
+    .collage-separator {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+
+        span {
+            font-family: globals.$text-font-stack;
+            color: globals.$primary-text;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-right: 1rem;
+        }
+
+        .separator-line-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+
+            .separator-line {
+                height: 1px;
+                background-color: globals.$primary-text;
+                width: 100%;
+            }
         }
     }
 }
