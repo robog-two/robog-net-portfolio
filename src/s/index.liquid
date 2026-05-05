@@ -1,0 +1,14 @@
+---
+title: All snippets
+layout: blog.liquid
+---
+{% assign snippets = collections.all | where: 'data.snippet', 'yes' %}
+
+<ul>
+  {% for item in snippets reversed %}
+    <li>
+      <a href="{{ item.url }}">{{ item.url }}</a>
+      <p>{{ item.data.page.rawInput | excerpt }}</p>
+    </li>
+  {% endfor %}
+</ul>
