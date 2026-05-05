@@ -362,7 +362,7 @@ date: %04d-%02d-%02d
 time: %s
 tags: post
 snippet: yes
-layout: blog.njk
+layout: blog.liquid
 description: yes
 ---
 `, t.Year(), int(t.Month()), t.Day(), timestr)
