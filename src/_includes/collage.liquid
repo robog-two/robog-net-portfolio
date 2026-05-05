@@ -15,7 +15,7 @@ navOverrideText: All Posts
     </div>
 </div>
 
-{%- for snippet in collections['post-digital-minimalism'] -%}
+{%- for snippet in collections[collect] -%}
   <div class="snippet-card">
     <header class="post-header">
       <time datetime="{{ snippet.data.date | date: '%Y-%m-%d' }}">
