@@ -78,6 +78,16 @@
             background-size: 100%;
         }
 
+        a[href$=".pdf"] {
+            border: 2px solid globals.$primary-text;
+            text-decoration: none;
+        }
+
+
+            a[href$=".pdf"]::before {
+                background-image: url("/fileicon.svg");
+            }
+
         a {
             @include shared.link-color-transition(globals.$color-primary);
             padding-right: 5px;
