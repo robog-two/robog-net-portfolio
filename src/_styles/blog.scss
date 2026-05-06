@@ -79,14 +79,17 @@
         }
 
         a[href$=".pdf"] {
-            border: 2px solid globals.$primary-text;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            border: 1px solid globals.$primary-text;
             text-decoration: none;
         }
 
 
-            a[href$=".pdf"]::before {
-                background-image: url("/fileicon.svg");
-            }
+        a[href$=".pdf"]::before {
+            background-image: url("/fileicon.svg");
+        }
 
         a {
             @include shared.link-color-transition(globals.$color-primary);
