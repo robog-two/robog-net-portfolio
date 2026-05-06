@@ -4,6 +4,7 @@
     "build": "deno --allow-read --allow-env --allow-write --allow-ffi npm:@11ty/eleventy --config=.eleventy.deno.ts"
   },
   "imports": {
+    "@11ty/eleventy": "npm:@11ty/eleventy@^3.1.5",
     "@11ty/eleventy-img": "npm:@11ty/eleventy-img@^6.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "npm:@11ty/eleventy-plugin-syntaxhighlight@^5.0.2",
     "@11tyrocks/eleventy-plugin-sass-lightningcss": "npm:@11tyrocks/eleventy-plugin-sass-lightningcss@^1.3.0",
