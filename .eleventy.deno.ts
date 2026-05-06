@@ -5,8 +5,25 @@ import markdownItFootnote from "markdown-it-footnote";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import markdownIt from "markdown-it";
 import { DOMParser } from "@b-fuze/deno-dom";
+import type EleventyConfig from "@11ty/eleventy";
 
-export default (eleventyConfig) => {
+// Format file size in human-readable format
+function formatFileSize(bytes: number): string {
+  const units = ["b", "kb", "mb", "gb"];
+  let size = bytes;
+  let unitIndex = 0;
+
+  while (size >= 1024 && unitIndex < units.length - 1) {
+    size /= 1024;
+    unitIndex++;
+  }
+
+  return `${Math.ceil(parseFloat(size.toFixed(size < 10 ? 2 : 1)))}${
+    units[unitIndex]
+  }`;
+}
+
+export default (eleventyConfig: EleventyConfig) => {
   eleventyConfig.addPlugin(eleventySass);
   eleventyConfig.addPlugin(syntaxHighlight);
 
@@ -41,7 +58,6 @@ export default (eleventyConfig) => {
 
   eleventyConfig.addPassthroughCopy("src/cv");
 
-  //eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
   eleventyConfig.addPassthroughCopy({ "src/_favicon": "/" });
 
   // Gallery pieces are completely static and should not be processed
@@ -55,6 +71,56 @@ export default (eleventyConfig) => {
 
   // Copy blog attachments to output (still needed for source images)
   eleventyConfig.addPassthroughCopy("src/blog/media");
+
+  // Add file sizes to PDF links
+  eleventyConfig.addTransform("pdf-filesize", async function (content) {
+    if (!this.page.outputPath.endsWith(".html")) {
+      return content;
+    }
+
+    try {
+      const dom = new DOMParser().parseFromString(
+        "<!doctype html><html><body>" + content + "</body></html>",
+        "text/html",
+      );
+
+      const links = dom.querySelectorAll("a[href$='.pdf']");
+
+      for (const link of links) {
+        const href = link.getAttribute("href");
+        if (!href) continue;
+
+        try {
+          // Resolve file path relative to project root
+          let filePath = href;
+          if (href.startsWith("/")) {
+            filePath = "public" + href;
+          } else {
+            // Relative path - resolve from page directory
+            const pageDir = this.page.inputPath.replace(/[^/]*$/, "");
+            filePath = pageDir.replace("src/", "") + href;
+          }
+
+          const stats = await Deno.stat(filePath);
+          const sizeStr = formatFileSize(stats.size);
+
+          // Create and append span
+          const span = dom.createElement("span");
+          span.className = "filesize";
+          span.textContent = sizeStr;
+          link.appendChild(span);
+        } catch {
+          // File not found or error reading file, skip this link
+          continue;
+        }
+      }
+
+      return dom.body.innerHTML;
+    } catch {
+      // If DOM parsing fails, return content as-is
+      return content;
+    }
+  });
 
   return {
     dir: {
@@ -86,7 +152,7 @@ function htmlToText(html: string) {
 
   //parse html into text
   const dom = (new DOMParser()).parseFromString(
-    "<!doctype html><html><body>" + html +  "</body></html>",
+    "<!doctype html><html><body>" + html + "</body></html>",
     "text/html",
   );
   return dom.body.textContent;
