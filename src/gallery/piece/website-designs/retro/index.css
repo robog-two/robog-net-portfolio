@@ -1,0 +1,192 @@
+/* global styles for print, mobile, and big screens */
+
+body {
+  font-family:
+    "Helvetica", "TeX Gyre Heros", "Nimbus Sans L", "FreeSans", "Mona Sans",
+    "Arial", "Arimo", "Liberation Sans", "Helvetica Neue", sans-serif;
+}
+
+address {
+  font-style: normal;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+
+td {
+  padding: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+fn {
+  display: block;
+  margin-top: 1em;
+  counter-increment: footnote-number;
+  padding-left: 0.5in;
+}
+
+/* This is always link to a footnote. */
+sup > a {
+  color: #003000 !important;
+  text-decoration: none;
+  font-size: 0.75em;
+}
+
+/* Looks like: --tab-->[1] Begin footnote in italics */
+fn::before {
+  content: "[" counter(footnote-number) "]";
+  display: block;
+  width: 0.5in;
+  height: 0;
+  text-align: right;
+  margin-left: calc(-0.5in - 5px);
+  padding-right: 5px;
+}
+
+body > footer {
+  text-align: center;
+}
+
+@media only screen {
+  body {
+    max-width: 600px;
+    background-color: #fcfbf4;
+    padding: 20px;
+    margin: 0px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  body > header {
+    text-align: center;
+    margin-bottom: 120px;
+  }
+
+  body > header > .logo {
+    font-size: 30pt;
+    margin-bottom: 0px;
+    line-height: 1pt;
+  }
+
+  body > header > h1 {
+    text-transform: uppercase;
+  }
+
+  body > footer {
+    margin-top: 80px;
+  }
+
+  html {
+    background-color: #acbba4;
+    background-image:
+      url("./greenliquid.webp"),
+      url("./greenliquid.jpg");
+  }
+
+  a {
+    color: #003000;
+    text-decoration: underline;
+  }
+
+  a:visited {
+    color: #306030;
+  }
+
+  fn::before {
+    color: #003000;
+  }
+
+  /* Clear formatting from links in header */
+  header a {
+    color: black !important;
+    text-decoration: none !important;
+  }
+
+  nav > a {
+    margin-right: 10px;
+  }
+
+  nav > a::after {
+    margin-left: 10px;
+    content: "•";
+  }
+
+  nav > a:last-child {
+    margin-right: 0;
+  }
+
+  nav > a:last-child::after {
+    display: none;
+  }
+}
+
+/* Styles for smaller screens */
+@media only screen and (min-width: 620px) {
+  body {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Styles for printed pages */
+@media only print {
+  body {
+    font-size: 12pt;
+  }
+
+  body > header {
+    display: none;
+  }
+
+  h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    padding-top: 12pt;
+    margin-top: 12pt;
+    font-size: 12pt;
+    line-height: 0;
+    font-weight: bold;
+  }
+
+  h4::before {
+    content: "# ";
+    vertical-align: super;
+  }
+
+  h5::before {
+    content: "## ";
+    vertical-align: super;
+  }
+
+  h6::before {
+    content: "### ";
+    vertical-align: super;
+  }
+
+  a {
+    color: black;
+  }
+}
+
+/*
+     FILE ARCHIVED ON 16:01:53 May 03, 2024 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 02:48:24 May 07, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 0.346
+  load_resource: 670.679 (2)
+  PetaboxLoader3.resolve: 376.801 (2)
+  PetaboxLoader3.datanode: 33.603 (2)
+*/

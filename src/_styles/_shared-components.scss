@@ -175,20 +175,19 @@
         font-family: globals.$font-stack;
         font-weight: bold;
         color: globals.$primary-text;
-        margin-top: globals.$spacing-xl;
-        margin-bottom: globals.$spacing-md;
     }
-
-
 
     h1 {
         font-size: globals.$font-size-2xl;
         border-bottom: 2px solid $theme-color;
         padding-bottom: 0;
+        margin-top: globals.$spacing-xl;
+        margin-bottom: globals.$spacing-md;
     }
 
     h2 {
-        margin-top: 0;
+        padding: 0;
+        margin: 0;
         font-size: globals.$font-size-lg
     }
 

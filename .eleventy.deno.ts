@@ -72,6 +72,9 @@ export default (eleventyConfig: EleventyConfig) => {
   // Copy blog attachments to output (still needed for source images)
   eleventyConfig.addPassthroughCopy("src/blog/media");
 
+  // Copy license file
+  eleventyConfig.addPassthroughCopy("LICENSE.txt");
+
   // Add file sizes to PDF links
   eleventyConfig.addTransform("pdf-filesize", async function (content) {
     if (!this.page.outputPath.endsWith(".html")) {

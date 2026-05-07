@@ -18,6 +18,8 @@
 // =============================================================================
 
 .content {
+
+
   article .post-excerpt {
     font-family: globals.$text-font-stack;
   }
@@ -61,7 +63,6 @@
 
   a {
     @include shared.link-color-transition(globals.$color-primary);
-    padding-right: 5px;
     display: inline-block;
   }
 
@@ -101,6 +102,10 @@
       color: #8f8f8f;
       font-size: 0.8em;
       font-family: globals.$font-stack;
+    }
+
+    a {
+        padding-right: 5px;
     }
 
     a::before {
