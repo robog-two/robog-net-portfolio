@@ -1,7 +1,7 @@
-@use './_globals' as globals;
-@use './base';
-@use './navigation';
-@use './shared-components' as shared;
+@use "./_globals" as globals;
+@use "./base";
+@use "./navigation";
+@use "./shared-components" as shared;
 
 // =============================================================================
 // BLOG PAGE STYLES
@@ -10,7 +10,7 @@
 
 // Page header with yellow background
 .page-header {
-    @include shared.page-header(globals.$color-primary);
+  @include shared.page-header(globals.$color-primary);
 }
 
 // =============================================================================
@@ -18,134 +18,141 @@
 // =============================================================================
 
 .content {
-    article .post-excerpt {
-        font-family: globals.$text-font-stack;
+  article .post-excerpt {
+    font-family: globals.$text-font-stack;
+  }
+
+  .blog-post-card {
+    @include shared.blog-post-card(globals.$color-primary);
+  }
+
+  // Div snippet cards live within a post,
+  // wherease article.snippet-card is on the
+  // blog listing page.
+  div.snippet-card:last-child {
+    padding-bottom: 0;
+    margin-bottom: 2rem;
+  }
+
+  div.snippet-card {
+    .post-header::before {
+      content: "";
+      display: block;
+      margin-left: -33px;
+      margin-bottom: -20px;
+      width: 16px;
+      height: 16px;
+      background-color: globals.$page-background-color;
+      border: 2px solid var(--color-primary);
+    }
+    padding-bottom: 2rem;
+  }
+
+  article.snippet-card {
+    margin-bottom: 2rem;
+  }
+
+  a .filesize {
+    font-weight: 100;
+    font-size: 0.8em;
+    margin-left: 5px;
+    filter: opacity(0.7);
+  }
+
+  a {
+    @include shared.link-color-transition(globals.$color-primary);
+    padding-right: 5px;
+    display: inline-block;
+  }
+
+  a:hover::before {
+    filter: invert(1);
+  }
+
+  a[href$=".pdf"] {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    border: 1px solid globals.$primary-text;
+    text-decoration: none;
+  }
+
+  a[href$=".pdf"]::before {
+    content: "";
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    margin-left: 5px;
+    white-space: nowrap;
+    background-image: url("/fileicon.svg");
+    background-size: 100%;
+  }
+
+  .snippet-card {
+    font-family: globals.$text-font-stack;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+    border-left: 2px solid;
+    border-color: var(--color-primary);
+
+    .post-header {
+      margin-bottom: 0.5rem;
+      color: #8f8f8f;
+      font-size: 0.8em;
+      font-family: globals.$font-stack;
     }
 
-    .blog-post-card {
-        @include shared.blog-post-card(globals.$color-primary);
+    a::before {
+      content: "";
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+      margin-right: 5px;
+      margin-left: 5px;
+      white-space: nowrap;
+      background-image: url("/linkicon.svg");
+      background-size: 100%;
     }
 
-    // Div snippet cards live within a post,
-    // wherease article.snippet-card is on the
-    // blog listing page.
-    div.snippet-card:last-child {
-        padding-bottom: 0;
-        margin-bottom: 2rem;
+    * {
+      font-family: inherit;
+    }
+  }
+
+  // For snippet thread pages
+  //     <div class="collage-separator">
+  //     <span>SNIPPETS</span>
+  //     <div class="separator-line-container">
+  //         <div class="separator-line"></div>
+  //     </div>
+  // </div>
+  .collage-separator {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+    span {
+      font-family: globals.$font-stack;
+      color: globals.$primary-text;
+      font-weight: bold;
+      font-size: 0.8em;
+      margin-right: 1rem;
     }
 
-    div.snippet-card {
-        .post-header::before {
-            content: "";
-            display: block;
-            margin-left: -33px;
-            margin-bottom: -20px;
-            width: 16px;
-            height: 16px;
-            background-color: globals.$page-background-color;
-            border: 2px solid var(--color-primary);
-        }
-        padding-bottom: 2rem;
+    .separator-line-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+
+      .separator-line {
+        height: 1px;
+        background-color: globals.$primary-text;
+        width: 100%;
+      }
     }
-
-    article.snippet-card {
-        margin-bottom: 2rem;
-    }
-
-    .snippet-card {
-        font-family: globals.$text-font-stack;
-        padding-left: 1.5rem;
-        padding-right: 1rem;
-        border-left: 2px solid;
-        border-color: var(--color-primary);
-
-        .post-header {
-            margin-bottom: 0.5rem;
-            color: #8f8f8f;
-            font-size: 0.8em;
-            font-family: globals.$font-stack;
-        }
-
-        a::before {
-            content: "";
-            display: inline-block;
-            height: 12px;
-            width: 12px;
-            margin-right: 5px;
-            margin-left: 5px;
-            white-space: nowrap;
-            background-image: url("/linkicon.svg");
-            background-size: 100%;
-        }
-
-        a .filesize {
-            font-weight: 100;
-            font-size: 0.8em;
-            margin-left: 5px;
-            filter: opacity(0.7);
-        }
-
-        a[href$=".pdf"] {
-            margin-top: 0.5rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-            border: 1px solid globals.$primary-text;
-            text-decoration: none;
-        }
-
-
-        a[href$=".pdf"]::before {
-            background-image: url("/fileicon.svg");
-        }
-
-        a {
-            @include shared.link-color-transition(globals.$color-primary);
-            padding-right: 5px;
-            display: inline-block;
-        }
-
-        a:hover::before {
-            filter: invert(1);
-        }
-
-        * {
-            font-family: inherit;
-        }
-    }
-
-    // For snippet thread pages
-//     <div class="collage-separator">
-//     <span>SNIPPETS</span>
-//     <div class="separator-line-container">
-//         <div class="separator-line"></div>
-//     </div>
-// </div>
-    .collage-separator {
-        display: flex;
-        flex-direction: row;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-
-        span {
-            font-family: globals.$font-stack;
-            color: globals.$primary-text;
-            font-weight: bold;
-            font-size: 0.8em;
-            margin-right: 1rem;
-        }
-
-        .separator-line-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-
-            .separator-line {
-                height: 1px;
-                background-color: globals.$primary-text;
-                width: 100%;
-            }
-        }
-    }
+  }
 }
 
 // =============================================================================
@@ -153,33 +160,33 @@
 // =============================================================================
 
 .post-content {
-    @include shared.post-content(globals.$color-primary);
-    @include shared.post-images;
+  @include shared.post-content(globals.$color-primary);
+  @include shared.post-images;
 }
 
-body,html,main {
-    min-height: 100vh;
+body, html, main {
+  min-height: 100vh;
 }
 
 main article.post-content {
-    padding-bottom: 146px;
+  padding-bottom: 146px;
 }
 
 footer {
-    background-color: globals.$color-primary;
-    font-family: globals.$text-font-stack;
-    text-align: center;
-    padding: 5px;
-    height: 100px;
-    width: 100vw;
-    padding-top: 15px;
-    padding-bottom: 50px;
-    position: absolute;
-    bottom: 0;
+  background-color: globals.$color-primary;
+  font-family: globals.$text-font-stack;
+  text-align: center;
+  padding: 5px;
+  height: 100px;
+  width: 100vw;
+  padding-top: 15px;
+  padding-bottom: 50px;
+  position: absolute;
+  bottom: 0;
 
-    a {
-        @include shared.link-color-transition(globals.$color-primary);
-    }
+  a {
+    @include shared.link-color-transition(globals.$color-primary);
+  }
 }
 
 // =============================================================================
@@ -187,5 +194,5 @@ footer {
 // =============================================================================
 
 .image-modal {
-    @extend %image-modal;
+  @extend %image-modal;
 }
