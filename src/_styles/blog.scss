@@ -52,38 +52,6 @@
     margin-bottom: 2rem;
   }
 
-  a .filesize {
-    font-weight: 100;
-    font-size: 0.8em;
-    margin-left: 5px;
-    filter: opacity(0.7);
-  }
-
-  a:hover::before {
-    filter: invert(1);
-  }
-
-  a[href$=".pdf"] {
-    padding-right: 5px;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    display: inline-block;
-    border: 1px solid globals.$primary-text;
-    text-decoration: none;
-  }
-
-  a[href$=".pdf"]::before {
-    content: "";
-    display: inline-block;
-    height: 12px;
-    width: 12px;
-    margin-right: 5px;
-    margin-left: 5px;
-    white-space: nowrap;
-    background-image: url("/fileicon.svg");
-    background-size: 100%;
-  }
-
   .snippet-card {
     font-family: globals.$text-font-stack;
     padding-left: 1.5rem;
@@ -122,6 +90,38 @@
     * {
       font-family: inherit;
     }
+  }
+
+  a .filesize {
+    font-weight: 100;
+    font-size: 0.8em;
+    margin-left: 5px;
+    filter: opacity(0.7);
+  }
+
+  a:hover::before {
+    filter: invert(1);
+  }
+
+  a[href$=".pdf"] {
+    padding-right: 5px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    border: 1px solid globals.$primary-text;
+    text-decoration: none;
+  }
+
+  a[href$=".pdf"]::before {
+    content: "";
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+    margin-left: 5px;
+    white-space: nowrap;
+    background-image: url("/fileicon.svg");
+    background-size: 100%;
   }
 
   // For snippet thread pages
