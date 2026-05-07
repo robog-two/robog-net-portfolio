@@ -1,4 +1,4 @@
-@use './_globals' as globals;
+@use "./_globals" as globals;
 
 // =============================================================================
 // NAVIGATION & HEADER COMPONENTS
@@ -6,21 +6,21 @@
 
 // Mixins for common patterns
 @mixin button-hover-effect($translate-x: -#{globals.$hover-translate}) {
-    transform: translateX($translate-x);
+  transform: translateX($translate-x);
 }
 
 @mixin text-base-styles {
-    font-family: globals.$font-stack;
-    font-size: globals.$font-size-lg;
-    line-height: globals.$line-height-normal;
-    color: globals.$primary-text;
+  font-family: globals.$font-stack;
+  font-size: globals.$font-size-lg;
+  line-height: globals.$line-height-normal;
+  color: globals.$primary-text;
 }
 
 @mixin heading-base-styles {
-    font-family: globals.$font-stack;
-    font-weight: bold;
-    color: globals.$primary-text;
-    margin: 0;
+  font-family: globals.$font-stack;
+  font-weight: bold;
+  color: globals.$primary-text;
+  margin: 0;
 }
 
 // =============================================================================
@@ -28,47 +28,47 @@
 // =============================================================================
 
 .page-navigation {
-    position: absolute;
-    top: 50%;
-    left: globals.$spacing-md;
-    transform: translateY(-50%);
-    z-index: 101;
+  position: absolute;
+  top: 50%;
+  left: globals.$spacing-md;
+  transform: translateY(-50%);
+  z-index: 101;
 
-    .home-link {
-        display: flex;
-        align-items: center;
-        gap: globals.$spacing-sm;
-        @include text-base-styles;
-        font-size: globals.$font-size-xl;
-        font-weight: bold;
-        text-decoration: none;
-        padding: 0.75rem globals.$spacing-md;
-        transition: all globals.$transition-fast globals.$ease-standard;
+  .home-link {
+    display: flex;
+    align-items: center;
+    gap: globals.$spacing-sm;
+    @include text-base-styles;
+    font-size: globals.$font-size-xl;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 0.75rem globals.$spacing-md;
+    transition: all globals.$transition-fast globals.$ease-standard;
 
-        .arrow {
-            display: inline-block;
-            height: auto;
-            img {
-                height: 0.7em;
-                width: auto;
-            }
-            font-size: globals.$font-size-xl;
-            transition: transform globals.$transition-fast globals.$ease-standard;
-        }
-
-        .home-text,
-        .back-text {
-            transition: color globals.$transition-fast globals.$ease-standard;
-        }
-
-        &:hover {
-            @include button-hover-effect;
-
-            .arrow {
-                transform: translateX(-2px);
-            }
-        }
+    .arrow {
+      display: inline-block;
+      height: auto;
+      img {
+        height: 0.7em;
+        width: auto;
+      }
+      font-size: globals.$font-size-xl;
+      transition: transform globals.$transition-fast globals.$ease-standard;
     }
+
+    .home-text,
+    .back-text {
+      transition: color globals.$transition-fast globals.$ease-standard;
+    }
+
+    &:hover {
+      @include button-hover-effect;
+
+      .arrow {
+        transform: translateX(-2px);
+      }
+    }
+  }
 }
 
 // =============================================================================
@@ -76,41 +76,41 @@
 // =============================================================================
 
 .header-container {
-    height: globals.$header-full-height;
-    position: relative;
+  height: globals.$header-full-height;
+  position: relative;
 }
 
 .page-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: globals.$header-full-height;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: globals.$header-full-height;
+  text-align: center;
+  position: relative;
+  z-index: globals.$z-header;
+
+  h1 {
+    @include heading-base-styles;
+    font-size: globals.$title-full-size;
     position: relative;
-    z-index: globals.$z-header;
+    z-index: 1;
+    padding-left: 125px;
+    padding-right: 125px;
+  }
+
+  // JavaScript-triggered shrunk state for sticky header
+  &.shrunk {
+    min-height: globals.$header-shrunk-height;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transition: none;
 
     h1 {
-        @include heading-base-styles;
-        font-size: globals.$title-full-size;
-        position: relative;
-        z-index: 1;
-        padding-left: 125px;
-        padding-right: 125px;
+      font-size: globals.$title-shrunk-size;
     }
-
-    // JavaScript-triggered shrunk state for sticky header
-    &.shrunk {
-        min-height: globals.$header-shrunk-height;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        transition: none;
-
-        h1 {
-            font-size: globals.$title-shrunk-size;
-        }
-    }
+  }
 }
 
 // =============================================================================
@@ -118,49 +118,49 @@
 // =============================================================================
 
 .content {
-    max-width: globals.$content-max-width;
-    margin: 0 auto;
-    padding: globals.$content-padding;
+  max-width: globals.$content-max-width;
+  margin: 0 auto;
+  padding: globals.$content-padding;
 
-    // Typography hierarchy for markdown content
-    h2 {
-        @include heading-base-styles;
-        font-size: globals.$font-size-4xl;
-        margin: globals.$spacing-xl 0 globals.$spacing-md 0;
-        padding-bottom: globals.$spacing-sm;
+  // Typography hierarchy for markdown content
+  h2 {
+    @include heading-base-styles;
+    font-size: globals.$font-size-4xl;
+    margin: globals.$spacing-xl 0 globals.$spacing-md 0;
+    padding-bottom: globals.$spacing-sm;
+  }
+
+  h3 {
+    @include heading-base-styles;
+    font-size: globals.$font-size-2xl;
+    margin: globals.$spacing-lg 0 globals.$spacing-md 0;
+  }
+
+  p {
+    @include text-base-styles;
+    margin-bottom: globals.$spacing-md;
+  }
+
+  // Inline text styling
+  strong {
+    font-weight: bold;
+    color: globals.$primary-text;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  // List styling
+  ul, ol {
+    @include text-base-styles;
+    margin: globals.$spacing-md 0;
+    padding-left: globals.$spacing-xl;
+
+    li {
+      margin-bottom: globals.$spacing-sm;
     }
-
-    h3 {
-        @include heading-base-styles;
-        font-size: globals.$font-size-2xl;
-        margin: globals.$spacing-lg 0 globals.$spacing-md 0;
-    }
-
-    p {
-        @include text-base-styles;
-        margin-bottom: globals.$spacing-md;
-    }
-
-    // Inline text styling
-    strong {
-        font-weight: bold;
-        color: globals.$primary-text;
-    }
-
-    em {
-        font-style: italic;
-    }
-
-    // List styling
-    ul, ol {
-        @include text-base-styles;
-        margin: globals.$spacing-md 0;
-        padding-left: globals.$spacing-xl;
-
-        li {
-            margin-bottom: globals.$spacing-sm;
-        }
-    }
+  }
 }
 
 // =============================================================================
@@ -168,54 +168,54 @@
 // =============================================================================
 
 @media (max-width: 768px) {
-    .page-header h1 {
-        font-size: globals.$font-size-3xl;
-        padding-left: 0;
-        padding-right: 0;
-    }
+  .page-header h1 {
+    font-size: globals.$font-size-3xl;
+    padding-left: 0;
+    padding-right: 0;
+  }
 
-    .page-header.shrunk h1 {
-        font-size: globals.$font-size-lg !important;
-        padding-left: 50px;
-    }
+  .page-header.shrunk h1 {
+    font-size: globals.$font-size-lg !important;
+    padding-left: 50px;
+  }
 
-    .page-navigation {
-        top: 0;
-        left: 0;
-        height: 60px;
-        transform: none;
-        display: flex;
-        align-items: center;
+  .page-navigation {
+    top: 0;
+    left: 0;
+    height: 60px;
+    transform: none;
+    display: flex;
+    align-items: center;
 
-        .home-link {
-            padding: 0.5rem;
-            font-size: 4rem;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .home-link {
+      padding: 0.5rem;
+      font-size: 4rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-            .arrow {
-                img {
-                    height: 2.5rem;
-                    padding-top: 8px;
-                    padding-left: 8px;
-                    width: auto;
-                }
-            }
-
-            .back-text {
-                display: none;
-            }
+      .arrow {
+        img {
+          height: 2.5rem;
+          padding-top: 8px;
+          padding-left: 8px;
+          width: auto;
         }
-    }
+      }
 
-    .page-header.shrunk {
-        .arrow {
-            img {
-                height: 2rem;
-                width: auto;
-            }
-        }
+      .back-text {
+        display: none;
+      }
     }
+  }
+
+  .page-header.shrunk {
+    .arrow {
+      img {
+        height: 2rem;
+        width: auto;
+      }
+    }
+  }
 }

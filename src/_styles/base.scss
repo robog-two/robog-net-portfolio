@@ -7,49 +7,49 @@
 
 // CSS Reset and base body styling
 body {
-    // Typography
-    font-family: globals.$font-stack;
-    color: globals.$primary-text;
+  // Typography
+  font-family: globals.$font-stack;
+  color: globals.$primary-text;
 
-    background-color: globals.$page-background-color;
+  background-color: globals.$page-background-color;
 
-    // Layout reset
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    position: relative;
+  // Layout reset
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
 
-    // Improve text rendering
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+  // Improve text rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 // Markdown plugin styling
 .footnote-ref {
-    a {
-        text-decoration: none;
-        font-size: calc(0.7 * globals.$font-size-base);
-        position: relative;
-        top: -4px;
-    }
+  a {
+    text-decoration: none;
+    font-size: calc(0.7 * globals.$font-size-base);
+    position: relative;
+    top: -4px;
+  }
 }
 
 // Box sizing reset for better layout control
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 // Remove default margins and focus styles
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 // Improve focus visibility for accessibility
 :focus-visible {
-    outline: 2px solid globals.$primary-text;
-    outline-offset: 2px;
+  outline: 2px solid globals.$primary-text;
+  outline-offset: 2px;
 }

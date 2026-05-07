@@ -1,7 +1,7 @@
-@use './_globals' as globals;
-@use './base';
-@use './navigation';
-@use './shared-components' as shared;
+@use "./_globals" as globals;
+@use "./base";
+@use "./navigation";
+@use "./shared-components" as shared;
 
 // =============================================================================
 // GENERIC PAGE STYLES
@@ -10,70 +10,70 @@
 
 // Page header with default background
 .page-header {
-    background: globals.$color-primary;
+  background: globals.$color-primary;
 }
 
 // Content styling
 .content {
-    max-width: globals.$content-max-width;
-    margin: 0 auto;
-    padding: globals.$content-padding;
+  max-width: globals.$content-max-width;
+  margin: 0 auto;
+  padding: globals.$content-padding;
 
-    // Typography hierarchy for markdown content
-    h2 {
-        font-family: globals.$font-stack;
-        font-weight: bold;
-        color: globals.$primary-text;
-        font-size: globals.$font-size-4xl;
-        margin: globals.$spacing-xl 0 globals.$spacing-md 0;
-        padding-bottom: globals.$spacing-sm;
+  // Typography hierarchy for markdown content
+  h2 {
+    font-family: globals.$font-stack;
+    font-weight: bold;
+    color: globals.$primary-text;
+    font-size: globals.$font-size-4xl;
+    margin: globals.$spacing-xl 0 globals.$spacing-md 0;
+    padding-bottom: globals.$spacing-sm;
+  }
+
+  h3 {
+    font-family: globals.$font-stack;
+    font-weight: bold;
+    color: globals.$primary-text;
+    font-size: globals.$font-size-2xl;
+    margin: globals.$spacing-lg 0 globals.$spacing-md 0;
+  }
+
+  p {
+    font-family: globals.$text-font-stack;
+    font-size: globals.$font-size-lg;
+    line-height: globals.$line-height-normal;
+    color: globals.$primary-text;
+    margin-bottom: globals.$spacing-md;
+  }
+
+  // Inline text styling
+  strong {
+    font-weight: bold;
+    color: globals.$primary-text;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a {
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
     }
+  }
 
-    h3 {
-        font-family: globals.$font-stack;
-        font-weight: bold;
-        color: globals.$primary-text;
-        font-size: globals.$font-size-2xl;
-        margin: globals.$spacing-lg 0 globals.$spacing-md 0;
+  // List styling
+  ul, ol {
+    font-family: globals.$text-font-stack;
+    font-size: globals.$font-size-lg;
+    line-height: globals.$line-height-normal;
+    color: globals.$primary-text;
+    margin: globals.$spacing-md 0;
+    padding-left: globals.$spacing-xl;
+
+    li {
+      margin-bottom: globals.$spacing-sm;
     }
-
-    p {
-        font-family: globals.$text-font-stack;
-        font-size: globals.$font-size-lg;
-        line-height: globals.$line-height-normal;
-        color: globals.$primary-text;
-        margin-bottom: globals.$spacing-md;
-    }
-
-    // Inline text styling
-    strong {
-        font-weight: bold;
-        color: globals.$primary-text;
-    }
-
-    em {
-        font-style: italic;
-    }
-
-    a {
-        color: inherit;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    // List styling
-    ul, ol {
-        font-family: globals.$text-font-stack;
-        font-size: globals.$font-size-lg;
-        line-height: globals.$line-height-normal;
-        color: globals.$primary-text;
-        margin: globals.$spacing-md 0;
-        padding-left: globals.$spacing-xl;
-
-        li {
-            margin-bottom: globals.$spacing-sm;
-        }
-    }
+  }
 }

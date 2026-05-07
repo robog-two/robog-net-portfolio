@@ -4,23 +4,23 @@
 // Custom font loading for TeX Gyre Heros family used throughout the portfolio
 
 // Base font configuration
-$font-family-name: 'TeX Gyre Heros';
-$font-path: '/_fonts/';
-$font-format: 'woff';
+$font-family-name: "TeX Gyre Heros";
+$font-path: "/_fonts/";
+$font-format: "woff";
 
 // Mixin for consistent font-face declarations
 @mixin font-face($font-file, $weight: normal, $style: normal) {
-    @font-face {
-        font-family: $font-family-name;
-        src: url("#{$font-path}#{$font-file}.#{$font-format}") format($font-format);
-        font-weight: $weight;
-        font-style: $style;
-        font-display: swap; // Optimize loading performance
-    }
+  @font-face {
+    font-family: $font-family-name;
+    src: url("#{$font-path}#{$font-file}.#{$font-format}") format($font-format);
+    font-weight: $weight;
+    font-style: $style;
+    font-display: swap; // Optimize loading performance
+  }
 }
 
 // Font family variants
-@include font-face('heros', normal, normal);
-@include font-face('herositalic', normal, italic);
-@include font-face('herosbold', bold, normal);
-@include font-face('herosbolditalic', bold, italic);
+@include font-face("heros", normal, normal);
+@include font-face("herositalic", normal, italic);
+@include font-face("herosbold", bold, normal);
+@include font-face("herosbolditalic", bold, italic);

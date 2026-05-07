@@ -1,7 +1,7 @@
-@use './_globals' as globals;
-@use './base';
-@use './navigation';
-@use './shared-components' as shared;
+@use "./_globals" as globals;
+@use "./base";
+@use "./navigation";
+@use "./shared-components" as shared;
 
 // =============================================================================
 // APPS PAGE STYLES
@@ -10,45 +10,45 @@
 
 // Page header with green background
 .page-header {
-    background: globals.$color-primary;
+  background: globals.$color-primary;
 }
 
 // Apps page content and grid layout
 .content {
-    // Responsive grid for app cards
-    .apps-grid {
-        @extend %grid-layout;
+  // Responsive grid for app cards
+  .apps-grid {
+    @extend %grid-layout;
+  }
+
+  .app-item {
+    @extend %card-content;
+    border-color: globals.$color-primary;
+
+    // Technology/platform metadata
+    strong {
+      @include shared.link-color-transition(globals.$color-primary);
+      display: inline;
     }
 
-    .app-item {
-        @extend %card-content;
-        border-color: globals.$color-primary;
-
-        // Technology/platform metadata
-        strong {
-            @include shared.link-color-transition(globals.$color-primary);
-            display: inline;
-        }
-
-        // App description text
-        p {
-            margin-bottom: globals.$spacing-lg;
-        }
-
-        // Action links (demo, code, etc.)
-        a {
-            margin-right: globals.$spacing-md;
-
-            // Primary action button (usually first link)
-            &:first-of-type {
-                @include shared.button-primary(globals.$color-primary);
-                margin-right: globals.$spacing-md;
-            }
-
-            // Secondary links
-            &:not(:first-of-type) {
-                @include shared.link-color-transition(globals.$color-primary);
-            }
-        }
+    // App description text
+    p {
+      margin-bottom: globals.$spacing-lg;
     }
+
+    // Action links (demo, code, etc.)
+    a {
+      margin-right: globals.$spacing-md;
+
+      // Primary action button (usually first link)
+      &:first-of-type {
+        @include shared.button-primary(globals.$color-primary);
+        margin-right: globals.$spacing-md;
+      }
+
+      // Secondary links
+      &:not(:first-of-type) {
+        @include shared.link-color-transition(globals.$color-primary);
+      }
+    }
+  }
 }

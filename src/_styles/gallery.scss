@@ -1,7 +1,7 @@
-@use './_globals' as globals;
-@use './base';
-@use './navigation';
-@use './shared-components' as shared;
+@use "./_globals" as globals;
+@use "./base";
+@use "./navigation";
+@use "./shared-components" as shared;
 
 // =============================================================================
 // GALLERY PAGE STYLES
@@ -10,7 +10,7 @@
 
 // Page header with cyan background
 .page-header {
-    background: globals.$color-primary;
+  background: globals.$color-primary;
 }
 
 // Gallery content and grid layout
@@ -18,102 +18,102 @@
 // Responsive grid for gallery items
 
 .content {
-    @include shared.post-content(globals.$color-primary);
-    // Override from mixin
-    max-width: 1200px !important;
+  @include shared.post-content(globals.$color-primary);
+  // Override from mixin
+  max-width: 1200px !important;
 }
 
 section.series-header {
-    h1 em {
-        display: block;
-        font-size: globals.$font-size-base;
+  h1 em {
+    display: block;
+    font-size: globals.$font-size-base;
+  }
+
+  .horizontal {
+    display: flex;
+    flex-direction: row;
+
+    div {
+      flex-basis: 60%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding-right: 10px;
+    }
+
+    aside {
+      flex-basis: 40%;
+      display: block;
+
+      p {
+        margin-bottom: 0;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      figcaption {
+        line-height: globals.$font-size-base;
+        opacity: 0.6;
+        font-style: italic;
+        text-align: center;
+      }
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    h1 {
+      text-align: center;
     }
 
     .horizontal {
-        display: flex;
-        flex-direction: row;
+      flex-direction: column-reverse;
 
-        div {
-            flex-basis: 60%;
-            display: flex;
-            justify-content: space-between;
-            flex-direction: column;
-            padding-right: 10px;
-        }
+      div {
+        display: block;
+      }
 
-        aside {
-            flex-basis: 40%;
-            display: block;
-
-            p {
-                margin-bottom: 0;
-            }
-
-            img {
-                width: 100%;
-                height: auto;
-            }
-
-            figcaption {
-                line-height: globals.$font-size-base;
-                opacity: 0.6;
-                font-style: italic;
-                text-align: center;
-            }
-        }
+      aside figcaption {
+        margin-bottom: 20px;
+      }
     }
-
-    @media screen and (max-width: 760px) {
-        h1 {
-            text-align: center;
-        }
-
-        .horizontal {
-            flex-direction: column-reverse;
-
-            div {
-                display: block;
-            }
-
-            aside figcaption {
-                margin-bottom: 20px;
-            }
-        }
-    }
+  }
 }
 
 section.gallery-series {
-    @extend %grid-layout;
+  @extend %grid-layout;
 }
 
 section img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 section.gallery-item {
-    @extend %card-content;
-    border-color: globals.$color-primary;
+  @extend %card-content;
+  border-color: globals.$color-primary;
 
-    h2 {
-        text-align: center;
-    }
+  h2 {
+    text-align: center;
+  }
 
-    // Medium/category information
-    em {
-        color: globals.$color-primary;
-        font-weight: bold;
-        display: inline;
-        margin-bottom: globals.$spacing-md;
-    }
+  // Medium/category information
+  em {
+    color: globals.$color-primary;
+    font-weight: bold;
+    display: inline;
+    margin-bottom: globals.$spacing-md;
+  }
 
-    // Project description
-    p {
-        margin-bottom: globals.$spacing-lg;
-    }
+  // Project description
+  p {
+    margin-bottom: globals.$spacing-lg;
+  }
 
-    // Project links
-    a {
-        @include shared.link-color-transition(globals.$color-primary);
-    }
+  // Project links
+  a {
+    @include shared.link-color-transition(globals.$color-primary);
+  }
 }

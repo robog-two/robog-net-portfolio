@@ -1,58 +1,62 @@
-@use './_globals' as globals;
-@use './base';
-@use './navigation';
-@use 'sass:color';
+@use "./_globals" as globals;
+@use "./base";
+@use "./navigation";
+@use "sass:color";
 // =============================================================================
 // MIXINS & UTILITIES
 // =============================================================================
 
 // Mixin for corner positioning to reduce duplication
 @mixin corner-position($position) {
-    @if $position == top-left {
-        top: 0;
-        left: 0;
-    } @else if $position == top-right {
-        top: 0;
-        right: 0;
-    } @else if $position == bottom-right {
-        bottom: 0;
-        right: 0;
-    } @else if $position == bottom-left {
-        bottom: 0;
-        left: 0;
-    }
+  @if $position == top-left {
+    top: 0;
+    left: 0;
+  } @else if $position == top-right {
+    top: 0;
+    right: 0;
+  } @else if $position == bottom-right {
+    bottom: 0;
+    right: 0;
+  } @else if $position == bottom-left {
+    bottom: 0;
+    left: 0;
+  }
 }
 
 // Mixin for triangle background positioning (inherits corner position)
 @mixin triangle-bg-position($position) {
-    @include corner-position($position);
+  @include corner-position($position);
 }
 
 // Mixin for nav text transforms with consistent positioning
 @mixin nav-text-transform($x-offset, $y-offset, $rotation) {
-    transform: translate(
-        calc(-50% + #{$x-offset}),
-        calc(-50% + #{$y-offset})
-    ) rotate($rotation);
+  transform: translate(
+    calc(-50% + #{$x-offset}),
+    calc(-50% + #{$y-offset})
+  ) rotate($rotation);
 }
 
 // Mixin for triangle gradient backgrounds
 @mixin triangle-gradient($angle, $color, $class) {
-    $tts: globals.$triangle-transition-speed;
-    transition: --#{$angle}-cprop $tts, width $tts, height $tts;
-    background: linear-gradient($angle, var(--#{$angle}-cprop) 50%, transparent 50%);
+  $tts: globals.$triangle-transition-speed;
+  transition: --#{$angle}-cprop $tts, width $tts, height $tts;
+  background: linear-gradient(
+    $angle,
+    var(--#{$angle}-cprop) 50%,
+    transparent 50%
+  );
 
-    @at-root {
-        .corner-nav#{$class}:hover .triangle-bg {
-            --#{$angle}-cprop: #{$color};
-        }
-
-        @property --#{$angle}-cprop {
-            syntax: '<color>';
-            initial-value: color.scale($color, $lightness: 60%);
-            inherits: false;
-        }
+  @at-root {
+    .corner-nav#{$class}:hover .triangle-bg {
+      --#{$angle}-cprop: #{$color};
     }
+
+    @property --#{$angle}-cprop {
+      syntax: "<color>";
+      initial-value: color.scale($color, $lightness: 60%);
+      inherits: false;
+    }
+  }
 }
 
 // =============================================================================
@@ -60,113 +64,129 @@
 // =============================================================================
 
 .highest-nav {
-    z-index: 400 !important;
+  z-index: 400 !important;
 
-    .nav-text {
-        z-index: 500 !important;
-    }
+  .nav-text {
+    z-index: 500 !important;
+  }
 }
 
 .corner-nav {
-    // Base styles for corner navigation elements
-    position: fixed;
+  // Base styles for corner navigation elements
+  position: fixed;
+  width: globals.$triangle-size;
+  height: globals.$triangle-size;
+  font-size: globals.$nav-label-size;
+  font-weight: bold;
+  color: globals.$primary-text;
+  text-decoration: none;
+  text-align: center;
+  line-height: globals.$triangle-size;
+  z-index: 100;
+  transition: color globals.$triangle-transition-speed ease-in;
+
+  // Triangle background element (animated on hover)
+  .triangle-bg {
+    position: absolute;
     width: globals.$triangle-size;
     height: globals.$triangle-size;
-    font-size: globals.$nav-label-size;
-    font-weight: bold;
+    transition: all globals.$triangle-transition-speed ease-in-out;
+    pointer-events: none;
+  }
+
+  // Navigation label text positioning
+  .nav-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    white-space: nowrap;
+    line-height: 1;
+    padding-top: calc(-#{globals.$nav-label-size} / 2);
+  }
+
+  // Hover effects for triangle expansion
+  &:hover {
     color: globals.$primary-text;
-    text-decoration: none;
-    text-align: center;
-    line-height: globals.$triangle-size;
-    z-index: 100;
-    transition: color globals.$triangle-transition-speed ease-in;
+    z-index: 400 !important;
 
-    // Triangle background element (animated on hover)
-    .triangle-bg {
-        position: absolute;
-        width: globals.$triangle-size;
-        height: globals.$triangle-size;
-        transition: all globals.$triangle-transition-speed ease-in-out;
-        pointer-events: none;
-    }
-
-    // Navigation label text positioning
     .nav-text {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        white-space: nowrap;
-        line-height: 1;
-        padding-top: calc(-#{globals.$nav-label-size} / 2);
+      z-index: 500 !important;
     }
 
-    // Hover effects for triangle expansion
-    &:hover {
-        color: globals.$primary-text;
-        z-index: 400 !important;
+    .triangle-bg {
+      width: globals.$triangle-hover-size;
+      height: globals.$triangle-hover-size;
+    }
+  }
 
-        .nav-text {
-            z-index: 500 !important;
-        }
+  // Corner-specific positioning and styling
+  &.top-left {
+    @include corner-position(top-left);
 
-        .triangle-bg {
-            width: globals.$triangle-hover-size;
-            height: globals.$triangle-hover-size;
-        }
+    .nav-text {
+      @include nav-text-transform(
+        -#{globals.$nav-label-padding},
+        -#{globals.$nav-label-padding},
+        -45deg,
+      );
     }
 
-    // Corner-specific positioning and styling
-    &.top-left {
-        @include corner-position(top-left);
+    .triangle-bg {
+      @include triangle-bg-position(top-left);
+      @include triangle-gradient(135deg, globals.$color-pink, ".top-left");
+    }
+  }
 
-        .nav-text {
-            @include nav-text-transform(-#{globals.$nav-label-padding}, -#{globals.$nav-label-padding}, -45deg);
-        }
+  &.top-right {
+    @include corner-position(top-right);
 
-        .triangle-bg {
-            @include triangle-bg-position(top-left);
-            @include triangle-gradient(135deg, globals.$color-pink, '.top-left');
-        }
+    .nav-text {
+      @include nav-text-transform(
+        #{globals.$nav-label-padding},
+        -#{globals.$nav-label-padding},
+        45deg,
+      );
     }
 
-    &.top-right {
-        @include corner-position(top-right);
+    .triangle-bg {
+      @include triangle-bg-position(top-right);
+      @include triangle-gradient(225deg, globals.$color-yellow, ".top-right");
+    }
+  }
 
-        .nav-text {
-            @include nav-text-transform(#{globals.$nav-label-padding}, -#{globals.$nav-label-padding}, 45deg);
-        }
+  &.bottom-right {
+    @include corner-position(bottom-right);
 
-        .triangle-bg {
-            @include triangle-bg-position(top-right);
-            @include triangle-gradient(225deg, globals.$color-yellow, '.top-right');
-        }
+    .nav-text {
+      @include nav-text-transform(
+        #{globals.$nav-label-padding},
+        #{globals.$nav-label-padding},
+        -45deg,
+      );
     }
 
-    &.bottom-right {
-        @include corner-position(bottom-right);
+    .triangle-bg {
+      @include triangle-bg-position(bottom-right);
+      @include triangle-gradient(315deg, globals.$color-green, ".bottom-right");
+    }
+  }
 
-        .nav-text {
-            @include nav-text-transform(#{globals.$nav-label-padding}, #{globals.$nav-label-padding}, -45deg);
-        }
+  &.bottom-left {
+    @include corner-position(bottom-left);
 
-        .triangle-bg {
-            @include triangle-bg-position(bottom-right);
-            @include triangle-gradient(315deg, globals.$color-green, '.bottom-right');
-        }
+    .nav-text {
+      @include nav-text-transform(
+        -#{globals.$nav-label-padding},
+        #{globals.$nav-label-padding},
+        45deg,
+      );
     }
 
-    &.bottom-left {
-        @include corner-position(bottom-left);
-
-        .nav-text {
-            @include nav-text-transform(-#{globals.$nav-label-padding}, #{globals.$nav-label-padding}, 45deg);
-        }
-
-        .triangle-bg {
-            @include triangle-bg-position(bottom-left);
-            @include triangle-gradient(45deg, globals.$color-cyan, '.bottom-left');
-        }
+    .triangle-bg {
+      @include triangle-bg-position(bottom-left);
+      @include triangle-gradient(45deg, globals.$color-cyan, ".bottom-left");
     }
+  }
 }
 
 // =============================================================================
@@ -174,15 +194,15 @@
 // =============================================================================
 
 #color-blocks-sketch {
-    position: relative;
-    margin-bottom: globals.$spacing-sm;
-    overflow: visible;
+  position: relative;
+  margin-bottom: globals.$spacing-sm;
+  overflow: visible;
 
-    canvas {
-        display: block;
-    }
+  canvas {
+    display: block;
+  }
 
-    z-index: -1;
+  z-index: -1;
 }
 
 // =============================================================================
@@ -190,24 +210,24 @@
 // =============================================================================
 
 .bizCard {
-    // Centered full-viewport layout
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
+  // Centered full-viewport layout
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
 
-    // Typography hierarchy
-    h1 {
-        font-size: 2.8rem;
-        font-weight: normal;
-        margin: -40px 0 0 0;
-    }
+  // Typography hierarchy
+  h1 {
+    font-size: 2.8rem;
+    font-weight: normal;
+    margin: -40px 0 0 0;
+  }
 
-    h2 {
-        font-size: 1.2rem;
-        font-weight: normal;
-        margin-top: -10px;
-    }
+  h2 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    margin-top: -10px;
+  }
 }
