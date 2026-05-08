@@ -41,8 +41,8 @@ I have a really hard time in my own life bridging my more formal and academic pe
 I went through a few iterations:
 - [Pure html/retro style](/gallery/piece/website-designs/retro)
 - [A sticky note theme](https://old.robog.net/)
-- [A bulletin board theme](/gallery/piece/bulletin-board-letters)
-- [An abstract oceanic/3d scene of some kind](/gallery/piece/website-designs/bulletin-board-letters/serene.png)
+- [A bulletin board theme](/gallery/piece/website-designs/bulletin-board-letters)
+- [An abstract oceanic/3d scene of some kind](/gallery/piece/website-designs/serene.png)
 
 After lots of iteration I finally came up with this idea, which is sort of inspired by the old "Simon" toy which has the four corners that light up which you tap in order. I combined that concept and the playful/toy–like nature with an old business card design I had created, which I think meshes the two design goals of this website quite well and I've kept it since. This is the website design that I've stuck with for the longest time and hopefully it will last for years to come.
 
