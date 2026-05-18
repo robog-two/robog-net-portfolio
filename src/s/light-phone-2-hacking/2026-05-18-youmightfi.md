@@ -1,7 +1,7 @@
 ---
 date: 2026-05-18
 time: 12:47PM
-tags: post
+tags: post-light-phone-2-hacking
 snippet: yes
 layout: blog.liquid
 description: yes
