@@ -231,3 +231,29 @@
     margin-top: -10px;
   }
 }
+
+body {
+  background-image: url('/sky.webp');
+  background-size: cover;
+  background-position: 0 0;
+  background-color: transparent;
+  animation: scroll-left 480s linear infinite;
+  z-index: -998;
+}
+
+@keyframes scroll-left {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: -60px 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+
+html {
+  background-color: #ffe9dc;
+}
