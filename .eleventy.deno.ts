@@ -87,7 +87,10 @@ export default (eleventyConfig: EleventyConfig) => {
         "text/html",
       );
 
-      const links = dom.querySelectorAll("a[href$='.pdf']");
+      const links = [
+        ...dom.querySelectorAll("a[href$='.pdf']"),
+        ...dom.querySelectorAll("a[href$='.txt']"),
+      ];
 
       for (const link of links) {
         const href = link.getAttribute("href");
