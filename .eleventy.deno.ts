@@ -75,6 +75,9 @@ export default (eleventyConfig: EleventyConfig) => {
   // Copy license file
   eleventyConfig.addPassthroughCopy("LICENSE.txt");
 
+  // SVG Badges
+  eleventyConfig.addPassthroughCopy("src/badges");
+
   // Add file sizes to PDF links
   eleventyConfig.addTransform("pdf-filesize", async function (content) {
     if (!this.page.outputPath.endsWith(".html")) {
