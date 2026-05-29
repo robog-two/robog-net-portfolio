@@ -200,3 +200,136 @@ footer {
 .image-modal {
   @extend %image-modal;
 }
+
+
+
+@media print {
+  // reset styles thanks to claude haiku 4.5
+  .page-header {
+    h1 {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .header-container {
+    height: auto;
+  }
+
+  main.content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+
+    h2, h3, h4, h5, h6 {
+      margin: 0;
+      padding: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0;
+      }
+    }
+  }
+
+  .post-content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+
+  }
+
+  .content {
+    .snippet-card {
+      padding: 0;
+      margin: 0;
+      border: none;
+
+      .post-header::before {
+        margin: 0;
+      }
+
+      .post-header {
+        margin: 0;
+      }
+    }
+  }
+
+  article.snippet-card {
+    margin: 0;
+  }
+
+  footer {
+    display: none;
+  }
+
+  img {
+    max-width: 100%;
+    width: 100%;
+    margin-left: 0 !important;
+    margin: 0 !important;
+  }
+  // end reset styles, begin my style work
+
+  body {
+    padding-left: 2in;
+    padding-right: 0.5in;
+  }
+
+  .post-content h1 {
+    font-size: 14pt !important;
+  }
+
+  .page-header h1 {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .header-container {
+    height: initial !important;
+    padding-top: 2in !important;
+    padding-bottom: 1in !important;
+    position: relative !important;
+  }
+
+  .page-header.shrunk h1 {
+      font-size: 24pt !important;
+  }
+
+
+  .page-header {
+    min-height: auto !important;
+    font-size: inherit !important;
+    height: initial !important;
+    position: relative !important;
+    display: block;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    background-color: transparent;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .page-header h1::after {
+    content: "By Sam Knight";
+    display: block;
+    font-size: 18pt;
+  }
+
+  .page-navigation {
+    visibility: hidden;
+    display: none;
+  }
+
+  .page-header {
+    text-align: left;
+  }
+}
