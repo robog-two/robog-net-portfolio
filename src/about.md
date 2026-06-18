@@ -16,7 +16,7 @@ I'm working on/providing coding assistance for three different research projects
 
 For my senior project, I'm communicating with faculty in the art and computer science department. My plan is to produce a multimedia art piece blending traditional drawing techniques, interactivity, and data visualization.
 
-![A person with shoulder-length brown hair and glasses is looking towards the camera and smiling. They are wearing a cream quarter zip turtleneck (unzipped). They are sitting at the bottom of the frame. Behind them is a large sculpture, a tall pillar with yellow glass spikes similar to a pine cone. Behind the pillar are several trees with their spring leaves just beginning to grow.](/blog/media/atlbg.png)
+![A person with shoulder-length brown hair and glasses is looking towards the camera and smiling. They are wearing a cream quarter zip turtleneck (unzipped). They are sitting at the bottom of the frame. Behind them is a large sculpture, a tall pillar with yellow glass spikes similar to a pine cone. Behind the pillar are several trees with their spring leaves just beginning to grow.](/blog/media/atlbg.jpg)
 
 <figcaption>Visiting the Atlanta Botanical Gardens.</figcaption>
 
