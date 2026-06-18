@@ -5,14 +5,20 @@ primaryColor: '#ff6fab'
 footer: ''
 navOverrideLink: /
 navOverrideText: Home
-description: Sam Knight (any/all) is a programmer, multimedia digital artist, and queer feminist advocate studying Computer Science at Ithaca College. Their exacting aesthetic sensibilities guide their journey to make precise, impactful, and expansive work everywhere they go.
+description: Sam Knight (any/all) is a values-driven programmer and multimedia digital artist studying Computer Science at Ithaca College.
 ---
 
-_Sam Knight_ (any/all) is a programmer, multimedia digital artist, and queer feminist advocate studying Computer Science at Ithaca College. Their exacting aesthetic sensibilities guide their journey to make precise, impactful, and expansive work everywhere they go.
+I'm interested in values-driven programming. Currently, I work for a nonprofit that uses software to support local bands and music fans in finding, recommending, and sharing information about local artists and music venues.
 
-![A person with shoulder-length brown hair and glasses is looking down at the ground facing the camera. They are wearing a green beanie, a dark blueberry colored shirt, light blue jeans and vans. They have a small keyring clipped into a belt loop, their right hand is in their pocket and their left hand is holding an umbrella with multicolored strawberries printed on it. The image is framed by a forest with a pine tree on the right side (the person's left) and other deciduous trees on the left.](/blog/media/cornell-botanical-gardens.png)
+After college, I'd like to work for a nonprofit that deals with the environment, privacy, open source, the "indie web," or AI trust and safety. If you're part of an organization like this, please feel free to reach out.
 
-<figcaption>Visiting the Cornell botanical gardens.</figcaption>
+I'm working on/providing coding assistance for three different research projects.
+
+For my senior project, I'm communicating with faculty in the art and computer science department. My plan is to produce a multimedia art piece blending traditional drawing techniques, interactivity, and data visualization.
+
+![A person with shoulder-length brown hair and glasses is looking towards the camera and smiling. They are wearing a cream quarter zip turtleneck (unzipped). They are sitting at the bottom of the frame. Behind them is a large sculpture, a tall pillar with yellow glass spikes similar to a pine cone. Behind the pillar are several trees with their spring leaves just beginning to grow.](/blog/media/atlbg.png)
+
+<figcaption>Visiting the Atlanta Botanical Gardens.</figcaption>
 
 # Résumé
 
