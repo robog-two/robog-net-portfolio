@@ -86,8 +86,8 @@ body > footer {
   html {
     background-color: #acbba4;
     background-image:
-      url("./greenliquid.webp"),
-      url("./greenliquid.jpg");
+      url("greenliquid.webp"),
+      url("greenliquid.jpg");
   }
 
   a {

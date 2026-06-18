@@ -5,7 +5,7 @@ import markdownItFootnote from "markdown-it-footnote";
 import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import markdownIt from "markdown-it";
 import { DOMParser } from "@b-fuze/deno-dom";
-import type EleventyConfig from "@11ty/eleventy";
+import type { EleventyConfig, EleventyPage } from "@11ty/eleventy";
 
 // Format file size in human-readable format
 function formatFileSize(bytes: number): string {
@@ -50,7 +50,7 @@ export default (eleventyConfig: EleventyConfig) => {
     return JSON.stringify(Object.keys(content));
   });
 
-  eleventyConfig.amendLibrary("md", (mdLib) => {
+  eleventyConfig.amendLibrary("md", (mdLib: any) => {
     mdLib
       .use(markdownItCheckbox)
       .use(markdownItFootnote);
@@ -62,6 +62,7 @@ export default (eleventyConfig: EleventyConfig) => {
 
   // Gallery pieces are completely static and should not be processed
   eleventyConfig.addPassthroughCopy("src/gallery/piece");
+  eleventyConfig.addPassthroughCopy("src/spheres");
 
   // Copy font files to output
   eleventyConfig.addPassthroughCopy("src/_fonts");
@@ -79,7 +80,10 @@ export default (eleventyConfig: EleventyConfig) => {
   eleventyConfig.addPassthroughCopy("src/badges");
 
   // Add file sizes to PDF links
-  eleventyConfig.addTransform("pdf-filesize", async function (content) {
+  eleventyConfig.addTransform("pdf-filesize", async function (
+      this: { page: EleventyPage },
+      content: string
+  ): Promise<string> {
     if (!this.page.outputPath.endsWith(".html")) {
       return content;
     }
