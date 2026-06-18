@@ -1,7 +1,7 @@
 ---
 date: 2026-05-18
 time: 12:47PM
-tags: post-light-phone-2-hacking
+tags: post-digital-minimalism
 snippet: yes
 layout: blog.liquid
 description: yes
