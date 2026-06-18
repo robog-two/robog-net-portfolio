@@ -12,6 +12,22 @@ description: My personal art gallery. Currently working on the "What Grows" seri
 
 <section class="gallery-item">
 
+## Drawings
+
+![A piece of cloth pinned up against a wall, rendered in charcoal](/gallery/piece/drawings/SamKnightHomework04FabricStudy.JPG)
+
+_Medium:_ Various. Charcoal, pen, graphite.
+
+_Created:_ January 2026 - May 2026
+
+A portfolio of various drawings I did in class.
+
+[View Piece →](/gallery/piece/drawings)
+
+</section>
+
+<section class="gallery-item">
+
 ## Herb Journey
 
 ![A leaf of parsley flapping its wings like a butterfly goes through a city towards the sunset](/blog/media/herb-journey-thumb.png)
