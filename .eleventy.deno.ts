@@ -29,8 +29,8 @@ export default (eleventyConfig: EleventyConfig) => {
 
   // Add image optimization plugin
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    formats: ["webp", "avif", "svg"],
-    widths: ["240", "480", "760", "1280", null],
+    formats: ["webp", "svg"],
+    widths: ["1280", null],
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
