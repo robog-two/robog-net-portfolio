@@ -1,8 +1,9 @@
 const scl = 10;
 let wingRot = 0;
 
-const bpm = 118*4;
+const bpm = 118 * 4;
 
+let music = undefined;
 let timeAdjust = bpm / 60 / 1000;
 let timeAdjustSine = timeAdjust * 3.14159265359;
 
@@ -43,11 +44,16 @@ function setup() {
       city[row][col] = randomizeHeight();
     }
   }
-  
+
   for (let i = 0; i < boidCount; i++) {
     boids.push({});
-    boids[i].pos = createVector((random(20) - 10) * scl, (random(20) - 30) * scl, random(20 * scl));
-    boids[i].vel = createVector(random(-1, 1),random(-1, 1),random(-1, 1)).normalize();
+    boids[i].pos = createVector(
+      (random(20) - 10) * scl,
+      (random(20) - 30) * scl,
+      random(20 * scl),
+    );
+    boids[i].vel = createVector(random(-1, 1), random(-1, 1), random(-1, 1))
+      .normalize();
   }
 }
 
@@ -62,7 +68,7 @@ function draw() {
     0,
     0,
     1,
-    0
+    0,
   );
   perspective(2 * atan(height / 2 / 800), width / height, 0.01, 220 * scl);
   //orbitControl();
@@ -90,8 +96,8 @@ function draw() {
   plane(300 * scl);
   ambientMaterial(255);
   rotateX(-HALF_PI);
-  
-  cityTravelDist += 1
+
+  cityTravelDist += 1;
   if (cityTravelDist > blockScl * scl) {
     cityTravelDist = 0;
     city.shift();
@@ -100,7 +106,7 @@ function draw() {
       city[city.length - 1][col] = randomizeHeight();
     }
   }
-  
+
   translate(0, 0, -cityTravelDist);
 
   translate((city[0].length / -2) * scl * blockScl, 0, -2 * scl * blockScl);
@@ -116,7 +122,7 @@ function draw() {
     }
   }
   translate((city[0].length / 2) * scl * blockScl, 0, 2 * scl * blockScl);
-  
+
   translate(0, 0, cityTravelDist);
 
   push();
@@ -127,7 +133,7 @@ function draw() {
   translate(0, 4 * scl, scl / -2);
   renderParsley();
   pop();
-  
+
   updateBoids(boids, 200 * scl);
   for (let boid of boids) {
     push();
@@ -137,4 +143,16 @@ function draw() {
     renderParsley();
     pop();
   }
+
+  if (music && music.isLoaded() && !music.isPlaying()) {
+    try {
+      music.play();
+    } catch (_) {
+      //ignore
+    }
+  }
+}
+
+function mousePressed() {
+  music = loadSound("chive.mp3");
 }
