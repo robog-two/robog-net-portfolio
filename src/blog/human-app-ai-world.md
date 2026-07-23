@@ -5,6 +5,15 @@ date: 2026-07-23
 tags: post
 description: yes
 ---
+
+<section id="slideViewer">
+<img src=""></img>
+</section>
+
+
+![How to make a very human app in a very artificial world](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.001.png)
+
+
 Hi, my name is Sam Knight. My recent research project is titled "Designing an App for Recommending Local Music." Or, to put it another way, I'm figuring out how to make a very human app in a very artificial world.
 
 This work was done with my faculty advisor, Dr. Doug Turnbull, and with assistance from Fisher Griesel and Abe Manfra.
@@ -160,3 +169,6 @@ Thank you.
 *This research was funded by Ithaca College as part of the Summer Scholars program.*
 *An early draft of this post was created with an LLM from an audio recording of a live presentation.*
 *Scroll animations were developed with the assistance of Claude Sonnet 5.*
+
+<script src="/_scripts/slide-viewer.js" defer></script>
+<link rel="stylesheet" href="/_styles/slide-viewer.css">

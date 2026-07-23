@@ -1,0 +1,95 @@
+#slideViewer {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  #slideViewer img {
+    // stack images for slide transitions
+    position: absolute;
+    // 1/2 of the screen minus half the height of the slide, which is a 16:9 ratio, and we know the width.
+    top: calc((100vh / 2) - (((100vw - 518px) / (16/9)) / 2));
+    right: 0;
+
+    width: calc(100vw - 518px);
+    height: calc((100vw - 518px) / (16/9));
+
+    transition: opacity 0.1s ease-in-out;
+
+    // reset other css from regular blog post
+    transform: none;
+    filter: none;
+    box-shadow: none;
+    margin: 0;
+  }
+
+  #slideViewer img.transitioning {
+    opacity: 0;
+    z-index: 999;
+  }
+
+  #slideViewer {
+    display: block;
+    position: fixed;
+    top:0;
+    right:0;
+    height: calc(100vh);
+    width: calc(100vw - 518px);
+  }
+
+  #slideViewer::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: calc(100vh);
+    width: calc(100vw - 518px);
+    background-color: black;
+    z-index: -999;
+  }
+
+  .content,.post-content {
+    margin-left: 0;
+    padding-left: 0;
+    width: 500px;
+  }
+
+  .post-content {
+    padding-left: 15px;
+  }
+
+  .post-content img {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .page-header {
+    width: 518px;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .page-navigation {
+    top: 20px;
+  }
+
+  .page-header.shrunk .page-navigation {
+    top: 50%;
+  }
+
+  .page-header.shrunk h1 {
+    font-size: 1rem;
+    text-align: right;
+    padding-right: 0;
+  }
+
+  footer {
+    width: 518px;
+  }
+
+  main.content,.page-content,body,html {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+}
