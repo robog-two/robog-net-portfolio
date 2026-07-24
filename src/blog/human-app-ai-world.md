@@ -7,20 +7,22 @@ description: yes
 ---
 
 <section id="slideViewer">
-<img src=""></img>
+<img src="" style="display:none"></img>
 </section>
 
 
 ![How to make a very human app in a very artificial world](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.001.png)
 
+*This blog post is adapted from a keynote. It is best viewed on a desktop computer.*
 
 Hi, my name is Sam Knight. My recent research project is titled "Designing an App for Recommending Local Music." Or, to put it another way, I'm figuring out how to make a very human app in a very artificial world.
 
 This work was done with my faculty advisor, Dr. Doug Turnbull, and with assistance from Fisher Griesel and Abe Manfra.
 
-Before I get started, I'd like to address the *artificial intelephant* in the room.
 
 ![Let's address the artificial intelephant in the room](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.002.png)
+
+Before I get started, I'd like to address the *artificial intelephant* in the room.
 
 This pie chart is from Quinnipiac University, and it represents whether people believe AI is more beneficial or more harmful to society.
 
@@ -28,11 +30,7 @@ This pie chart is from Quinnipiac University, and it represents whether people b
 
 You see this larger blob, which is 55% of respondents saying AI does more harm than good overall. Then you have this smaller circle, which is 33%, saying AI causes more benefit than harm. And of course you have this undecided circle. (12%)
 
-So which one am I?
-
-![Which one am I?](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.004.png)
-
-I would say let's challenge the premise.
+So which one am I? I would say let's challenge the premise.
 
 ![Challenge the premise](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.005.png)
 
@@ -70,21 +68,21 @@ What if we could take this concept and generalize it, create a "magic black box,
 
 We could pull in data from everywhere, and I mean literally everywhere: community calendars, local radio stations, posters on a lamppost, on a street corner, social media like an artist's Instagram or newsletters from local fans, news websites, the artist's website directly, and of course every streaming service under the sun, YouTube, Deezer, Bandcamp, Spotify, SoundCloud. We could combine all of that and cross-reference everything to get the data we actually want. We would know that Artist X is from Place Y (they're local), they play music that sounds like Z, and because they play music that sounds like Z and you like Z, you'd probably like them a lot.
 
-Here are some examples of the kind of data it was basically my dream to import into our system.
-
 ![Examples of data sources](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.011.png)
 
-Through some technological advances and a lot of work — some of which my colleagues have presented posters about, like processing show posters automatically to intake event data — we've created this magic black box.
+Here are some examples of the kind of data I'm talking about. Previously, it was basically my dream to import into our system, but it just wasn't possible to do with the existing OCR technology and manual text parsing.
+
+However, thanks to advances in machine learning and a lot of work—some of which my colleagues have presented posters about, like processing show posters automatically to intake event data—we've created this magic black box.
 
 So what's inside our magic black box?
 
 ![What's in there?](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.012.png)
 
-It's a large language model...
+It's just a large language model.
 
 ![It's a large language model](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.014.png)
 
-...and a lot of SQL queries.
+Well, and a lot of SQL queries that aggregate the data to produce a unified result for each kind of entity, like events or artists.
 
 ![And a lot of SQL queries](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.015.png)
 
@@ -98,7 +96,7 @@ For example, we had one of our users send us a signed letter about refusing to b
 
 ![Wikipedia: Criticism of Spotify](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.017.png)
 
-This is the Wikipedia page for criticism of Spotify, and you'll notice it's gigantic — because, like I said, these artists are very entrenched in the art world. They're very favorable toward copyright, and very protective of their work and of the things they spend their lives producing.
+This is the Wikipedia page for criticism of Spotify, and you'll notice it's gigantic—because, like I said, these artists are very entrenched in the art world. They're very favorable toward copyright, and very protective of their work and of the things they spend their lives producing.
 
 We also sometimes hear environmental arguments from the AI crowd.
 
@@ -120,7 +118,7 @@ That brings me to the results of the user interviews we did, which has informed 
 
 What was most unexpected was our user's high standards of safety and privacy. These are people who care about being protected from others interested in their data. For example, if you know someone is going to a local venue at a certain time, you now know exactly where they'll be. That could be dangerous if a bad actor were trying to find this person in real life. So even though it seems innocuous, something like "I'm going to be at the show on Friday" can be very private information depending on who it's shared with.
 
-These people are also very frugal, creative, adaptable, and pragmatic. So we're looking at how to make local music more accessible and more affordable — how to make sure you know the price of a show, since sometimes you show up and have no idea what it costs. We've been working on incorporating different APIs and data sources so we can crowdsource that kind of pricing information from people who've already been to the show.
+These people are also very frugal, creative, adaptable, and pragmatic. So we're looking at how to make local music more accessible and more affordable. We looked at how to find the price of a show, since sometimes you show up and have no idea what it costs. We've been working on incorporating different APIs and data sources so we can crowdsource that kind of pricing information from people who've already been to the show.
 
 I've been talking about leveraging large language models within our system, but I haven't talked much about using them to create the systems with agentic programming. Given all this user research, you might think we could simply plug it into a coding agent and have it build the app. Right?
 

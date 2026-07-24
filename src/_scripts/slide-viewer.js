@@ -21,6 +21,7 @@ function updateSlideViewer() {
       currentSrc = currentImage.src;
 
       const next = viewer.cloneNode(true);
+      next.style.display = "block";
       next.src = currentImage.src;
       next.alt = currentImage.alt;
       container.appendChild(next);
