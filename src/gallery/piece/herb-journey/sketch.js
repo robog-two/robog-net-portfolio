@@ -154,5 +154,5 @@ function draw() {
 }
 
 function mousePressed() {
-  music = loadSound("chive.mp3");
+  music = music ?? loadSound("chive.mp3");
 }
