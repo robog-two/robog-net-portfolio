@@ -161,6 +161,27 @@
       transform: scale(globals.$hover-scale);
     }
   }
+
+  // Multiple images typed on one markdown line land as sibling <img>s
+  // inside a single <p> — lay those out as a grid instead of stacking.
+  p:has(img + img) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: globals.$spacing-md;
+    margin: globals.$spacing-xl 0;
+
+    img {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+
+      @media (min-width: 768px) {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
 }
 
 // Post content styling with theme color

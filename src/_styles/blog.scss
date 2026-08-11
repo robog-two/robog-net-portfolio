@@ -53,6 +53,8 @@
   }
 
   .snippet-card {
+    @include shared.post-images;
+
     font-family: globals.$text-font-stack;
     padding-left: 1.5rem;
     padding-right: 1rem;
