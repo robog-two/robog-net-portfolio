@@ -21,6 +21,8 @@
   @include shared.post-content(globals.$color-primary);
   // Override from mixin
   max-width: 1200px !important;
+
+  padding: 2px;
 }
 
 section.series-header {
@@ -93,17 +95,22 @@ section img {
 
 section.gallery-item {
   @extend %card-content;
+
+  max-width: 100%;
+
   border-color: globals.$color-primary;
 
   h2 {
     text-align: center;
+    max-width: 100%;
   }
 
   // Medium/category information
   em {
     color: globals.$color-primary;
     font-weight: bold;
-    display: inline;
+    display: inline-block;
+    max-width: 100%;
     margin-bottom: globals.$spacing-md;
   }
 

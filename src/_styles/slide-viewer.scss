@@ -7,11 +7,15 @@
     // stack images for slide transitions
     position: absolute;
     // 1/2 of the screen minus half the height of the slide, which is a 16:9 ratio, and we know the width.
-    top: calc((100vh / 2) - (((100vw - 518px) / (16/9)) / 2));
+    top: calc(max(0px, (100vh / 2) - (((100vw - 530px) / (16/9)) / 2)));
     right: 0;
 
-    width: calc(100vw - 518px);
-    height: calc((100vw - 518px) / (16/9));
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
 
     transition: opacity 0.1s ease-in-out;
 
@@ -33,7 +37,7 @@
     top:0;
     right:0;
     height: calc(100vh);
-    width: calc(100vw - 518px);
+    width: calc(100vw - 530px);
   }
 
   #slideViewer::before {
@@ -42,9 +46,11 @@
     top: 0;
     right: 0;
     height: calc(100vh);
-    width: calc(100vw - 518px);
+    width: calc(100vw - 530px);
     background-color: black;
     z-index: -999;
+    margin:0;
+    padding:0;
   }
 
   .content,.post-content {

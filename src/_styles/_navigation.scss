@@ -120,7 +120,7 @@
 .content {
   max-width: globals.$content-max-width;
   margin: 0 auto;
-  padding: globals.$content-padding;
+  padding: globals.$content-padding 2px;
 
   // Typography hierarchy for markdown content
   h2 {
