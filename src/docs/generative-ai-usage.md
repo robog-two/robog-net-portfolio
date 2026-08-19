@@ -7,7 +7,7 @@ tags:
 
 **This document is an outline of my personal best practices and beliefs when incorporating Generative AI into my work.**
 
-In a stark contrast to [Satya Nadella of Microsoft](https://snscratchpad.com/posts/looking-ahead-2026/), I won't beat around the bush. There *is* a real problem with the prevalence of so-called "AI slop"[^1] on the internet today. I'm someone who has always advocated for user privacy, open source, and using technology as a means to enable human joy and well-being. It is clear to me that the current state of Generative AI usage across the Fortune 500 and the internet broadly is increasingly negative and problematic. In this document, I'd like to outline my own policy on using Generative AI, with several core axioms[^2] and reasoning behind each.
+There is a real problem with the prevalence of so-called "AI slop"[^1] in our world today. I'm someone who has always advocated for user privacy, open source, and using technology as a means to enable human joy and well-being. It is clear to me that the current state of Generative AI usage across the Fortune 500 and the internet broadly is increasingly negative and problematic. In this document, I'd like to outline my own policy on using Generative AI, with several core axioms[^2] and reasoning behind each.
 
 This isn't a legally binding document or contract, and my stance on the correct way to incorporate this emerging technology according to my own moral principles is evolving—sometimes I use it wrong, too. However, I think it's important to hold myself accountable, and if you notice older code that appears to be generated without disclosure or contains LLM-created fabrications, please [reach out to me personally](https://robog.net/about) and I will make an effort to correct it.
 
@@ -46,11 +46,11 @@ I don't want to under– or oversell the environmental impact of large language 
 
 There is a clear solution to both of these problems: Use smaller, more efficient models, and host them on personally owned infrastructure. The technology needed to achieve this is complex, because smaller models often require clever inclusion of context (i.e. Retrieval Augmented Generation), or very fine-tuned prompting. However, the advantages of privacy and efficiency are clearly worth the additional design effort.
 
-## Final Note on AI "Art"
+## Final Note on "AI Art"
 **I do not and will not use or publish AI generated images or video in my work. Period.**
-When I need art assets and I cannot create them myself, I will often consult permissively licensed or copyleft media sources, like the Library of Congress or Wikimedia Commons, giving attribution as the license requires. While I don't agree with the way that people talk about AI generated art—it is mostly through a framework of copyright law, which in general tends to support the rights of large media conglomerates and not small creators—I still think it is important to recognize that the technology is both bad for the environment and has been developed quite unethically, and most proponents of AI "art" detest actual artists and their livelihoods. I sort of feel about AI art the same way I feel about Cryptocurrency: Cool math, not so cool intended purpose.[^3]
+When I need art assets and I cannot create them myself, I will often consult permissively licensed or copyleft media sources, like the Library of Congress or Wikimedia Commons, giving attribution as the license requires. While I don't agree with the way that people talk about AI generated art—it is mostly through a framework of copyright law, which in general tends to support the rights of large media conglomerates and not small creators—I still think it is important to recognize that the technology has a larger energy footprint than LLMs, and most proponents of "AI art" detest actual artists and their livelihoods. I sort of feel about AI art the same way I feel about Cryptocurrency: Cool math, not so cool intended purpose.[^3]
 
-At the end of the day, I want to create things that are joyful and useful. Sometimes large language models support this goal, and sometimes they come into conflict with it. My hope is that the axioms outlined in this document make it clear that I put a lot of thought into how and when I choose to include this powerful new technology in my own projects.
+At the end of the day, I want to create things that are fun to use and actually productive. Sometimes large language models support this goal, and sometimes they come into conflict with it. My hope is that the axioms outlined in this document make it clear that I put a lot of thought into how and when I choose to include this powerful new technology in my own projects.
 
 I hope you find them joyful and useful.
 
