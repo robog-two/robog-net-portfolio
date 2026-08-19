@@ -105,7 +105,7 @@
     filter: invert(1);
   }
 
-  a[href$=".pdf"] {
+  a[href$=".pdf"],a[href$=".txt"],a[href$=".mp3"] {
     padding-right: 5px;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -114,7 +114,7 @@
     text-decoration: none;
   }
 
-  a[href$=".pdf"]::before {
+  a[href$=".pdf"]::before,a[href$=".txt"]::before,a[href$=".mp3"]::before {
     content: "";
     display: inline-block;
     height: 12px;
