@@ -13,6 +13,8 @@ This isn't a legally binding document or contract, and my stance on the correct 
 
 # 1. The usage of Generative AI should be *disclosed*.
 
+*Badges I designed that disclose authorship. You might have been linked here by clicking on one of them.*
+
 I feel like this principle makes sense in the context of my other values. I believe that collection of private user data should be disclosed, I believe that the source code of software we use should be disclosed, and I believe that the practices and thoughts behind that development should be disclosed. Sharing information is part of creating an equitable world. When we are informed we have agency, we can choose where to put our time and effort, what we can trust, and who we can count on.
 
 I expect that some people will see a Generative AI disclosure and immediately turn the other way. I think that's okay, in the same way that I think it's okay that some people choose not to use social media, or some people choose not to eat meat. Everyone has their own preferences and beliefs, and they should be allowed to live according to those standards. *They cannot make this choice for themselves when reading or interacting with content created by Generative AI that has not been disclosed*.
@@ -57,9 +59,9 @@ I hope you find them joyful and useful.
 Best,<br/>
 Sam
 
-<p style="text-align: center; margin-top: 50px; margin-bottom: 120px; width: 100%;">//////////// 🫀 ////////////</p>
+<img alt="An ink drawing of a hand presents a floating '100%' label that is glowing indicated by tick marks around it." src="/badges/byhand-large.svg" style="margin: 4rem auto 6rem auto; width: 120px; height: auto; filter: none; box-shadow: none;"></img>
 
-<p style="text-align: center; margin-bottom: 350px; width: 100%;">Originally written on January 9th, 2026 after long deliberation and discussions with friends and those close to me.<br/><br/>This document was not created by Generative AI.<br/>Claude Sonnet 4.5 and Gemma 3 were consulted for feedback on the prose and structure of initial drafts, but no text visible here was output by an LLM.<br/>I would know, I can feel my carpal tunnels.</p>
+<p style="margin-bottom: 350px; width: 100%;">Originally written on January 9th, 2026 in response to <a href="https://snscratchpad.com/posts/looking-ahead-2026/">this blog post by Satya Nadella</a>, CEO, Microsoft.<br/><br/>This document was not created by Generative AI.<br/>Claude Sonnet 4.5 and Gemma 3 were consulted for feedback on the prose and structure of initial drafts, but no text visible here was output by an LLM.<br/>I would know, I can feel my carpal tunnels.</p>
 
 
 *Footnotes:*
