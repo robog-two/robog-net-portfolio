@@ -61,7 +61,7 @@ you even think about writing the application.
 
 # 2. Talk to everyone!
 
-"Networking" is such a terrible word. It is basically a zhuzhed-up word that means 
+"Networking" is such a terrible word. It is basically a zhuzhed-up way to say
 "talking." You are already networking all the time without realizing it. All the social 
 events you go to, all of the birthday parties, movies, plays... All of these are great 
 opportunities to network. Especially if you are a 20-something-college-student, you are 
