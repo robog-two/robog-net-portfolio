@@ -39,7 +39,6 @@ method for finding work you love is about setting yourself up to find people, gi
 them an opportunity to reach out to you, and having a place to give prospective 
 recruiters a way to understand who you are and what you stand for.
 
-
 # 1. The best jobs are the kind that come looking for you.
 
 In my college career, the best job offers I've gotten have come from my "weak ties." 
@@ -57,7 +56,6 @@ accepted with his recommendation.
 The moral of this story is that you should tell people the kind of jobs that you want. 
 Especially people in your field/department. This is where the vast majority of 
 opportunities come from. 
-
 
 # 2. Talk to everyone!
 
@@ -85,16 +83,6 @@ information. Instead of sending e-mails like "hi :)" they will send you e-mails 
 :)" e-mail, I am making the Mr. Krabs dollar sign eyes when I get the second e-mail. You 
 will be surprised how well this strategy works. I definitely was (that second e-mail was 
 real, by the way!)
-
-
-[^1]: Your business card should definitely have your email. You might also want to organize
-it by "interest," for example, mine lists my tag line, then my contact information, then
-a link to my art portfolio, then a link to my code examples on GitHub. Imagine different
-questions people might ask, and what you might point to on the card as the best way to
-find out more about this aspect of your work. You can also see [my business card design](/s/2026-05-06-businessca/) and adapt it as you
-see fit. Like everything else I've created on this site it is licensed under CC0, no strings
-attached.
-
 
 # 3. Show me the real *you*.
 
@@ -137,7 +125,7 @@ price of your domain. One of the ones that comes to mind is Porkbun.
 
 Once you have a basic website, you can expand it with a portfolio, about pages, blog 
 posts, and anything else you can think of. Then, you can show off who you really are, 
-and all of the work you do that isn't necessarily re'sume' (add diacritics) 
+and all of the work you do that isn't necessarily résumé 
 worthy.
 
 And remember, it doesn't need to be perfect. You don't even need to think it's good. I 
@@ -148,7 +136,6 @@ it is just a short description and a link to your resume and portfolio.
 
 You will be not just the boss of your own place on the .net, you will be *The Boss* 
 when people look at your website and see how cool it is. Try it!
-
 
 # You got this!
 
@@ -171,8 +158,13 @@ towards it, and not just treading water.
 
 Please [let me know](https://robog.net/about) how it goes! You got this!
 
-
-
+[^1]: Your business card should definitely have your email. You might also want to organize
+it by "interest," for example, mine lists my tag line, then my contact information, then
+a link to my art portfolio, then a link to my code examples on GitHub. Imagine different
+questions people might ask, and what you might point to on the card as the best way to
+find out more about this aspect of your work. You can also see [my business card design](/s/2026-05-06-businessca/) and adapt it as you
+see fit. Like everything else I've created on this site it is licensed under CC0, no strings
+attached.
 
 [^2]: Of course,
 take this advice with a grain of salt and remember to have back-up plans. Don't spend
