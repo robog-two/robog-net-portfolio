@@ -43,8 +43,12 @@ export default (eleventyConfig: EleventyConfig) => {
     return markdownIt({ html: true }).render(content);
   });
   eleventyConfig.addFilter("excerpt", function (content = "") {
-    return htmlToText(markdownIt({ html: true }).render(content)).slice(0, 200)
-      .replace(/\.+$/, "").replace(/\s\w+$/, "") + "…";
+    return htmlToText(markdownIt({ html: true }).render(content))
+      .replace(/\s+/g, " ") /* bug fix: convert line breaks to preserve spacing */
+      .trim().slice(0, 200)
+      .replace(/\s+\w+$/, "") /* remove last cut-off word chunk */
+      .replace(/[\.\,\-\—\;\:]+\s*$/, "") /* remove last punctuation/spacing after cutoff */
+      + "…";
   });
   eleventyConfig.addFilter("keys", function (content = {}) {
     return JSON.stringify(Object.keys(content));
@@ -150,8 +154,9 @@ export default (eleventyConfig: EleventyConfig) => {
 
 function htmlToText(html: string) {
   //remove code brakes and tabs
-  html = html.replace(/\n/g, "");
-  html = html.replace(/\t/g, "");
+  // soft line breaks separate words, so they become spaces
+  html = html.replace(/\n/g, " ");
+  html = html.replace(/\t/g, " ");
 
   //keep html brakes and tabs
   html = html.replace(/<\/td>/g, " ");
