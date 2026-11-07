@@ -394,8 +394,9 @@ function adjustColor() {
 }
 
 function keyPressed() {
-  // M mutes or unmutes instead of dropping a block (WCAG 1.4.2)
-  if (key === "m" || key === "M") {
+  // Once the game has started, M mutes or unmutes instead of dropping a
+  // block (WCAG 1.4.2). Before that, M starts the game like any other key.
+  if (full && (key === "m" || key === "M")) {
     muted = !muted;
     outputVolume(muted ? 0 : 1);
     return;

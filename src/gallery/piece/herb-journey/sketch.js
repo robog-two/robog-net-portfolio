@@ -164,6 +164,14 @@ function toggleMute() {
 }
 let muted = false;
 
+// M starts the sound the same way a click does, so keyboard users can
+// hear the piece too. Once it's playing, M mutes and unmutes.
 function keyPressed() {
-  if (key === "m" || key === "M") toggleMute();
+  if (key !== "m" && key !== "M") return;
+  if (!(music)) {
+    userStartAudio();
+    mousePressed();
+  } else {
+    toggleMute();
+  }
 }
