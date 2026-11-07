@@ -33,6 +33,28 @@ The design has a good base: the body text has strong contrast (`#0d0748` on `#ff
 | 🟠 Moderate | 9 | Low-contrast text, filename alt text, empty "Apps" link, multiple `<h1>`s, untitled iframe, horizontal scrolling at 320px |
 | 🟡 Minor / best practice | 8 | Interactive art pieces with no title or text alternative, pinch-zoom disabled, `<a>` with no `href` |
 
+## Fix status (updated 2026-11-07)
+
+All 23 items below have been fixed, except where noted. After the fixes:
+
+- **axe-core reports 0 violations on all 37 pages** (WCAG 2.0/2.1/2.2 A and AA plus best-practice rules). It found 10 rule failures before.
+- **The pages look the same.** Every page was screenshotted at 1280px and 390px before and after, then compared pixel by pixel. Every content heading keeps its exact font, size, margins and position. The only intended visual changes are the darker text from #7 and the removal of sideways scrolling from #12.
+
+How the headings were fixed without touching the markdown: the build step (`demoteContentHeadings` in `.eleventy.deno.ts`) shifts every heading inside `<main>` down one level and records the original level in `data-md-level`. The Sass helper `h()` in `_styles/_globals.scss` then matches headings by that original level, so a markdown `#` still looks like it always did, but it's now an `<h2>` under the page's single `<h1>`.
+
+Known differences and limits:
+- Pages now render in standards mode instead of quirks mode. CSS adjustments reproduce the old spacing everywhere except two spots:
+  - On the AI-usage doc, at phone width, a footnote marker wraps onto its own line, and that line is about 10px taller.
+  - On the slm docs page, one line holding only inline code sits 1px lower.
+- The decorative green "Apps" corner no longer shows a pointer cursor on hover, because it isn't a link any more.
+- #20 (a typed note option for Passing Notes) was not added, because it would change the page's look. The email link on the About page remains the accessible way to get in touch.
+- New behaviors that only show up for the people who need them:
+  - A "Skip to content" link and a homepage "Pause animations" button, both visible only on keyboard focus.
+  - The homepage corner triangles now also grow when focused with the keyboard.
+  - Press M to mute the art pieces.
+  - The homepage cubes and sky start paused for anyone with "reduce motion" turned on.
+- The build also had a race: file-size labels such as "103kb" sometimes disappeared or showed "0b", because sizes were read from `public/` before the files were copied there. Sizes are now read from the source files, so the labels always appear.
+
 ---
 
 ## 🔴 Critical / serious

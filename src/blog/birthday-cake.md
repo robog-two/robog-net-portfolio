@@ -12,6 +12,6 @@ The cake is adapted from a [NYT recipe](https://cooking.nytimes.com/recipes/1018
 
 🐿️
 
-<iframe src="/blog/media/baffling_blueberry_birthday_cake_recipe.pdf" style="width: 100%; aspect-ratio: 11/20"></iframe>
+<iframe title="Baffling blueberry birthday cake recipe (PDF)" src="/blog/media/baffling_blueberry_birthday_cake_recipe.pdf" style="width: 100%; aspect-ratio: 11/20"></iframe>
 
 If you have any trouble baking or any tweaks, please shoot me an email and I will update the recipe as soon as I can.

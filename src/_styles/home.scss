@@ -47,7 +47,8 @@
   );
 
   @at-root {
-    .corner-nav#{$class}:hover .triangle-bg {
+    .corner-nav#{$class}:hover .triangle-bg,
+    .corner-nav#{$class}:focus-visible .triangle-bg {
       --#{$angle}-cprop: #{$color};
     }
 
@@ -104,8 +105,9 @@
     padding-top: calc(-#{globals.$nav-label-size} / 2);
   }
 
-  // Hover effects for triangle expansion
-  &:hover {
+  // Hover (and keyboard focus) effects for triangle expansion
+  &:hover,
+  &:focus-visible {
     color: globals.$primary-text;
     z-index: 400 !important;
 
@@ -225,7 +227,7 @@
     margin: -40px 0 0 0;
   }
 
-  h2 {
+  .tagline {
     font-size: 1.2rem;
     font-weight: normal;
     margin-top: -10px;
@@ -256,4 +258,32 @@ body {
 
 html {
   background-color: #ffe9dc;
+}
+
+// =============================================================================
+// MOTION CONTROL
+// =============================================================================
+
+// Paused by the "Pause animations" button or prefers-reduced-motion
+.motion-paused body {
+  animation-play-state: paused;
+}
+
+// Only visible while it has keyboard focus
+.motion-toggle {
+  position: fixed;
+  bottom: globals.$spacing-md;
+  left: 50%;
+  z-index: 600;
+  padding: globals.$spacing-xs globals.$spacing-md;
+  font: bold 1rem globals.$font-stack;
+  color: globals.$primary-text;
+  background: globals.$page-background-color;
+  border: globals.$border-width solid globals.$primary-text;
+  cursor: pointer;
+  transform: translate(-50%, 300%);
+
+  &:focus {
+    transform: translate(-50%, 0);
+  }
 }

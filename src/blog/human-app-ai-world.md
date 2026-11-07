@@ -6,8 +6,8 @@ tags: post
 description: yes
 ---
 
-<section id="slideViewer">
-<img src="" style="display:none"></img>
+<section id="slideViewer" aria-hidden="true">
+<img src="" alt="" style="display:none"></img>
 </section>
 
 
@@ -26,7 +26,7 @@ Before I get started, I'd like to address the *artificial intelephant* in the ro
 
 This pie chart is from Quinnipiac University, and it represents whether people believe AI is more beneficial or more harmful to society.
 
-![Artificial Intelligence Opinion Survey](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.003.png)
+!["Artificial Intelligence" Opinion Survey: a pie chart from TechCrunch and Quinnipiac University, 2026. 55% say AI does more harm than good, 33% say more good than harm, and 12% are undecided](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.003.png)
 
 You see this larger blob, which is 55% of respondents saying AI does more harm than good overall. Then you have this smaller circle, which is 33%, saying AI causes more benefit than harm. And of course you have this undecided circle. (12%)
 
@@ -44,7 +44,7 @@ We should be informed, but we should look at it on a case-by-case basis. For the
 
 With that out of the way, I'd like to go into a history of local music apps that my team and I have been working on.
 
-![Local Music Apps: A History](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.007.png)
+![Local Music Apps: A History. A line drawing of a long dachshund wearing headphones](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.007.png)
 
 I joined this project only a year ago, and it had been around for several years before me, and there's been a lot of research in this field in general. I work for a nonprofit that creates an app that recommends local music to people. It kind of depends on what your definition of "local" is, but for me personally, local music is the kind of bands you can go see on the weekend that are just in your town. It's very accessible, and oftentimes it's people you know. It's part of your community.
 
@@ -54,7 +54,7 @@ Our previous app, Localify.org, provided a website that looks familiar if you've
 
 Here's what the architecture formerly looked like.
 
-![Architecture of Localify.org](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.009.png)
+![Local Music Apps: A History. Figure 2, Architecture of Localify.org: artist origin data from Wikipedia, event data from BandsInTown and artist data from Spotify and Last.fm feed local artist candidates and an artist similarity matrix. Together with the user's location and seed artists, a recommendation algorithm produces a ranked list of local artists](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.009.png)
 
 You can see at the top there are basically three or four different websites where we got information from. These were hardcoded. We didn't have anything that wasn't an API we had applied for or paid for. And the data goes to very specific places within our application: you see this big box in the middle, and all of that data from these APIs just goes to specific points in the process. From Wikipedia, we'd get data about where artists are from. From BandsInTown, we'd get information about their events. From Spotify, we'd get information about the artists themselves, like their picture or an audio preview.
 
@@ -68,7 +68,7 @@ What if we could take this concept and generalize it, create a "magic black box,
 
 We could pull in data from everywhere, and I mean literally everywhere: community calendars, local radio stations, posters on a lamppost, on a street corner, social media like an artist's Instagram or newsletters from local fans, news websites, the artist's website directly, and of course every streaming service under the sun, YouTube, Deezer, Bandcamp, Spotify, SoundCloud. We could combine all of that and cross-reference everything to get the data we actually want. We would know that Artist X is from Place Y (they're local), they play music that sounds like Z, and because they play music that sounds like Z and you like Z, you'd probably like them a lot.
 
-![Examples of data sources](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.011.png)
+![Examples of data sources: a collage of a Spotify artist page, show posters for local bands, a concert calendar newsletter, a community events calendar, and a YouTube music video](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.011.png)
 
 Here are some examples of the kind of data I'm talking about. Previously, it was basically my dream to import into our system, but it just wasn't possible to do with the existing OCR technology and manual text parsing.
 
@@ -100,13 +100,13 @@ This is the Wikipedia page for criticism of Spotify, and you'll notice it's giga
 
 We also sometimes hear environmental arguments from the AI crowd.
 
-![Environmental concerns](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.018.png)
+![Is this evil? "Datacenter pollution is necessary because... AI will cure cancer!" ... but will it?](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.018.png)
 
 On one hand, people say AI uses a lot of water; on the other hand, people who create AI models often say data-center pollution is necessary because AI is going to cure cancer and create huge scientific benefits that outweigh the costs. But the problem is we haven't seen it outweigh the cost so far. We haven't seen AI cure cancer. We haven't seen AI music that is incredibly interesting and captivating and tells a story that otherwise couldn't be told by a human. We haven't seen AI art created by a generative model that has the same emotional connection and transformative power as something produced by humans.
 
 So I think it's definitely a balance.
 
-![Ethical considerations for our magic black box](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.019.png)
+![Is this evil? Our Magic Black Box surrounded by our safeguards: supports independent artists, human moderation, source attribution, nonprofit, data corroboration, RAG and context supplied, paid API use and honest access, crowdsourced human data, output data regularly audited, IC renewable energy, human art and design, small models over large models, LLM text never displayed, open weights and local processing. Caption: Reduce human/environmental cost, increase community benefits](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.019.png)
 
 I like to think of it as reducing the human and environmental costs while increasing the community benefit, because I think this service is only possible at this scale due to advances in AI and large language models. We spent a lot of time carefully thinking about how to balance this new technology, which lets us do things that weren't previously possible. We're able to intake more organic data and combine it in intuitive, language-based ways that weren't possible before. But how do we do this more efficiently? How do we do this in a way that is better for the environment? How do we use and deploy it in a manner that is ethical?
 
@@ -114,7 +114,7 @@ We do a number of things to address this. First and foremost, our entire busines
 
 That brings me to the results of the user interviews we did, which has informed a lot of what I've been saying, and is how we went about transforming our old model into this new AI-powered system without losing sight of our values.
 
-![User research word cloud](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.020.png)
+![User research word cloud. The largest words are Curious, Social, Creative, Community, Privacy, Frugal, Safety, Connected, Interested, Organized, Customization, Sentimental, Aesthetic, Local and Practical](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.020.png)
 
 What was most unexpected was our user's high standards of safety and privacy. These are people who care about being protected from others interested in their data. For example, if you know someone is going to a local venue at a certain time, you now know exactly where they'll be. That could be dangerous if a bad actor were trying to find this person in real life. So even though it seems innocuous, something like "I'm going to be at the show on Friday" can be very private information depending on who it's shared with.
 
@@ -126,7 +126,7 @@ I've been talking about leveraging large language models within our system, but 
 
 Well, we've used agentic coding tools throughout this process to develop software more quickly, since our team is so small. It's very useful for rapidly iterating on prototypes.
 
-![2 hours later](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.022.png)
+![2 hours later: three AI-generated app screen mockups showing a music preference form, an event page and a list of people going, splattered with gold paint, with an AI tool reading "Deep in thought... 35,916"](./media/human-app-ai-world/User%20Research%20for%20Local%20Music%20App/User%20Research%20for%20Local%20Music%20App.022.png)
 
 But the problem is, if you just plug everything into an LLM, you get something like this: very basic wireframes that just reuse existing metaphors and affordances from other apps. That's fine, but it's not very interesting or artsy, and we're held to a higher standard. We want our app to feel unique. We're grounded in this local culture built on show posters, T-shirts, and album covers. There's so much art, design, and craft in these scenes. An app that's bland and similar to every other app on the market feels corporate, and feels like it doesn't match what our users want, since these are people who are creative and interested in seeing what other people and artists are doing.
 

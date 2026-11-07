@@ -1,16 +1,17 @@
 ---
 layout: base.liquid
 ---
+<a class="skip-link" href="#main">Skip to content</a>
 <div class="page-content">
   <header class="header-container">
     <div class="page-header">
       {% unless hideNav %}
         <nav class="page-navigation">
           <a
-            href="                        {% if navOverrideLink %}{{ navOverrideLink }}{% else %}/{% endif %}"
+            href="{% if navOverrideLink %}{{ navOverrideLink }}{% else %}/{% endif %}"
             class="home-link"
           >
-            <div class="arrow"><img src="/_favicon/arrow.svg" alt="Back Arrow"></div>
+            <div class="arrow"><img src="/_favicon/arrow.svg" alt=""></div>
             <span class="back-text">
               {% if navOverrideText %}{{ navOverrideText }}{% else %}Home{% endif %}
             </span>
@@ -21,7 +22,7 @@ layout: base.liquid
     </div>
   </header>
 
-  <main class="content">
+  <main class="content" id="main">
     {{ content }}
   </main>
 

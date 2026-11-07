@@ -394,8 +394,15 @@ function adjustColor() {
 }
 
 function keyPressed() {
+  // M mutes or unmutes instead of dropping a block (WCAG 1.4.2)
+  if (key === "m" || key === "M") {
+    muted = !muted;
+    outputVolume(muted ? 0 : 1);
+    return;
+  }
   press();
 }
+let muted = false;
 
 function mousePressed() {
   

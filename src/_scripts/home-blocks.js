@@ -1,5 +1,39 @@
 // This easter egg was implemented with the assistance of Claude 4.5 Haiku
 
+// Animations that run forever need a way to stop them (WCAG 2.2.2).
+// They start paused for people who ask their OS to reduce motion, and the
+// "Pause animations" button (shown on keyboard focus) or a click on the
+// cubes toggles them. The scrolling sky is paused by the same class.
+const motion = {
+  paused: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+};
+
+(function setUpMotionToggle() {
+  const toggle = document.querySelector(".motion-toggle");
+  const sketch = document.getElementById("color-blocks-sketch");
+
+  function setPaused(paused) {
+    motion.paused = paused;
+    document.documentElement.classList.toggle("motion-paused", paused);
+    if (toggle) toggle.setAttribute("aria-pressed", String(paused));
+  }
+
+  setPaused(motion.paused);
+  if (toggle) toggle.addEventListener("click", () => setPaused(!motion.paused));
+
+  // The cubes sit behind the text, so check clicks by position
+  document.addEventListener("click", (e) => {
+    if (!sketch || e.target.closest("a, button")) return;
+    const r = sketch.getBoundingClientRect();
+    if (
+      e.clientX >= r.left && e.clientX <= r.right &&
+      e.clientY >= r.top && e.clientY <= r.bottom
+    ) {
+      setPaused(!motion.paused);
+    }
+  });
+})();
+
 new p5(function (p) {
   const BLOCK = 40;
   const PADDING = 80;
@@ -271,6 +305,7 @@ new p5(function (p) {
 
     const now = p.millis();
     if (
+      !motion.paused &&
       now > 15000 &&
       Math.floor(now / 5000) > Math.floor((now - p.deltaTime) / 5000)
     ) {

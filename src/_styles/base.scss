@@ -27,6 +27,9 @@ body {
 
 // Markdown plugin styling
 .footnote-ref {
+  // Keep the raised marker from making its line taller
+  line-height: 0;
+
   a {
     text-decoration: none;
     font-size: calc(0.7 * globals.$font-size-base);
@@ -52,4 +55,56 @@ body {
 :focus-visible {
   outline: 2px solid globals.$primary-text;
   outline-offset: 2px;
+}
+
+// =============================================================================
+// ACCESSIBILITY HELPERS
+// =============================================================================
+
+.visually-hidden {
+  @include globals.visually-hidden;
+}
+
+// "Skip to content" link: hidden until it receives keyboard focus
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  padding: globals.$spacing-sm globals.$spacing-md;
+  background: globals.$page-background-color;
+  color: globals.$primary-text;
+  font-family: globals.$font-stack;
+  font-weight: bold;
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
+}
+
+// Wide code blocks scroll inside their own box instead of the page
+pre {
+  overflow-x: auto;
+}
+
+// Headings shifted down a level at build time keep the default size of
+// their original level. Zero specificity, so any explicit style wins.
+:where([data-md-level="1"]) { font-size: 2em; }
+:where([data-md-level="2"]) { font-size: 1.5em; }
+:where([data-md-level="3"]) { font-size: 1.17em; }
+:where([data-md-level="4"]) { font-size: 1em; }
+:where([data-md-level="5"]) { font-size: 0.83em; }
+:where([data-md-level="6"]) { font-size: 0.67em; }
+
+// Respect the system "reduce motion" setting
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

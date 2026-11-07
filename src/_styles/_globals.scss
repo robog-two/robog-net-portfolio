@@ -4,6 +4,21 @@
 // Centralized design tokens, colors, typography, and spacing for the portfolio
 
 @use "sass:color";
+@use "sass:string";
+
+// =============================================================================
+// HEADING LEVELS
+// =============================================================================
+// Headings inside <main> are shifted down one level at build time so the
+// page title is the only <h1> (see demoteContentHeadings in
+// .eleventy.deno.ts). The original level is kept in `data-md-level`.
+// h(1) matches a heading that is *styled* as level 1: either a plain <h1>,
+// or a demoted heading that was an <h1> in the markdown.
+@function h($level) {
+  @return string.unquote(
+    ":is(h#{$level}:not([data-md-level]), [data-md-level=\"#{$level}\"])"
+  );
+}
 
 // =============================================================================
 // TYPOGRAPHY SYSTEM
@@ -145,3 +160,16 @@ $grid-gap: $spacing-xl;
 // Legacy aliases
 $transition-speed: $transition-fast;
 $triangle-transition-speed: $transition-triangle;
+
+// Hide content visually while keeping it available to screen readers
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}

@@ -156,3 +156,14 @@ function draw() {
 function mousePressed() {
   music = music ?? loadSound("chive.mp3");
 }
+
+// Press M to mute or unmute (WCAG 1.4.2 Audio Control)
+function toggleMute() {
+  muted = !muted;
+  outputVolume(muted ? 0 : 1);
+}
+let muted = false;
+
+function keyPressed() {
+  if (key === "m" || key === "M") toggleMute();
+}
