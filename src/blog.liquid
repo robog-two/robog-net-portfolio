@@ -8,7 +8,7 @@ style: blog
   {%- if post.data.snippet == 'yes' -%}
     <article class="snippet-card">
       <header class="post-header">
-        Snippet Post • <time datetime="{{ post.data.date | date: '%Y-%m-%d' }}"
+        Snippet Post - <time datetime="{{ post.data.date | date: '%Y-%m-%d' }}"
           >{{ post.data.date | date: '%B %d, %Y' }}
           {{ post.data.time -}}
         </time>
