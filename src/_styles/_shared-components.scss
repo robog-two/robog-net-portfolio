@@ -218,6 +218,14 @@
         margin-left: 0;
       }
     }
+
+    // On phones, show small thumbnails (about three per row) instead of
+    // one full-width image per row. Tap an image to see it larger.
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: globals.$spacing-xs;
+      margin: globals.$spacing-md 0;
+    }
   }
 }
 
