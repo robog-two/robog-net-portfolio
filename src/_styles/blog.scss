@@ -63,7 +63,7 @@
 
     .post-header {
       margin-bottom: 0.5rem;
-      color: #8f8f8f;
+      color: #45425e; // 9.4:1 on the page background
       font-size: 0.8em;
       font-family: globals.$font-stack;
     }
@@ -184,7 +184,7 @@ footer {
   text-align: center;
   padding: 5px;
   height: 100px;
-  width: 100vw;
+  width: 100%;
   padding-top: 15px;
   padding-bottom: 50px;
   position: absolute;
@@ -223,7 +223,7 @@ footer {
     margin: 0;
     padding: 0;
 
-    h2, h3, h4, h5, h6 {
+    #{globals.h(2)}, #{globals.h(3)}, #{globals.h(4)}, #{globals.h(5)}, #{globals.h(6)} {
       margin: 0;
       padding: 0;
     }
@@ -286,7 +286,7 @@ footer {
     padding-right: 0.5in;
   }
 
-  .post-content h1 {
+  .post-content #{globals.h(1)} {
     font-size: 14pt !important;
   }
 

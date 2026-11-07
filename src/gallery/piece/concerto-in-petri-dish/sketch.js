@@ -220,3 +220,21 @@ function draw() {
 function mousePressed() {
   userStartAudio();
 }
+
+// Press M to mute or unmute (WCAG 1.4.2 Audio Control)
+function toggleMute() {
+  muted = !muted;
+  outputVolume(muted ? 0 : 1);
+}
+let muted = false;
+
+// M starts the sound the same way a click does, so keyboard users can
+// hear the piece too. Once it's playing, M mutes and unmutes.
+function keyPressed() {
+  if (key !== "m" && key !== "M") return;
+  if (!(getAudioContext().state === "running")) {
+    userStartAudio();
+  } else {
+    toggleMute();
+  }
+}

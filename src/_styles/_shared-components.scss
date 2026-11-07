@@ -46,7 +46,10 @@
 // Responsive grid layout for content cards
 %grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(globals.$grid-min-width, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(globals.$grid-min-width, 100%), 1fr)
+  );
   gap: globals.$grid-gap;
   margin-top: globals.$spacing-xl;
 }
@@ -102,6 +105,7 @@
 // Blog post card with theme color
 @mixin blog-post-card($theme-color) {
   @extend %card-base;
+  position: relative; // anchors the stretched .card-link
   border-color: $theme-color;
   margin-bottom: globals.$spacing-xl;
 
@@ -122,6 +126,10 @@
       }
     }
 
+    .post-time {
+      display: block;
+    }
+
     .post-time, time {
       font-size: 0.9rem;
       color: rgba(13, 7, 72, globals.$opacity-subtle);
@@ -135,6 +143,35 @@
 
   .read-more {
     @include link-color-transition($theme-color);
+    // Sit above the stretched title link so its hover style still shows
+    position: relative;
+    z-index: 1;
+  }
+
+  // The title link covers the whole card, so the card stays clickable
+  // without wrapping block content (and other links) in one big link.
+  .post-header h2 a.card-link {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    &:focus-visible {
+      outline: none;
+
+      &::after {
+        outline: 2px solid globals.$primary-text;
+        outline-offset: 2px;
+      }
+    }
   }
 }
 
@@ -181,6 +218,14 @@
         margin-left: 0;
       }
     }
+
+    // On phones, show small thumbnails (about three per row) instead of
+    // one full-width image per row. Tap an image to see it larger.
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: globals.$spacing-xs;
+      margin: globals.$spacing-md 0;
+    }
   }
 }
 
@@ -198,7 +243,7 @@
     color: globals.$primary-text;
   }
 
-  h1 {
+  #{globals.h(1)} {
     font-size: globals.$font-size-2xl;
     border-bottom: 2px solid $theme-color;
     padding-bottom: 0;
@@ -206,7 +251,7 @@
     margin-bottom: globals.$spacing-md;
   }
 
-  h2 {
+  #{globals.h(2)} {
     padding: 0;
     margin: 0;
     font-size: globals.$font-size-lg;
@@ -229,6 +274,11 @@
 
   figcaption {
     text-align: center;
+  }
+
+  // No gap under embeds that sit alone in a paragraph
+  iframe {
+    display: block;
   }
 
   // Task list styling (for blog posts)
@@ -259,6 +309,18 @@
   left: 0;
   width: 100%;
   height: 100%;
+  // Reset native <dialog> styles
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow: hidden;
+
+  &::backdrop {
+    background: transparent;
+  }
   z-index: globals.$z-modal;
   opacity: 0;
   transition: opacity globals.$transition-slow globals.$ease-standard;

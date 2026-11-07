@@ -83,57 +83,41 @@ export default (eleventyConfig: EleventyConfig) => {
   // SVG Badges
   eleventyConfig.addPassthroughCopy("src/badges");
 
-  // Add file sizes to PDF links
-  eleventyConfig.addTransform("pdf-filesize", async function (
+  // Post-process every HTML page: add file sizes to download links,
+  // fix heading levels inside the page content, and make code blocks
+  // reachable by keyboard.
+  eleventyConfig.addTransform("html-postprocess", async function (
       this: { page: EleventyPage },
       content: string
   ): Promise<string> {
-    if (!this.page.outputPath.endsWith(".html")) {
+    if (!this.page.outputPath || !this.page.outputPath.endsWith(".html")) {
       return content;
     }
 
+    // Full documents are parsed as-is so the doctype, <html lang>, <head>
+    // and <body> survive. Fragments (no <html>) are wrapped and unwrapped.
+    const isFullDocument = /<html[\s>]/i.test(content);
+
     try {
       const dom = new DOMParser().parseFromString(
-        "<!doctype html><html><body>" + content + "</body></html>",
+        isFullDocument
+          ? content
+          : "<!doctype html><html><body>" + content + "</body></html>",
         "text/html",
       );
 
-      const links = [
-        ...dom.querySelectorAll("a[href$='.pdf']"),
-        ...dom.querySelectorAll("a[href$='.txt']"),
-        ...dom.querySelectorAll("a[href$='.mp3']"),
-      ];
+      await addFileSizes(dom, this.page);
+      demoteContentHeadings(dom);
 
-      for (const link of links) {
-        const href = link.getAttribute("href");
-        if (!href) continue;
-
-        try {
-          // Resolve file path relative to project root
-          let filePath = href;
-          if (href.startsWith("/")) {
-            filePath = "public" + href;
-          } else {
-            // Relative path - resolve from page directory
-            const pageDir = this.page.inputPath.replace(/[^/]*$/, "");
-            filePath = pageDir.replace("src/", "") + href;
-          }
-
-          const stats = await Deno.stat(filePath);
-          const sizeStr = formatFileSize(stats.size);
-
-          // Create and append span
-          const span = dom.createElement("span");
-          span.className = "filesize";
-          span.textContent = sizeStr;
-          link.appendChild(span);
-        } catch {
-          // File not found or error reading file, skip this link
-          continue;
-        }
+      // Scrollable code blocks need to be focusable so keyboard users can
+      // scroll them (WCAG 2.1.1).
+      for (const pre of dom.querySelectorAll("main pre")) {
+        if (!pre.hasAttribute("tabindex")) pre.setAttribute("tabindex", "0");
       }
 
-      return dom.body.innerHTML;
+      if (!isFullDocument) return dom.body.innerHTML;
+      const doctype = /^\s*<!doctype[^>]*>/i.exec(content)?.[0] ?? "<!DOCTYPE html>";
+      return doctype + "\n" + dom.documentElement!.outerHTML;
     } catch {
       // If DOM parsing fails, return content as-is
       return content;
@@ -147,6 +131,76 @@ export default (eleventyConfig: EleventyConfig) => {
     },
   };
 };
+
+// Append a file size label to links that point at downloads.
+async function addFileSizes(dom: any, page: EleventyPage) {
+  const links = [
+    ...dom.querySelectorAll("a[href$='.pdf']"),
+    ...dom.querySelectorAll("a[href$='.txt']"),
+    ...dom.querySelectorAll("a[href$='.mp3']"),
+  ];
+
+  for (const link of links) {
+    const href = link.getAttribute("href");
+    if (!href) continue;
+
+    try {
+      // Read the size from the source file. The copy in public/ may not
+      // exist (or may be half-written) when this transform runs.
+      const candidates = href.startsWith("/")
+        // Under src/, or at the project root (e.g. /LICENSE.txt)
+        ? ["src" + href, "." + href]
+        // Relative path - resolve from page directory
+        : [page.inputPath.replace(/[^/]*$/, "") + href];
+
+      let stats: Deno.FileInfo | undefined;
+      for (const candidate of candidates) {
+        try {
+          stats = await Deno.stat(decodeURIComponent(candidate));
+          break;
+        } catch {
+          // try the next location
+        }
+      }
+      if (!stats) continue;
+      const sizeStr = formatFileSize(stats.size);
+
+      // Create and append span
+      const span = dom.createElement("span");
+      span.className = "filesize";
+      span.textContent = sizeStr;
+      link.appendChild(span);
+    } catch {
+      // File not found or error reading file, skip this link
+      continue;
+    }
+  }
+}
+
+// The page title in the header is the page's only <h1>. Markdown "#"
+// headings inside <main> would otherwise be extra <h1>s, so shift every
+// heading in <main> down one level (h1 -> h2, h2 -> h3, ...).
+// `data-md-level` keeps the original level so the styles stay the same;
+// see the `h()` helper in _styles/_globals.scss.
+function demoteContentHeadings(dom: any) {
+  const main = dom.querySelector("main");
+  if (!main || !dom.querySelector(".page-header h1") || !main.querySelector("h1")) {
+    return;
+  }
+
+  for (const heading of main.querySelectorAll("h1, h2, h3, h4, h5, h6")) {
+    const level = Number(heading.tagName[1]);
+    const newLevel = Math.min(level + 1, 6);
+    const replacement = dom.createElement("h" + newLevel);
+    for (const name of heading.getAttributeNames()) {
+      replacement.setAttribute(name, heading.getAttribute(name));
+    }
+    replacement.setAttribute("data-md-level", String(level));
+    if (level + 1 > 6) replacement.setAttribute("aria-level", String(level + 1));
+    while (heading.firstChild) replacement.appendChild(heading.firstChild);
+    heading.parentNode.replaceChild(replacement, heading);
+  }
+}
 
 // Source - https://stackoverflow.com/a/50822488
 // Posted by chrmcpn, modified by community. See post 'Timeline' for change history

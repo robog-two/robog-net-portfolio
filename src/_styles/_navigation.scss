@@ -49,6 +49,7 @@
       display: inline-block;
       height: auto;
       img {
+        display: block;
         height: 0.7em;
         width: auto;
       }
@@ -123,14 +124,14 @@
   padding: globals.$content-padding 2px;
 
   // Typography hierarchy for markdown content
-  h2 {
+  #{globals.h(2)} {
     @include heading-base-styles;
     font-size: globals.$font-size-4xl;
     margin: globals.$spacing-xl 0 globals.$spacing-md 0;
     padding-bottom: globals.$spacing-sm;
   }
 
-  h3 {
+  #{globals.h(3)} {
     @include heading-base-styles;
     font-size: globals.$font-size-2xl;
     margin: globals.$spacing-lg 0 globals.$spacing-md 0;
@@ -204,8 +205,9 @@
         }
       }
 
+      // Hidden visually but kept as the link's accessible name
       .back-text {
-        display: none;
+        @include globals.visually-hidden;
       }
     }
   }

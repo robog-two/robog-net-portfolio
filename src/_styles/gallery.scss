@@ -89,6 +89,7 @@ section.gallery-series {
 }
 
 section img {
+  display: block;
   width: 100%;
   height: auto;
 }
@@ -107,7 +108,8 @@ section.gallery-item {
 
   // Medium/category information
   em {
-    color: globals.$color-primary;
+    // Theme colour darkened to meet 4.5:1 contrast on white
+    color: color-mix(in srgb, globals.$color-primary, black 42%);
     font-weight: bold;
     display: inline-block;
     max-width: 100%;
