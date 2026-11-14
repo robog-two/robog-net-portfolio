@@ -306,8 +306,7 @@ new p5(function (p) {
     const now = p.millis();
     if (
       !motion.paused &&
-      now > 15000 &&
-      Math.floor(now / 5000) > Math.floor((now - p.deltaTime) / 5000)
+      p.frameCount % 300 == 20
     ) {
       colorBlocks.forEach((block, i) => {
         const { fn, duration } = pickAnimation(block);
