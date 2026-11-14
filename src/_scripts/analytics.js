@@ -1,22 +1,25 @@
-// Plausible analytics for every page on the site, including the static gallery
-// pieces and spheres. Docs: https://plausible.io/docs/script-extensions
+// Analytics for every page on the site, including the static gallery pieces and
+// spheres. Sends the same data to Plausible and Umami.
+//   Plausible docs: https://plausible.io/docs/script-extensions
+//   Umami docs:     https://docs.umami.is/docs/tracker-functions
 //
-// Built in (no code needed): pageviews, sources/UTMs, entry pages, devices,
-// time on page and scroll depth.
-// Extra here:
-//   - Outbound link clicks and file downloads (goal "Outbound Link: Click",
-//     "File Download")
-//   - "First Click": the first link a visitor clicks in a session, with the
-//     link destination and text as properties
-//   - "pieces_seen" property on gallery piece pageviews: how many different
-//     pieces this visitor has opened so far in the session
+// Built in to both: pageviews, sources/UTMs, entry pages, devices.
+// Built in to Plausible only: time on page, scroll depth, outbound links and
+// file downloads (enabled below). Umami gets those from this file instead.
+//
+// Events:
+//   "First Click"           first link clicked in a session {to, text, kind, area}
+//   "Outbound Link: Click"  (Umami; Plausible sends its own) {url}
+//   "File Download"         (Umami; Plausible sends its own) {url}
+//   "Page Engagement"       (Umami) visible seconds + max scroll % for a pageview
+//   "Gallery Piece"         (Umami) {piece, pieces_seen}; Plausible gets
+//                           pieces_seen as a pageview property
 (function () {
   "use strict";
 
-  var script = document.createElement("script");
-  script.async = true;
-  script.src = "https://plausible.io/js/pa-zOwKZXLFpAVB8BbtYJb3V.js";
-  document.head.appendChild(script);
+  // ---------------------------------------------------------------------------
+  // Helpers
+  // ---------------------------------------------------------------------------
 
   // sessionStorage can throw (private mode, blocked storage); fail quietly
   function readStore(key) {
@@ -26,15 +29,57 @@
     try { sessionStorage.setItem(key, value); } catch (e) { /* ignore */ }
   }
 
-  // Count distinct gallery pieces opened in this browser session
-  function piecesSeen() {
-    var match = location.pathname.match(/^\/gallery\/piece\/([^/]+)/);
-    if (!match) return null;
-    var seen = (readStore("pa-pieces") || "").split(",").filter(Boolean);
-    if (seen.indexOf(match[1]) === -1) seen.push(match[1]);
-    writeStore("pa-pieces", seen.join(","));
-    return seen.length;
+  function loadScript(src, attrs, onload) {
+    var script = document.createElement("script");
+    script.async = true;
+    script.src = src;
+    for (var name in attrs) script.setAttribute(name, attrs[name]);
+    if (onload) script.onload = onload;
+    document.head.appendChild(script);
   }
+
+  // Same extension list Plausible uses for file downloads
+  var DOWNLOAD_EXT = /\.(pdf|xlsx?|docx?|txt|rtf|csv|exe|key|pp[st]x?|7z|pkg|rar|gz|zip|avi|mov|mp4|mpe?g|wmv|midi?|mp3|wav|wma|dmg|iso|msi)$/i;
+
+  // ---------------------------------------------------------------------------
+  // Umami. It has no command queue, so calls made before script.js loads are
+  // held here and sent once it has.
+  // ---------------------------------------------------------------------------
+
+  var umamiQueue = [];
+  function umamiTrack(name, data) {
+    if (window.umami && umami.track) umami.track(name, data);
+    else umamiQueue.push([name, data]);
+  }
+
+  loadScript("https://cloud.umami.is/script.js", {
+    "data-website-id": "5489e229-f2eb-4bf0-afd1-115a5206bbda",
+    // Only count the live site, not localhost or preview deploys
+    "data-domains": "robog.net",
+  }, function () {
+    umamiQueue.forEach(function (call) { umami.track(call[0], call[1]); });
+    umamiQueue = [];
+  });
+
+  // ---------------------------------------------------------------------------
+  // Gallery pieces: count distinct pieces opened in this browser session
+  // ---------------------------------------------------------------------------
+
+  var pieceMatch = location.pathname.match(/^\/gallery\/piece\/([^/]+)/);
+  var piecesSeen = null;
+  if (pieceMatch) {
+    var seen = (readStore("pa-pieces") || "").split(",").filter(Boolean);
+    if (seen.indexOf(pieceMatch[1]) === -1) seen.push(pieceMatch[1]);
+    writeStore("pa-pieces", seen.join(","));
+    piecesSeen = seen.length;
+    umamiTrack("Gallery Piece", { piece: pieceMatch[1], pieces_seen: piecesSeen });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Plausible
+  // ---------------------------------------------------------------------------
+
+  loadScript("https://plausible.io/js/pa-zOwKZXLFpAVB8BbtYJb3V.js", {});
 
   window.plausible = window.plausible || function () {
     (plausible.q = plausible.q || []).push(arguments);
@@ -45,24 +90,34 @@
     outboundLinks: true,
     fileDownloads: true,
     customProperties: function (eventName) {
-      if (eventName !== "pageview") return {};
-      var count = piecesSeen();
-      return count ? { pieces_seen: String(count) } : {};
+      if (eventName !== "pageview" || !piecesSeen) return {};
+      return { pieces_seen: String(piecesSeen) };
     },
   });
 
-  // "First Click": only the first link click per session is sent
+  // ---------------------------------------------------------------------------
+  // Link clicks: "First Click" for both, outbound links and downloads for Umami
+  // ---------------------------------------------------------------------------
+
   function onClick(event) {
     var link = event.target.closest && event.target.closest("a[href]");
-    if (!link || readStore("pa-first-click")) return;
+    if (!link) return;
 
     var url = new URL(link.href, location.href);
+    var internal = url.origin === location.origin;
     // Ignore in-page jumps like the "Skip to content" link
-    if (url.origin === location.origin && url.pathname === location.pathname && url.hash) return;
+    if (internal && url.pathname === location.pathname && url.hash) return;
 
+    if (!internal && /^https?:$/.test(url.protocol)) {
+      umamiTrack("Outbound Link: Click", { url: link.href });
+    }
+    if (DOWNLOAD_EXT.test(url.pathname) || link.hasAttribute("download")) {
+      umamiTrack("File Download", { url: link.href });
+    }
+
+    if (readStore("pa-first-click")) return;
     writeStore("pa-first-click", "1");
 
-    var internal = url.origin === location.origin;
     var props = {
       to: internal ? url.pathname : url.hostname + url.pathname,
       text: (link.textContent || link.getAttribute("aria-label") || "").trim().replace(/\s+/g, " ").slice(0, 100),
@@ -70,9 +125,12 @@
       area: link.closest("nav") ? "nav" : "content",
     };
 
-    // A same-tab navigation can cancel the request, so hold the navigation
-    // until Plausible confirms (or briefly times out), like its own outbound
-    // link tracking does
+    // Umami sends with fetch keepalive, which survives navigation
+    umamiTrack("First Click", props);
+
+    // A same-tab navigation can cancel Plausible's request, so hold the
+    // navigation until it confirms (or briefly times out), like its own
+    // outbound link tracking does
     var sameTab = event.type === "click" && event.button === 0 &&
       !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey &&
       (!link.target || link.target === "_self") && !link.hasAttribute("download");
@@ -98,4 +156,56 @@
   document.addEventListener("auxclick", function (event) {
     if (event.button === 1) onClick(event);
   });
+
+  // ---------------------------------------------------------------------------
+  // Time on page and scroll depth for Umami (Plausible measures these itself).
+  // Sent once per pageview, the first time the page is hidden: navigating away,
+  // closing the tab, or switching apps on mobile.
+  // ---------------------------------------------------------------------------
+
+  var visibleMs = 0;
+  var visibleSince = document.visibilityState === "visible" ? Date.now() : null;
+  var maxScroll = 0;
+  var engagementSent = false;
+
+  function measureScroll() {
+    var doc = document.documentElement;
+    var height = Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0);
+    var seen = height <= window.innerHeight ? 1 : (window.scrollY + window.innerHeight) / height;
+    maxScroll = Math.max(maxScroll, Math.min(1, seen));
+  }
+
+  function timeBucket(seconds) {
+    if (seconds < 10) return "0-10s";
+    if (seconds < 30) return "10-30s";
+    if (seconds < 60) return "30-60s";
+    if (seconds < 180) return "1-3m";
+    if (seconds < 600) return "3-10m";
+    return "10m+";
+  }
+
+  function sendEngagement() {
+    if (visibleSince !== null) {
+      visibleMs += Date.now() - visibleSince;
+      visibleSince = null;
+    }
+    if (engagementSent) return;
+    engagementSent = true;
+    measureScroll();
+    var seconds = Math.round(visibleMs / 1000);
+    umamiTrack("Page Engagement", {
+      seconds: seconds,
+      time: timeBucket(seconds),
+      // Rounded down to the nearest 10% so the breakdown stays readable
+      scroll: Math.floor(maxScroll * 10) * 10,
+    });
+  }
+
+  window.addEventListener("scroll", measureScroll, { passive: true });
+  window.addEventListener("load", measureScroll);
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") sendEngagement();
+    else if (visibleSince === null) visibleSince = Date.now();
+  });
+  window.addEventListener("pagehide", sendEngagement);
 })();
