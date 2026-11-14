@@ -34,8 +34,6 @@ E-mail: [sknight2@ithaca.edu](mailto:sknight2@ithaca.edu)
 
 GitHub: [robog-two](https://github.com/robog-two)
 
-You can also contact me by [passing a note](/spheres/passing-notes), which gets printed out to a little receipt printer on my desk. It's fun!
-
 <p aria-hidden="true"><br/><br/><br/></p>
 
 # About This Site
