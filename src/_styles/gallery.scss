@@ -98,6 +98,9 @@ section.gallery-item {
   @extend %card-content;
 
   max-width: 100%;
+  // Anchor for the stretched "View Piece" link below
+  position: relative;
+  cursor: pointer;
 
   border-color: globals.$color-primary;
 
@@ -124,5 +127,34 @@ section.gallery-item {
   // Project links
   a {
     @include shared.link-color-transition(globals.$color-primary);
+
+    // Stretch the link's hit area over the whole card, so clicking anywhere
+    // on it opens the piece while keeping a single link for screen readers
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+  }
+
+  // Highlight the link when any part of the card is hovered. Limited to real
+  // hover devices so the highlight doesn't stick after a tap on touch screens.
+  @media (hover: hover) {
+    &:hover a {
+      background-color: globals.$primary-text;
+      color: globals.$color-primary;
+    }
+  }
+
+  // Keyboard focus only (:focus-visible), so tapping a card doesn't leave an
+  // outline behind when navigating back on mobile
+  &:has(a:focus-visible) {
+    outline: 2px solid globals.$color-primary;
+    outline-offset: 2px;
+
+    a {
+      background-color: globals.$primary-text;
+      color: globals.$color-primary;
+    }
   }
 }
