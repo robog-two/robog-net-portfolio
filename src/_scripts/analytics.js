@@ -14,6 +14,11 @@
 //   "Page Engagement"       (Umami) visible seconds + max scroll % for a pageview
 //   "Gallery Piece"         (Umami) {piece, pieces_seen}; Plausible gets
 //                           pieces_seen as a pageview property
+//
+// Fault tolerance: each service is loaded and called independently, and every
+// call into it is wrapped in try/catch. If one is blocked (ad blocker, network
+// error, outage) or throws, the other keeps working and the page is unaffected.
+// A link click that is held for tracking always navigates.
 (function () {
   "use strict";
 
@@ -29,13 +34,21 @@
     try { sessionStorage.setItem(key, value); } catch (e) { /* ignore */ }
   }
 
-  function loadScript(src, attrs, onload) {
-    var script = document.createElement("script");
-    script.async = true;
-    script.src = src;
-    for (var name in attrs) script.setAttribute(name, attrs[name]);
-    if (onload) script.onload = onload;
-    document.head.appendChild(script);
+  // Run fn, swallowing any error so one failure can't stop the rest
+  function safe(fn) {
+    try { fn(); } catch (e) { /* analytics must never break the page */ }
+  }
+
+  function loadScript(src, attrs, onload, onerror) {
+    safe(function () {
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = src;
+      for (var name in attrs) script.setAttribute(name, attrs[name]);
+      script.onload = function () { safe(onload); };
+      script.onerror = function () { safe(onerror); };
+      (document.head || document.documentElement).appendChild(script);
+    });
   }
 
   // Same extension list Plausible uses for file downloads
@@ -47,8 +60,13 @@
   // ---------------------------------------------------------------------------
 
   var umamiQueue = [];
+  var umamiFailed = false;
+  function umamiSend(name, data) {
+    safe(function () { window.umami.track(name, data); });
+  }
   function umamiTrack(name, data) {
-    if (window.umami && umami.track) umami.track(name, data);
+    if (umamiFailed) return;
+    if (window.umami && typeof window.umami.track === "function") umamiSend(name, data);
     else umamiQueue.push([name, data]);
   }
 
@@ -57,7 +75,17 @@
     // Only count the live site, not localhost or preview deploys
     "data-domains": "robog.net",
   }, function () {
-    umamiQueue.forEach(function (call) { umami.track(call[0], call[1]); });
+    var queued = umamiQueue;
+    umamiQueue = [];
+    // If the script loaded but didn't set up window.umami (some blockers
+    // serve an empty file), treat it as blocked
+    if (!window.umami || typeof window.umami.track !== "function") {
+      umamiFailed = true;
+      return;
+    }
+    queued.forEach(function (call) { umamiSend(call[0], call[1]); });
+  }, function () {
+    umamiFailed = true;
     umamiQueue = [];
   });
 
@@ -67,32 +95,47 @@
 
   var pieceMatch = location.pathname.match(/^\/gallery\/piece\/([^/]+)/);
   var piecesSeen = null;
-  if (pieceMatch) {
+  if (pieceMatch) safe(function () {
     var seen = (readStore("pa-pieces") || "").split(",").filter(Boolean);
     if (seen.indexOf(pieceMatch[1]) === -1) seen.push(pieceMatch[1]);
     writeStore("pa-pieces", seen.join(","));
     piecesSeen = seen.length;
     umamiTrack("Gallery Piece", { piece: pieceMatch[1], pieces_seen: piecesSeen });
-  }
+  });
 
   // ---------------------------------------------------------------------------
   // Plausible
   // ---------------------------------------------------------------------------
 
-  loadScript("https://plausible.io/js/pa-zOwKZXLFpAVB8BbtYJb3V.js", {});
+  var plausibleFailed = false;
+  function plausibleTrack(name, options) {
+    if (plausibleFailed) return false;
+    try {
+      window.plausible(name, options);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
 
-  window.plausible = window.plausible || function () {
-    (plausible.q = plausible.q || []).push(arguments);
-  };
-  plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
+  loadScript("https://plausible.io/js/pa-zOwKZXLFpAVB8BbtYJb3V.js", {}, null, function () {
+    plausibleFailed = true;
+  });
 
-  plausible.init({
-    outboundLinks: true,
-    fileDownloads: true,
-    customProperties: function (eventName) {
-      if (eventName !== "pageview" || !piecesSeen) return {};
-      return { pieces_seen: String(piecesSeen) };
-    },
+  safe(function () {
+    window.plausible = window.plausible || function () {
+      (plausible.q = plausible.q || []).push(arguments);
+    };
+    plausible.init = plausible.init || function (i) { plausible.o = i || {}; };
+
+    plausible.init({
+      outboundLinks: true,
+      fileDownloads: true,
+      customProperties: function (eventName) {
+        if (eventName !== "pageview" || !piecesSeen) return {};
+        return { pieces_seen: String(piecesSeen) };
+      },
+    });
   });
 
   // ---------------------------------------------------------------------------
@@ -103,7 +146,8 @@
     var link = event.target.closest && event.target.closest("a[href]");
     if (!link) return;
 
-    var url = new URL(link.href, location.href);
+    var url;
+    try { url = new URL(link.href, location.href); } catch (e) { return; }
     var internal = url.origin === location.origin;
     // Ignore in-page jumps like the "Skip to content" link
     if (internal && url.pathname === location.pathname && url.hash) return;
@@ -135,26 +179,33 @@
       !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey &&
       (!link.target || link.target === "_self") && !link.hasAttribute("download");
 
-    if (!sameTab || event.defaultPrevented) {
-      plausible("First Click", { props: props });
+    // Only hold the click when Plausible might still deliver; if it's
+    // blocked, let the browser navigate right away
+    if (!sameTab || event.defaultPrevented || plausibleFailed) {
+      plausibleTrack("First Click", { props: props });
       return;
     }
 
-    event.preventDefault();
     var done = false;
     function go() {
       if (done) return;
       done = true;
       location.href = link.href;
     }
-    plausible("First Click", { props: props, callback: go });
+    // Schedule the fallback before anything else can fail, so a held click
+    // always navigates
     setTimeout(go, 500);
+    event.preventDefault();
+    if (!plausibleTrack("First Click", { props: props, callback: go })) go();
   }
 
-  document.addEventListener("click", onClick);
+  function handleClick(event) {
+    try { onClick(event); } catch (e) { /* never block a click */ }
+  }
+  document.addEventListener("click", handleClick);
   // Middle-click opens a new tab
   document.addEventListener("auxclick", function (event) {
-    if (event.button === 1) onClick(event);
+    if (event.button === 1) handleClick(event);
   });
 
   // ---------------------------------------------------------------------------
@@ -201,11 +252,13 @@
     });
   }
 
-  window.addEventListener("scroll", measureScroll, { passive: true });
-  window.addEventListener("load", measureScroll);
+  window.addEventListener("scroll", function () { safe(measureScroll); }, { passive: true });
+  window.addEventListener("load", function () { safe(measureScroll); });
   document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden") sendEngagement();
-    else if (visibleSince === null) visibleSince = Date.now();
+    safe(function () {
+      if (document.visibilityState === "hidden") sendEngagement();
+      else if (visibleSince === null) visibleSince = Date.now();
+    });
   });
-  window.addEventListener("pagehide", sendEngagement);
+  window.addEventListener("pagehide", function () { safe(sendEngagement); });
 })();
