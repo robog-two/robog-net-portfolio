@@ -18,9 +18,9 @@ For my senior project, I'm communicating with faculty in the art and computer sc
 
 <figure>
 
-![A person with shoulder-length brown hair and glasses is looking towards the camera and smiling. They are wearing a cream quarter zip turtleneck (unzipped). They are sitting at the bottom of the frame. Behind them is a large sculpture, a tall pillar with yellow glass spikes similar to a pine cone. Behind the pillar are several trees with their spring leaves just beginning to grow.](/blog/media/atlbg.jpg)
+![A person with long wavy brown hair, green eyes, and tortoise shell glasses stands in front of an exhibit. They are smiling showing just the top row of teeth. They are wearing a green Nazar necklace (evil eye charm), and a black T-shirt which reads "Evil Noise Machine" and has a blurry white image with polka dots and abstract white forms. Their hands are in the front pockets of their light indigo jeans and on their left wrist is a chunky digital watch (2014 FitBit Surge). The piece behind them depicts furniture sewn into a plaid fabric. From left to right, the top row are a desk with filing drawers, a standard table, and a desk with small shelves on the left and two legs on the right. The bottom left is a picnic table with four figure-eight shaped ropelike forms sewn behind it/intersecting with it and changing colors. On the right is a tabletop supported by X-crossed legs sitting atop a larger flat base. The person obscures the bottom middle knitting but the hot pink background and a yellow zig-zag shape is visible.](/blog/media/guggenheim_portrait.jpg)
 
-<figcaption>Visiting the Atlanta Botanical Gardens.</figcaption>
+<figcaption>Visiting the Solomon R. Guggenheim Museum.</figcaption>
 
 </figure>
 
