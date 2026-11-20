@@ -1,0 +1,51 @@
+{
+  "label": "Src",
+  "git_path": "/src/",
+  "file_extension": ".md",
+  "filename_pattern": "",
+  "collection_type": "grouped",
+  "frontmatter_schema": [
+    {
+      "name": "title",
+      "type": "title",
+      "label": "Title",
+      "required": false
+    },
+    {
+      "name": "layout",
+      "type": "text",
+      "label": "Layout",
+      "required": false
+    },
+    {
+      "name": "primaryColor",
+      "type": "text",
+      "label": "Primary Color",
+      "required": false
+    },
+    {
+      "name": "footer",
+      "type": "text",
+      "label": "Footer",
+      "required": false
+    },
+    {
+      "name": "navOverrideLink",
+      "type": "text",
+      "label": "Nav Override Link",
+      "required": false
+    },
+    {
+      "name": "navOverrideText",
+      "type": "text",
+      "label": "Nav Override Text",
+      "required": false
+    },
+    {
+      "name": "description",
+      "type": "richtext",
+      "label": "Description",
+      "required": false
+    }
+  ]
+}

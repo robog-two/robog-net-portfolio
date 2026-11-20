@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "sites": [
+    {
+      "key": "robog",
+      "display_name": "robog.net",
+      "website_url": "https://robog.net",
+      "root_path": ""
+    }
+  ]
+}
