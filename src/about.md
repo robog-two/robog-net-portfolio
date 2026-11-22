@@ -26,7 +26,7 @@ For my senior project, I'm communicating with faculty in the art and computer sc
 
 # Résumé
 
-My [résumé](/cv/sam-knight-resume-mar-16-2026-newcolor.pdf) is available in PDF format. It was last updated March 16, 2026.
+My [résumé](/cv/Sam_Knight_Resume_Glanceable_Nov_22_2026.pdf) is available in PDF format. It was last updated March 16, 2026.
 
 # Contact Information
 

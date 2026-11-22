@@ -6,7 +6,7 @@ style: gallery
 description: My personal art gallery. Currently working on the "What Grows" series, featuring "Concerto in Petri Dish" and "Our World, Planes Overhead".
 ---
 
-
+This is my art portfolio. If you are looking for work I've done with code, please check out my [GitHub](https://github.com/robog-two)
 
 <section class="gallery-series">
 
